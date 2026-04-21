@@ -3,7 +3,7 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  staticPageGenerationTimeout: 300, // This gives it 5 minutes instead of 1
+  // We remove the timeout and other bloat to keep it simple for Turbopack
   images: {
     remotePatterns: [
       {
