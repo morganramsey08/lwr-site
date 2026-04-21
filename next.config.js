@@ -1,15 +1,12 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  trailingSlash: true,
+module.exports = {
   images: {
-    remotePatterns: [
-      {
-        protocol: "http",
-        hostname: process.env.NEXT_PUBLIC_WORDPRESS_API_HOSTNAME,
-        port: "",
-      },
+    domains: [
+      'admin.lightworkerranch.com', // This allows Vercel to show your WP images
+      'secure.gravatar.com',
+      '0.gravatar.com',
+      '1.gravatar.com',
+      '2.gravatar.com',
     ],
   },
-};
-
-module.exports = nextConfig;
+}
