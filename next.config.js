@@ -3,6 +3,7 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  staticPageGenerationTimeout: 300, // This gives it 5 minutes instead of 1
   images: {
     remotePatterns: [
       {
@@ -11,7 +12,6 @@ const nextConfig = {
       },
     ],
   },
-  // We remove the eslint block since it's causing a warning
 };
 
 module.exports = nextConfig;
