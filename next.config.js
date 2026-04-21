@@ -1,17 +1,17 @@
 /** @type {import('next').NextConfig} */
-module.exports = {
+const nextConfig = {
   typescript: {
-    // This allows the build to finish even if there are type errors
     ignoreBuildErrors: true,
   },
-  eslint: {
-    // This prevents linting errors from stopping the build
-    ignoreDuringBuilds: true,
-  },
   images: {
-    domains: [
-      'admin.lightworkerranch.com',
-      'secure.gravatar.com',
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'admin.lightworkerranch.com',
+      },
     ],
   },
-}
+  // We remove the eslint block since it's causing a warning
+};
+
+module.exports = nextConfig;
