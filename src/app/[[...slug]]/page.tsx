@@ -1,25 +1,34 @@
-import Hero from '@/components/Hero/Hero';
-// import DefaultPageTemplate from '@/components/Templates/DefaultPageTemplate';
+import { fetchGraphQL } from "@/utils/fetchGraphQL";
+import { HomeHeroQuery } from "@/queries/general/getHomePage";
+import Hero from "@/components/Hero/Hero";
 
-export default function Page({ params }: { params: { slug?: string[] } }) {
-  const isHomePage = !params.slug || params.slug.length === 0;
+/**
+ * Helper to convert the 'gql' object into a string for fetchGraphQL.
+ * If you ever get a 'query.replace' error, this ensures it's a string.
+ */
+function getQueryString(query: any): string {
+  if (typeof query === 'string') return query;
+  return query?.loc?.source?.body || "";
+}
 
-  if (isHomePage) {
-    return (
-      <main>
-        <Hero />
-        {/* Soon we will add your WhatsApp and Map sections here */}
-      </main>
-    );
-  }
+export default async function Page() {
+  const data = await fetchGraphQL(getQueryString(HomeHeroQuery), {
+    id: "/",
+    idType: "URI"
+  });
 
-  // This part handles all other pages (About, Retreats, Contact, etc.)
+  const page = data?.page;
+  const acf = page?.homePage;
+
   return (
-    <main className="internal-page">
-      <div style={{ padding: '100px 10%' }}>
-        <h1>{params.slug?.join(' ').replace(/-/g, ' ')}</h1>
-        <p>This is where your WordPress content will load automatically.</p>
-      </div>
+    <main>
+      <Hero 
+        title={acf?.heroTitle || page?.title}
+        subtitle={acf?.heroSubTitle || ""}
+        buttonText={acf?.heroButtonText || ""}
+        // Grab the featured image source URL here
+        bgImage={page?.featuredImage?.node?.sourceUrl} 
+      />
     </main>
   );
 }

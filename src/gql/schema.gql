@@ -3,6 +3,18 @@ schema {
   mutation: RootMutation
 }
 
+"""A Field Group managed by ACF"""
+interface AcfFieldGroup {
+  """The name of the field group"""
+  fieldGroupName: String @deprecated(reason: "Use __typename instead")
+}
+
+"""Fields associated with an ACF Field Group"""
+interface AcfFieldGroupFields {
+  """The name of the field group"""
+  fieldGroupName: String @deprecated(reason: "Use __typename instead")
+}
+
 """
 Avatars are profile images for users. WordPress by default uses the Gravatar service to host and fetch avatars from.
 """
@@ -3665,6 +3677,52 @@ interface HierarchicalTermNode implements DatabaseIdentifier & HierarchicalNode 
   uri: String
 }
 
+"""
+The &quot;HomePage&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;.
+"""
+type HomePage implements AcfFieldGroup & AcfFieldGroupFields & HomePage_Fields {
+  """The name of the field group"""
+  fieldGroupName: String @deprecated(reason: "Use __typename instead")
+
+  """
+  Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;HomePage&quot; Field Group
+  """
+  heroButtonText: String
+
+  """
+  Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;HomePage&quot; Field Group
+  """
+  heroSubTitle: String
+
+  """
+  Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;HomePage&quot; Field Group
+  """
+  heroTitle: String
+}
+
+"""
+Interface representing fields of the ACF &quot;HomePage&quot; Field Group
+"""
+interface HomePage_Fields implements AcfFieldGroup & AcfFieldGroupFields {
+  """The name of the field group"""
+  fieldGroupName: String @deprecated(reason: "Use __typename instead")
+
+  """
+  Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;HomePage&quot; Field Group
+  """
+  heroButtonText: String
+
+  """
+  Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;HomePage&quot; Field Group
+  """
+  heroSubTitle: String
+
+  """
+  Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;HomePage&quot; Field Group
+  """
+  heroTitle: String
+}
+
 """File details for a Media Item"""
 type MediaDetails {
   """The filename of the mediaItem"""
@@ -5299,7 +5357,7 @@ enum OrderEnum {
 """
 A standalone content entry generally used for static, non-chronological content such as &quot;About Us&quot; or &quot;Contact&quot; pages.
 """
-type Page implements ContentNode & DatabaseIdentifier & HierarchicalContentNode & HierarchicalNode & MenuItemLinkable & Node & NodeWithAuthor & NodeWithComments & NodeWithContentEditor & NodeWithFeaturedImage & NodeWithPageAttributes & NodeWithRevisions & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable {
+type Page implements ContentNode & DatabaseIdentifier & HierarchicalContentNode & HierarchicalNode & MenuItemLinkable & Node & NodeWithAuthor & NodeWithComments & NodeWithContentEditor & NodeWithFeaturedImage & NodeWithPageAttributes & NodeWithRevisions & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfHomePage {
   """
   Returns ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root).
   """
@@ -5479,6 +5537,9 @@ type Page implements ContentNode & DatabaseIdentifier & HierarchicalContentNode 
 
   """Whether the page object is password protected."""
   hasPassword: Boolean
+
+  """Fields of the HomePage ACF Field Group"""
+  homePage: HomePage
 
   """The globally unique identifier of the page object."""
   id: ID!
@@ -13838,6 +13899,14 @@ interface WPPageInfo implements PageInfo {
 
   """When paginating backwards, the cursor to continue."""
   startCursor: String
+}
+
+"""
+Provides access to fields of the &quot;HomePage&quot; ACF Field Group via the &quot;homePage&quot; field
+"""
+interface WithAcfHomePage {
+  """Fields of the HomePage ACF Field Group"""
+  homePage: HomePage
 }
 
 """The writing setting type"""
