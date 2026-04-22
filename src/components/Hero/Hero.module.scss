@@ -1,0 +1,56 @@
+@import '../../styles/variables'; // This links to your _variables.scss
+
+.hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0 8%;
+  color: #ffffff;
+
+  .heroImage {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    filter: brightness(0.7); // Darkens the image so the Teachers font is readable
+  }
+
+  .content {
+    max-width: 650px;
+
+    h1 {
+      font-family: $font-main; // Uses 'Teachers' from your variables
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+      line-height: 1.1;
+    }
+
+    p {
+      font-family: $font-main;
+      font-size: 1.2rem;
+      line-height: 1.6;
+      margin-bottom: 2.5rem;
+      opacity: 0.9;
+    }
+
+    .button {
+      background-color: $clay;
+      color: white;
+      border: none;
+      padding: 15px 35px;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+      }
+    }
+  }
+}

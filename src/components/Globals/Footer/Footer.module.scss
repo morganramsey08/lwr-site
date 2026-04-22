@@ -1,0 +1,118 @@
+@import '../../../styles/variables'; // Ensure this has $forest, $white, $clay
+
+.footer {
+  background-color: $forest;
+  color: $white;
+  font-family: $font-main;
+  padding: 80px 0 30px 0; // Top/bottom padding
+  border-top: 1px solid rgba(255, 255, 255, 0.05); // Subtle top divider
+
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 8%;
+  }
+
+  .grid {
+    display: grid;
+    // 3 Columns: Intro is wider, links are standard
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 70px; // Space before copyright
+    align-items: start;
+  }
+
+  // Common styles for both H3 and H4
+  h3, h4 {
+    color: $white;
+    font-weight: 400;
+    margin-bottom: 25px;
+    letter-spacing: 0.5px;
+  }
+
+  // Column 1 Specifics
+  .columnIntro {
+    h3 {
+      font-size: 1.8rem; // Slightly larger for "Living Water Retreat"
+      text-transform: capitalize;
+    }
+
+    p {
+      color: rgba($white, 0.85); // Slightly softer text
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 35px;
+      max-width: 480px;
+    }
+
+    .socials {
+      display: flex;
+      gap: 15px; // Space between social icons
+
+      .socialIcon {
+        // Here is the round, gold look
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        background-color: $clay; // That gold from your variables
+        border-radius: 50%; // Makes it perfectly round
+        color: $white; // Icon color
+        text-decoration: none;
+        transition: transform 0.2s ease;
+
+        &:hover {
+          transform: translateY(-2px); // Subtle hover effect
+        }
+
+        // Specifically style the Lucide icon inside
+        svg {
+          // This keeps the icon centered and subtle
+          display: block;
+        }
+      }
+    }
+  }
+
+  // Column 2 & 3 Specifics
+  .columnLinks {
+    h4 {
+      font-size: 1.2rem;
+      text-transform: capitalize;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        margin-bottom: 15px;
+
+        a {
+          color: rgba($white, 0.8);
+          text-decoration: none;
+          font-size: 1rem;
+          font-weight: 300;
+          transition: color 0.2s ease;
+
+          &:hover {
+            color: $white; // Pure white on hover
+          }
+        }
+      }
+    }
+  }
+
+  // Final Copyright Line
+  .copyright {
+    color: rgba($white, 0.7);
+    font-size: 0.9rem;
+    font-weight: 300;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.08); // The subtle line in the image
+    padding-top: 35px;
+    line-height: 1.6;
+  }
+}

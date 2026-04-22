@@ -1,32 +1,25 @@
-import Link from "next/link";
-import styles from "./Navigation.module.css";
+import React from 'react';
+import Link from 'next/link';
+import styles from './Navigation.module.scss';
 
-// We're turning this into a simple component that doesn't 
-// crash the build if WordPress is missing a menu.
-export default async function Navigation() {
-  
-  // For now, we'll use a hardcoded menu so your site can deploy.
-  // Once the site is live, we can reconnect this to WordPress properly.
-  const manualNavItems = [
-    { label: "Home", uri: "/" },
-  ];
-
+const Navigation = () => {
   return (
-    <nav
-      className={styles.navigation}
-      role="navigation"
-      itemScope
-      itemType="http://schema.org/SiteNavigationElement"
-    >
-      {manualNavItems.map((item, index) => (
-        <Link
-          itemProp="url"
-          href={item.uri}
-          key={index}
-        >
-          <span itemProp="name">{item.label}</span>
+    <nav className={styles.nav}>
+      <div className={styles.container}>
+        <Link href="/" className={styles.logo}>
+          Lightworker Ranch
         </Link>
-      ))}
+        
+        <div className={styles.menuTrigger}>
+          <span className={styles.menuText}>Menu</span>
+          <div className={styles.hamburger}>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
     </nav>
   );
-}
+};
+
+export default Navigation;

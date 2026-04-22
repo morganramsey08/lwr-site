@@ -1,5 +1,5 @@
 "use client";
-import styles from "./PreviewNotice.module.css";
+import styles from "./PreviewNotice.module.scss";
 import { usePathname } from "next/navigation";
 
 export const PreviewNotice = () => {
