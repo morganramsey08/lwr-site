@@ -8,11 +8,12 @@
   z-index: 100;
   padding: 30px 0;
 
-  .container {
+  .wrap {
+    // This is a great place to use the .container class in your JSX 
+    // to keep the logo and menu perfectly aligned with the rest of the site.
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 8%; // Matches the Hero padding
   }
 
   .logo {
@@ -28,7 +29,10 @@
     display: flex;
     align-items: center;
     cursor: pointer;
+    background: none; // Reset button defaults
+    border: none;
     color: $white;
+    padding: 0;
 
     .menuText {
       margin-right: 15px;
@@ -38,14 +42,92 @@
     }
 
     .hamburger {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end; // This pulls the bars to the right
+      gap: 6px; // Space between the bars
       width: 30px;
+
       span {
         display: block;
-        width: 100%;
-        height: 1px;
+        height: 2px; // Slightly thicker for better visibility
         background-color: $white;
-        margin: 6px 0;
+        transition: all 0.3s ease;
+        border-radius: 2px;
+      }
+
+      // Descending widths for the "F" shape
+      span:nth-child(1) { width: 100%; }    // Full (30px)
+      span:nth-child(2) { width: 70%; }     // Medium (~21px)
+      span:nth-child(3) { width: 40%; }     // Short (~12px)
+    }
+
+    // Optional: Animate widths on hover
+    &:hover .hamburger span {
+      width: 100%;
+      background-color: $clay;
+    }
+  }
+}
+
+// Add this inside .menuTrigger in your SCSS
+&.open {
+    .hamburger {
+      span {
+        display: block;
+        height: 2px;
+        background-color: $white;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); // "Morphic" feel
+        transform-origin: center; // Ensures they rotate from their own center
+        border-radius: 2px;
+      }
+      span:nth-child(1) {
+        width: 100%; // Snap to full width for the X
+        /* Move down to the middle (8px gap + 2px bar height) and rotate */
+        transform: translateY(8px) rotate(45deg);
+      }
+
+      span:nth-child(2) {
+        opacity: 0; // Fade out the middle bar
+        transform: translateX(10px); // Optional: slide it out to the right
+      }
+
+      span:nth-child(3) {
+        width: 100%; // Snap to full width for the X
+        /* Move up to the middle and rotate opposite direction */
+        transform: translateY(-8px) rotate(-45deg);
       }
     }
+  }
+
+// Simple Full-Screen Menu Overlay Logic
+.fullMenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: $forest;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  z-index: -1; // Sits behind the nav bar
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s ease-in-out;
+  
+  &.menuVisible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  a {
+    color: $white;
+    font-size: 2rem;
+    font-family: $font-main;
+    text-transform: uppercase;
+    &:hover { color: $clay; }
   }
 }

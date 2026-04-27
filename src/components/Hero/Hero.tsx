@@ -20,10 +20,12 @@ const Hero = ({ title, subtitle, buttonText, bgImage }: HeroProps) => {
       )}
 
       {/* 2. Changed 'container' to 'content' to match your SCSS nesting */}
-      <div className={styles.content}>
-        <h1>{title}</h1>
-        <p>{subtitle}</p>
-        <button className={styles.button}>{buttonText}</button>
+      <div className='container'>
+        <div className={styles.content}>
+          <h1>{title}</h1>
+          <p>{subtitle}</p>
+          <button className={styles.button}>{buttonText}</button>
+        </div>
       </div>
     </section>
   );
