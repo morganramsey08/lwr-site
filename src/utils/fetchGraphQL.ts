@@ -49,7 +49,7 @@ export async function fetchGraphQL<T = any>(
     const data = await response.json();
 
     if (data.errors) {
-      console.error("GraphQL Errors:", data.errors);
+      console.error("GraphQL Errors:", JSON.stringify(data.errors, null, 2));
       throw new Error("Error executing GraphQL query");
     }
 

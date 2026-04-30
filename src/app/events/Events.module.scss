@@ -1,0 +1,60 @@
+@use "../../../src/styles/variables" as *;
+.pageHeader {
+  text-align: center;
+  padding: 4rem 0 4rem; // Adjust padding to breathe correctly below Hero
+  max-width: 800px;
+  margin: 0 auto;
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #2d372d; // That deep dark green from your design
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    font-size: 1.25rem;
+    color: #4b5563; // Mid-gray
+    line-height: 1.6;
+    margin: 0;
+  }
+}
+
+.eventsLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 450px; 
+  gap: 4rem;
+  align-items: start;
+  padding-bottom: 5rem; // Bottom padding for the whole page
+}
+
+/* This is a crucial fix: 
+   FullCalendar sometimes has internal min-widths that break grid layouts. */
+.calendarContainer {
+  min-width: 0; 
+  overflow: hidden; 
+}
+
+.upcomingSection {
+  /* Ensure the sidebar doesn't shrink */
+  min-width: 350px;
+
+  h3 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #2d372d;
+    margin-bottom: 2rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .eventsLayout {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .upcomingSection {
+    min-width: 100%;
+  }
+}

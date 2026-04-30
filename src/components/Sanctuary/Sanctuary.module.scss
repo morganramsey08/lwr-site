@@ -1,0 +1,86 @@
+@import '../../styles/variables'; // This links to your _variables.scss
+
+.sanctuary {
+  padding: 100px 0;
+  background-color: $white;
+  color: $forest;
+
+  .header {
+    text-align: center;
+    margin-bottom: 60px;
+    h2 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 80px;
+    align-items: start;
+
+    @media (max-width: 992px) {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+
+    .item {
+      display: flex;
+      align-items: center; // Vertical alignment with icons
+      gap: 20px;
+
+      .iconBox {
+        background-color: #C8702E; // Your brand orange/clay
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      strong {
+        display: block;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 2px;
+      }
+
+      p {
+        font-size: 1rem;
+        line-height: 1.4;
+        margin: 0;
+        opacity: 0.8;
+      }
+
+      .hoursText {
+        white-space: pre-line;
+      }
+    }
+  }
+
+  .mapWrapper {
+    height: 480px;
+    background: #f0f2f0;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+
+    iframe {
+      filter: grayscale(0.1) contrast(1.05);
+    }
+  }
+}

@@ -5,17 +5,35 @@ export const HomeHeroQuery = gql`
     page(id: $id, idType: $idType) {
       title
       featuredImage {
-        node { sourceUrl }
+        node {
+          sourceUrl
+        }
       }
       homePage {
-        # Hero Fields
+        # Hero Section
         heroTitle
         heroSubTitle
         heroButtonText
-        # About Section Fields (from your JSON)
+        heroButtonUrl
+        
+        # About Section
         title
         content
         buttonLabel
+        aboutImage {
+          node {
+            sourceUrl
+            altText
+          }
+        }
+
+        # Sanctuary Section
+        sanctuaryTitle
+        sanctuarySubtitle
+        address
+        phone
+        email
+        hours
       }
     }
   }

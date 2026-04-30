@@ -4,10 +4,11 @@ interface HeroProps {
   title: string;
   subtitle: string;
   buttonText: string;
+  buttonLink?: string;
   bgImage?: string;
 }
 
-const Hero = ({ title, subtitle, buttonText, bgImage }: HeroProps) => {
+const Hero = ({ title, subtitle, buttonText, bgImage, buttonLink }: HeroProps) => {
   return (
     <section className={styles.hero}>
       {/* 1. Use an img tag to utilize your .heroImage styles and filters */}
@@ -24,7 +25,11 @@ const Hero = ({ title, subtitle, buttonText, bgImage }: HeroProps) => {
         <div className={styles.content}>
           <h1>{title}</h1>
           <p>{subtitle}</p>
-          <button className={styles.button}>{buttonText}</button>
+            {buttonText && (
+            <a href={buttonLink} className={styles.button}>
+              {buttonText}
+            </a>
+          )}
         </div>
       </div>
     </section>

@@ -1,0 +1,117 @@
+.calendarWrapper {
+  padding: 1.5rem;
+  max-width: 80rem; 
+  margin: 0 auto;
+}
+
+.customHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: nowrap; 
+}
+
+.navigationButtons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.monthTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2d372d;
+  margin: 0;
+  line-height: 1;
+}
+
+.navBtn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #2d372d;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  
+  &:hover { 
+    opacity: 0.9; 
+  }
+}
+
+.viewSwitcher {
+  display: flex;
+  gap: 4px;
+  background: #f3f4f6;
+  padding: 4px;
+  border-radius: 8px;
+
+  button {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: #4b5563;
+    transition: all 0.2s;
+
+    &.active {
+      background-color: #d48119;
+      color: white;
+    }
+  }
+}
+
+/* Explicit Global Overrides for FullCalendar Internal Elements */
+:global(.fc-col-header-cell) {
+  background-color: #2d372d !important;
+  border-color: #2d372d !important;
+  padding: 12px 0 !important;
+}
+
+:global(.fc-col-header-cell-cushion) {
+  color: white !important;
+  text-decoration: none !important;
+}
+
+:global(.fc-daygrid-day-top) {
+  flex-direction: row !important; /* Numbers to the left */
+}
+
+:global(.fc-daygrid-day-number) {
+  padding: 10px !important;
+  color: #6b7280 !important;
+}
+
+:global(.fc-day-today) {
+  background-color: #eff6ff !important;
+}
+
+/* Target the header cell for the current day */
+:global(.fc-col-header-cell.fc-day-today) {
+  /* Change the background to match your brand green or keep it light */
+  background-color: #eff6ff !important; 
+  
+  :global(.fc-col-header-cell-cushion) {
+    /* Set this to your brand green or a dark color for contrast */
+    color: #2d372d !important; 
+    font-weight: 700 !important;
+  }
+}
+
+/* Also fix the 'Today' highlight in the Day/Week view header row */
+:global(.fc-timegrid-col.fc-day-today) {
+  background-color: #eff6ff !important;
+}

@@ -1,15 +1,23 @@
+const path = require('path');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  // We remove the timeout and other bloat to keep it simple for Turbopack
   images: {
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'admin.lightworkerranch.com',
       },
+    ],
+  },
+  sassOptions: {
+    /* Combined into one clean array */
+    includePaths: [
+      path.join(__dirname, 'src'),
+      path.join(__dirname, 'src/assets/styles')
     ],
   },
 };

@@ -1,0 +1,132 @@
+@import '../../styles/variables';
+
+/* --- 1. DARK GREEN INTRO SECTION (Wellness Immersed in Nature) --- */
+.introSectionForest {
+  background-color: $forest; 
+  padding: 120px 0;
+  color: $white;
+
+  .introGrid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 100px;
+    align-items: center;
+
+    @media (max-width: 992px) {
+      grid-template-columns: 1fr;
+      gap: 60px;
+    }
+  }
+
+  .introContentLeft {
+    h2 {
+      font-size: clamp(2.5rem, 4vw, 3.5rem);
+      font-weight: 700;
+      margin-bottom: 2.5rem;
+      line-height: 1.2;
+    }
+
+    .introBody p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+      color: rgba($white, 0.9);
+      max-width: 90%;
+    }
+  }
+
+  .introImageSide {
+    .imageContainer {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1; 
+      
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 4px;
+      }
+    }
+  }
+}
+
+/* --- 2. MISSION & VISION SECTION (Linen Background) --- */
+.missionSection {
+  background-color: #f9f9f7; // Or use $linen if defined
+  padding: 10rem 0;
+}
+
+.missionHeader {
+  text-align: center;
+  max-width: 850px;
+  margin: 0 auto 5rem; // Centers header and adds gap before cards
+
+  h2 {
+    color: $forest;
+    font-size: clamp(2.5rem, 5vw, 3.8rem);
+    font-weight: 700;
+    margin-bottom: 2rem;
+    line-height: 1.1;
+  }
+
+  .missionSubtext p {
+    color: #5a5a5a;
+    font-size: 1.25rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+}
+
+/* --- 3. VALUES CARDS GRID --- */
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  align-items: stretch;
+
+  @media (max-width: 992px) {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
+
+.valueCard {
+  background: #f4f6f3; // Subtle light green/gray tint
+  padding: 4.5rem 2.5rem;
+  border-radius: 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  .iconCircle {
+    background-color: #c68a39; // The golden-clay color
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2.5rem;
+  }
+
+  h3 { 
+    color: $forest; 
+    margin-bottom: 1.5rem; 
+    font-size: 1.85rem;
+    font-weight: 600;
+  }
+
+  p { 
+    color: #4a4a4a; 
+    line-height: 1.6; 
+    font-size: 1.05rem;
+  }
+}
