@@ -1,7 +1,11 @@
 .calendarWrapper {
-  padding: 1.5rem;
+  padding: 1.5rem 0;
   max-width: 80rem; 
   margin: 0 auto;
+
+  @media (max-width: 768px) {
+    padding: 1rem 0; // Less padding on small screens
+  }
 }
 
 .customHeader {
@@ -10,6 +14,12 @@
   align-items: flex-end;
   margin-bottom: 2rem;
   width: 100%;
+
+  @media (max-width: 768px) {
+    flex-direction: column; // Stack header items
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
 }
 
 .headerLeft {
@@ -17,6 +27,11 @@
   align-items: center;
   gap: 1.5rem;
   flex-wrap: nowrap; 
+
+  @media (max-width: 480px) {
+    width: 100%;
+    justify-content: space-between; // Title and arrows on opposite ends
+  }
 }
 
 .navigationButtons {
@@ -30,6 +45,10 @@
   color: #2d372d;
   margin: 0;
   line-height: 1;
+
+  @media (max-width: 480px) {
+    font-size: 1.5rem; // Scale down title for small phones
+  }
 }
 
 .navBtn {
@@ -45,9 +64,7 @@
   cursor: pointer;
   transition: opacity 0.2s;
   
-  &:hover { 
-    opacity: 0.9; 
-  }
+  &:hover { opacity: 0.9; }
 }
 
 .viewSwitcher {
@@ -56,6 +73,15 @@
   background: #f3f4f6;
   padding: 4px;
   border-radius: 8px;
+
+  @media (max-width: 768px) {
+    width: 100%; // Make buttons span full width
+    button {
+      flex: 1;
+      text-align: center;
+      padding: 10px 0;
+    }
+  }
 
   button {
     padding: 8px 16px;
@@ -74,44 +100,65 @@
   }
 }
 
-/* Explicit Global Overrides for FullCalendar Internal Elements */
+/* --- Mobile Specific Overrides for FullCalendar Internal Elements --- */
 :global(.fc-col-header-cell) {
   background-color: #2d372d !important;
   border-color: #2d372d !important;
   padding: 12px 0 !important;
+
+  @media (max-width: 600px) {
+    padding: 8px 0 !important; // Narrower header cells
+  }
 }
 
 :global(.fc-col-header-cell-cushion) {
   color: white !important;
   text-decoration: none !important;
+  
+  @media (max-width: 600px) {
+    font-size: 12px; // Smaller weekday text (e.g., Mon vs Monday)
+  }
 }
 
-:global(.fc-daygrid-day-top) {
-  flex-direction: row !important; /* Numbers to the left */
-}
-
+/* Fix for the day numbers on mobile */
 :global(.fc-daygrid-day-number) {
   padding: 10px !important;
   color: #6b7280 !important;
+
+  @media (max-width: 600px) {
+    padding: 4px !important; // Less padding around the number
+    font-size: 13px;
+  }
 }
 
-:global(.fc-day-today) {
-  background-color: #eff6ff !important;
+/* Ensure events don't look cramped on mobile */
+:global(.fc-event) {
+  @media (max-width: 600px) {
+    font-size: 10px !important;
+    padding: 2px !important;
+  }
 }
 
 /* Target the header cell for the current day */
 :global(.fc-col-header-cell.fc-day-today) {
-  /* Change the background to match your brand green or keep it light */
   background-color: #eff6ff !important; 
-  
   :global(.fc-col-header-cell-cushion) {
-    /* Set this to your brand green or a dark color for contrast */
     color: #2d372d !important; 
     font-weight: 700 !important;
   }
 }
 
-/* Also fix the 'Today' highlight in the Day/Week view header row */
-:global(.fc-timegrid-col.fc-day-today) {
-  background-color: #eff6ff !important;
+/* Force the calendar to ignore any internal width calculations */
+:global(.fc) {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+:global(.fc-view-harness) {
+  width: 100% !important;
+}
+
+:global(.fc-scrollgrid) {
+  width: 100% !important;
+  border-right: 1px solid #ddd !important; /* Ensures the far right border shows up */
 }
