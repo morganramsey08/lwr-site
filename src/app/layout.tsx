@@ -1,5 +1,7 @@
 import { draftMode } from "next/headers";
 import { Inter, Teachers } from 'next/font/google';
+import { fetchGraphQL } from "@/utils/fetchGraphQL";
+import { GetNavigationQuery } from "@/queries/general/getNav";
 
 import "@/styles/globals.scss";
 
@@ -27,13 +29,16 @@ export default async function RootLayout({
   // 1. MUST await draftMode in Next.js 15
   const draft = await draftMode();
   const isEnabled = draft.isEnabled;
+  
+  const navData = await fetchGraphQL(GetNavigationQuery);
+  const menuItems = navData?.menu?.menuItems?.nodes || [];
 
   return (
     <html lang="en" className={`${inter.variable} ${teachers.variable}`}>
       {/* 2. Add 'teachers.className' here so the whole site uses it by default */}
       <body className={teachers.className}>
         {isEnabled && <PreviewNotice />}
-        <Navigation />
+        <Navigation menuItems={menuItems} />
         {children}
         <Footer />
       </body>

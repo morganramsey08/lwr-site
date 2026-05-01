@@ -130,3 +130,65 @@
     font-size: 1.05rem;
   }
 }
+
+/* --- HOME PAGE ABOUT SECTION FIX --- */
+.about {
+  background-color: $forest; // #2d3e2f
+  padding: 100px 0;
+  color: $white;
+
+  // This fixes the side-by-side layout from your design
+  .grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+    align-items: center;
+
+    @media (max-width: 992px) {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+
+  .content {
+    h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 2rem;
+      line-height: 1.2;
+      color: $white; // Ensure it stays white on the dark bg
+    }
+
+    .body p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+      color: $white;
+    }
+
+    // This fixes the unstyled "Learn More" button
+    .button {
+      margin-top: 1rem;
+      background: $white;
+      color: $forest;
+      padding: 14px 30px;
+      border: none;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      font-weight: 600;
+      display: inline-block;
+    }
+  }
+
+  .imageWrapper {
+    .image {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      // Adds that subtle white shadow from your earlier design
+      box-shadow: 20px 20px 0px rgba(255, 255, 255, 0.05); 
+    }
+  }
+}

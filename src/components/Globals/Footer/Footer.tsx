@@ -30,25 +30,28 @@ const Footer = () => {
             </div>
           </div>
           
-          {/* Column 2: Quick Links */}
-          <div className={styles.columnLinks}>
-            <h4>Quick Links</h4>
-            <ul>
-              <li><Link href="/">Homepage</Link></li>
-              <li><Link href="/about">About LWR</Link></li>
-              <li><Link href="/offerings">Offerings</Link></li>
-              <li><Link href="/calendar">Calendar</Link></li>
-            </ul>
-          </div>
-          
-          {/* Column 3: Programs */}
-          <div className={styles.columnLinks}>
-            <h4>Programs</h4>
-            <ul>
-              <li><Link href="/teachers">Teachers</Link></li>
-              <li><Link href="/memberships">Memberships</Link></li>
-              <li><Link href="/ignite">Ignite Your Light</Link></li>
-            </ul>
+          {/* Wrapper for Link Columns to handle mobile layout better */}
+          <div className={styles.linksWrapper}>
+            {/* Column 2: Quick Links */}
+            <div className={styles.columnLinks}>
+              <h4>Quick Links</h4>
+              <ul>
+                <li><Link href="/">Homepage</Link></li>
+                <li><Link href="/about">About LWR</Link></li>
+                <li><Link href="/offerings">Offerings</Link></li>
+                <li><Link href="/calendar">Calendar</Link></li>
+              </ul>
+            </div>
+            
+            {/* Column 3: Programs */}
+            <div className={styles.columnLinks}>
+              <h4>Programs</h4>
+              <ul>
+                <li><Link href="/teachers">Teachers</Link></li>
+                <li><Link href="/memberships">Memberships</Link></li>
+                <li><Link href="/ignite">Ignite Your Light</Link></li>
+              </ul>
+            </div>
           </div>
         </div>
 

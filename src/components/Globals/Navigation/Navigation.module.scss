@@ -1,122 +1,121 @@
 @import '../../../styles/variables';
 
 .nav {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 100;
-  padding: 30px 0;
+  z-index: 1000;
+  padding: 2rem 0;
 
-  .wrap {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .logo {
-    color: $white;
-    text-decoration: none;
-    font-family: $font-main;
-    font-size: 1.5rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-
-  .menuTrigger {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    background: none;
-    border: none;
-    color: $white;
-    padding: 0;
-
-    .menuText {
-      margin-right: 15px;
-      text-transform: uppercase;
-      font-size: 0.9rem;
-      letter-spacing: 1px;
-    }
-
-    .hamburger {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 6px;
-      width: 30px;
-
-      span {
-        display: block;
-        height: 2px;
-        background-color: $white;
-        // Updated transition for a smoother "morphic" feel
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        border-radius: 2px;
-        transform-origin: center;
-      }
-
-      span:nth-child(1) { width: 100%; }
-      span:nth-child(2) { width: 70%; }
-      span:nth-child(3) { width: 40%; }
-    }
-
-    // --- MOVE THIS INSIDE .menuTrigger ---
-    &.open {
-      .hamburger {
-        span:nth-child(1) {
-          width: 100%;
-          // 6px gap + 2px height = 8px to reach the center of the middle bar
-          transform: translateY(8px) rotate(45deg);
-        }
-
-        span:nth-child(2) {
-          opacity: 0;
-          transform: translateX(10px);
-        }
-
-        span:nth-child(3) {
-          width: 100%;
-          transform: translateY(-8px) rotate(-45deg);
-        }
-      }
-    }
-
-    &:hover:not(.open) .hamburger span {
-      width: 100%;
-      background-color: $clay;
-    }
+  // --- SCROLLED STATE ---
+  &.scrolled {
+    background-color: rgba($forest, 0.65); // Dark green with slight transparency
+    padding: 1.2rem 0; // Thinner nav on scroll
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(8px); // Optional: adds a nice glass effect
   }
 }
 
-// Full-Screen Menu stays outside as a sibling to .nav or child of body
+.wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  color: $white;
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-decoration: none;
+  font-size: 1.2rem;
+  z-index: 1100; // Ensures logo stays visible over the overlay
+}
+
+/* --- THE FULL SCREEN OVERLAY --- */
 .fullMenu {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
-  background: $forest;
+  background-color: $forest; // Using the #2d3e2f variable
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
-  z-index: -1;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.4s ease-in-out;
-  
+  transition: all 0.5s ease-in-out;
+  z-index: 1050;
+
   &.menuVisible {
     opacity: 1;
     visibility: visible;
   }
+}
 
-  a {
-    color: $white;
-    font-size: 2rem;
-    font-family: $font-main;
+/* This container ensures links are stacked and centered */
+.menuLinks {
+  display: flex;
+  flex-direction: column; // Vertically stacks the links
+  align-items: center;
+  gap: 2.5rem; // Space between Home, About, Events
+}
+
+.menuLink {
+  color: $white;
+  font-size: clamp(2.5rem, 8vw, 4.5rem); // Large, cinematic responsive text
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: 300;
+  letter-spacing: 0.6rem; // Matches the spaced-out look in your design
+  transition: opacity 0.3s ease, letter-spacing 0.3s ease;
+
+  &:hover {
+    opacity: 0.6;
+    letter-spacing: 0.8rem; // Subtle expansion effect on hover
+  }
+}
+
+/* --- THE TRIGGER BUTTON --- */
+.menuTrigger {
+  background: none;
+  border: none;
+  color: $white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  z-index: 1100;
+  
+  .menuText {
     text-transform: uppercase;
-    &:hover { color: $clay; }
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    font-weight: 500;
+  }
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background-color: $white;
+    transition: all 0.3s ease;
+  }
+}
+
+/* Animations for the hamburger turning into an 'X' */
+.open {
+  .hamburger {
+    span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    span:nth-child(2) { opacity: 0; }
+    span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
   }
 }

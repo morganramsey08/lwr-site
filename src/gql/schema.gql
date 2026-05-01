@@ -11,6 +11,26 @@ type AboutPage implements AboutPage_Fields & AcfFieldGroup & AcfFieldGroupFields
   fieldGroupName: String @deprecated(reason: "Use __typename instead")
 
   """
+  Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group
+  """
+  heroButtonLink: String
+
+  """
+  Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group
+  """
+  heroButtonText: String
+
+  """
+  Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group
+  """
+  heroSubtitle: String
+
+  """
+  Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group
+  """
+  heroTitle: String
+
+  """
   Field of the &quot;image&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group
   """
   introImage: AcfMediaItemConnectionEdge
@@ -87,6 +107,26 @@ Interface representing fields of the ACF &quot;AboutPage&quot; Field Group
 interface AboutPage_Fields implements AcfFieldGroup & AcfFieldGroupFields {
   """The name of the field group"""
   fieldGroupName: String @deprecated(reason: "Use __typename instead")
+
+  """
+  Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group
+  """
+  heroButtonLink: String
+
+  """
+  Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group
+  """
+  heroButtonText: String
+
+  """
+  Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group
+  """
+  heroSubtitle: String
+
+  """
+  Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group
+  """
+  heroTitle: String
 
   """
   Field of the &quot;image&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group
@@ -5502,8 +5542,8 @@ type MenuItemToMenuItemLinkableConnectionEdge implements Edge & MenuItemLinkable
 Designated areas where navigation menus can be displayed. Represents the named regions in the interface where menus can be assigned.
 """
 enum MenuLocationEnum {
-  """Empty menu location"""
-  EMPTY
+  """Put the menu in the primary_menu location"""
+  PRIMARY_MENU
 }
 
 """

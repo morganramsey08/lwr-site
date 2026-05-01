@@ -23,6 +23,14 @@ export type AboutPage = AboutPage_Fields & AcfFieldGroup & AcfFieldGroupFields &
    * @deprecated Use __typename instead
    */
   fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
+  heroButtonLink?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
+  heroButtonText?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
+  heroSubtitle?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
+  heroTitle?: Maybe<Scalars['String']['output']>;
   /** Field of the &quot;image&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
   introImage?: Maybe<AcfMediaItemConnectionEdge>;
   /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
@@ -60,6 +68,14 @@ export type AboutPage_Fields = {
    * @deprecated Use __typename instead
    */
   fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
+  heroButtonLink?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
+  heroButtonText?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
+  heroSubtitle?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
+  heroTitle?: Maybe<Scalars['String']['output']>;
   /** Field of the &quot;image&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
   introImage?: Maybe<AcfMediaItemConnectionEdge>;
   /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
@@ -3757,8 +3773,8 @@ export type MenuItemToMenuItemLinkableConnectionEdge = Edge & MenuItemLinkableCo
 
 /** Designated areas where navigation menus can be displayed. Represents the named regions in the interface where menus can be assigned. */
 export enum MenuLocationEnum {
-  /** Empty menu location */
-  Empty = 'EMPTY'
+  /** Put the menu in the primary_menu location */
+  PrimaryMenu = 'PRIMARY_MENU'
 }
 
 /** Identifier types for retrieving a specific navigation menu. Specifies which property (ID, name, location) is used to locate a particular menu. */
