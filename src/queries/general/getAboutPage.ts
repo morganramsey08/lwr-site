@@ -7,7 +7,6 @@ export const AboutPageQuery = `
           sourceUrl
         }
       }
-      # Changed from aboutPageFields to aboutPage based on the error
       aboutPage {
         heroTitle
         heroSubtitle
@@ -31,6 +30,12 @@ export const AboutPageQuery = `
             sourceUrl
           }
         }
+        sanctuaryTitle
+        sanctuarySubtitle
+        address
+        phone
+        email
+        hours
       }
     }
   }

@@ -12,14 +12,13 @@ export default async function AboutPage() {
     : (AboutPageQuery as any)?.loc?.source?.body || "";
 
     const data = await fetchGraphQL(queryStr, {
-    id: "60", // Replace with your actual About page ID
-    idType: "DATABASE_ID"
+      id: "60", // Ensure this ID matches your About Page in WP
+      idType: "DATABASE_ID"
     });
 
   const page = data?.page;
   const fields = page?.aboutPage;
   
-console.log("ACF Data Check:", fields); // Check your terminal/server log
   return (
     <main>
       <Hero 
@@ -29,13 +28,21 @@ console.log("ACF Data Check:", fields); // Check your terminal/server log
         buttonLink={fields?.heroButtonLink}
         bgImage={page?.featuredImage?.node?.sourceUrl}
       />
+
       <AboutIntroduction data={fields} />
       
       <MissionVision data={fields} />
       
       <CommunityCTA />
       
-      <VisitSanctuary />
+      <VisitSanctuary 
+        title={fields?.sanctuaryTitle} 
+        subtitle={fields?.sanctuarySubtitle} 
+        address={fields?.address} 
+        phone={fields?.phone} 
+        email={fields?.email} 
+        hours={fields?.hours} 
+      />
     </main>
   );
 }
