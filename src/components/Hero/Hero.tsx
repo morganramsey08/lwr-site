@@ -20,7 +20,6 @@ const Hero = ({ title, subtitle, buttonText, bgImage, buttonLink }: HeroProps) =
         />
       )}
 
-      {/* 2. Changed 'container' to 'content' to match your SCSS nesting */}
       <div className='container'>
         <div className={styles.content}>
           <h1>{title}</h1>
