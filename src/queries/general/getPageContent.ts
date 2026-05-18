@@ -13,14 +13,16 @@ export const PageContentQuery = `
 `;
 
 export const MembershipsPageQuery = `
-  query GetMembershipsContent($id: ID!) {
+  query GetMembershipsContent($id: ID!, $parentId: ID!) {
+    # Get the text content
     page(id: $id, idType: DATABASE_ID) {
       title
       content
-      featuredImage {
-        node {
-          sourceUrl
-        }
+    }
+    # Get the images associated with this page ID
+    mediaItems(where: { parent: $parentId }, first: 1) {
+      nodes {
+        sourceUrl
       }
     }
   }
