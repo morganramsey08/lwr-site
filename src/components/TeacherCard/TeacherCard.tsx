@@ -1,4 +1,4 @@
-'use client'; // This is now safe because we aren't fetching data here
+'use client';
 
 import { FacebookLogoIcon, InstagramLogoIcon } from '@phosphor-icons/react';
 import styles from '@/app/teachers/Teachers.module.scss';
@@ -15,8 +15,9 @@ export default function TeacherCard({ teacher }: { teacher: any }) {
       
       <div className={styles.details}>
         <h2 className={styles.name}>{teacher.title}</h2>
+        
         {fields?.teacherTitle && (
-          <span className={styles.jobTitle}>{fields.teacherTitle}</span>
+          <p className={styles.jobTitle}>{fields.teacherTitle}</p>
         )}
         
         <div 
@@ -27,12 +28,12 @@ export default function TeacherCard({ teacher }: { teacher: any }) {
         <div className={styles.socials}>
           {fields?.socialMediaInstagram && (
             <a href={fields.socialMediaInstagram} target="_blank" rel="noreferrer" className={styles.iconLink}>
-              <InstagramLogoIcon size={20} weight="regular" />
+              <InstagramLogoIcon size={18} weight="light" />
             </a>
           )}
           {fields?.socialMediaFacebook && (
             <a href={fields.socialMediaFacebook} target="_blank" rel="noreferrer" className={styles.iconLink}>
-              <FacebookLogoIcon size={20} weight="regular" />
+              <FacebookLogoIcon size={18} weight="light" />
             </a>
           )}
         </div>

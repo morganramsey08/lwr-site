@@ -18,6 +18,10 @@ export type Scalars = {
 /** The &quot;AboutPage&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
 export type AboutPage = AboutPage_Fields & AcfFieldGroup & AcfFieldGroupFields & {
   __typename?: 'AboutPage';
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
+  address?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
+  email?: Maybe<Scalars['String']['output']>;
   /**
    * The name of the field group
    * @deprecated Use __typename instead
@@ -31,6 +35,8 @@ export type AboutPage = AboutPage_Fields & AcfFieldGroup & AcfFieldGroupFields &
   heroSubtitle?: Maybe<Scalars['String']['output']>;
   /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
   heroTitle?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
+  hours?: Maybe<Scalars['String']['output']>;
   /** Field of the &quot;image&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
   introImage?: Maybe<AcfMediaItemConnectionEdge>;
   /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
@@ -41,6 +47,12 @@ export type AboutPage = AboutPage_Fields & AcfFieldGroup & AcfFieldGroupFields &
   missionSection?: Maybe<Scalars['String']['output']>;
   /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
   missionTitle?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
+  phone?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
+  sanctuarySubtitle?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
+  sanctuaryTitle?: Maybe<Scalars['String']['output']>;
   /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
   valueOneIcon?: Maybe<Scalars['String']['output']>;
   /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
@@ -63,6 +75,10 @@ export type AboutPage = AboutPage_Fields & AcfFieldGroup & AcfFieldGroupFields &
 
 /** Interface representing fields of the ACF &quot;AboutPage&quot; Field Group */
 export type AboutPage_Fields = {
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
+  address?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
+  email?: Maybe<Scalars['String']['output']>;
   /**
    * The name of the field group
    * @deprecated Use __typename instead
@@ -76,6 +92,8 @@ export type AboutPage_Fields = {
   heroSubtitle?: Maybe<Scalars['String']['output']>;
   /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
   heroTitle?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
+  hours?: Maybe<Scalars['String']['output']>;
   /** Field of the &quot;image&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
   introImage?: Maybe<AcfMediaItemConnectionEdge>;
   /** Field of the &quot;textarea&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
@@ -86,6 +104,12 @@ export type AboutPage_Fields = {
   missionSection?: Maybe<Scalars['String']['output']>;
   /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
   missionTitle?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
+  phone?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
+  sanctuarySubtitle?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
+  sanctuaryTitle?: Maybe<Scalars['String']['output']>;
   /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
   valueOneIcon?: Maybe<Scalars['String']['output']>;
   /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;AboutPage&quot; Field Group */
@@ -1416,7 +1440,9 @@ export enum ContentTypeEnum {
   /** The Type of Content object */
   Page = 'PAGE',
   /** The Type of Content object */
-  Post = 'POST'
+  Post = 'POST',
+  /** The Type of Content object */
+  Teacher = 'TEACHER'
 }
 
 /** Identifier types for retrieving a specific content type definition. Determines whether to look up content types by ID or name. */
@@ -1815,6 +1841,35 @@ export type CreateTagPayload = {
   tag?: Maybe<Tag>;
 };
 
+/** Input for the createTeacher mutation. */
+export type CreateTeacherInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** The content of the object */
+  content?: InputMaybe<Scalars['String']['input']>;
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
+  date?: InputMaybe<Scalars['String']['input']>;
+  /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
+  menuOrder?: InputMaybe<Scalars['Int']['input']>;
+  /** The password used to protect the content of the object */
+  password?: InputMaybe<Scalars['String']['input']>;
+  /** The slug of the object */
+  slug?: InputMaybe<Scalars['String']['input']>;
+  /** The status of the object */
+  status?: InputMaybe<PostStatusEnum>;
+  /** The title of the object */
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** The payload for the createTeacher mutation. */
+export type CreateTeacherPayload = {
+  __typename?: 'CreateTeacherPayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** The Post object mutation type. */
+  teacher?: Maybe<Teacher>;
+};
+
 /** Input for the createUser mutation. */
 export type CreateUserInput = {
   /** User's AOL IM account. */
@@ -2083,6 +2138,29 @@ export type DeleteTagPayload = {
   deletedId?: Maybe<Scalars['ID']['output']>;
   /** The deleted term object */
   tag?: Maybe<Tag>;
+};
+
+/** Input for the deleteTeacher mutation. */
+export type DeleteTeacherInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** Whether the object should be force deleted instead of being moved to the trash */
+  forceDelete?: InputMaybe<Scalars['Boolean']['input']>;
+  /** The ID of the teacher to delete */
+  id: Scalars['ID']['input'];
+  /** Override the edit lock when another user is editing the post */
+  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** The payload for the deleteTeacher mutation. */
+export type DeleteTeacherPayload = {
+  __typename?: 'DeleteTeacherPayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** The ID of the deleted object */
+  deletedId?: Maybe<Scalars['ID']['output']>;
+  /** The object before it was deleted */
+  teacher?: Maybe<Teacher>;
 };
 
 /** Input for the deleteUser mutation. */
@@ -2627,6 +2705,41 @@ export type GeneralSettingsToMediaItemConnectionEdge = Edge & MediaItemConnectio
   cursor?: Maybe<Scalars['String']['output']>;
   /** The node of the connection, without the edges */
   node: MediaItem;
+};
+
+/** The &quot;GlobalSettings&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type GlobalSettings = AcfFieldGroup & AcfFieldGroupFields & GlobalSettings_Fields & {
+  __typename?: 'GlobalSettings';
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;image&quot; Field Type added to the schema as part of the &quot;GlobalSettings&quot; Field Group */
+  newsletterBackground?: Maybe<AcfMediaItemConnectionEdge>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;GlobalSettings&quot; Field Group */
+  newsletterButtonText?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;GlobalSettings&quot; Field Group */
+  newsletterSubtitle?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;GlobalSettings&quot; Field Group */
+  newsletterTitle?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;GlobalSettings&quot; Field Group */
+export type GlobalSettings_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;image&quot; Field Type added to the schema as part of the &quot;GlobalSettings&quot; Field Group */
+  newsletterBackground?: Maybe<AcfMediaItemConnectionEdge>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;GlobalSettings&quot; Field Group */
+  newsletterButtonText?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;GlobalSettings&quot; Field Group */
+  newsletterSubtitle?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;GlobalSettings&quot; Field Group */
+  newsletterTitle?: Maybe<Scalars['String']['output']>;
 };
 
 /** Content that can be organized in a parent-child structure. Provides fields for navigating up and down the hierarchy and maintaining structured relationships. */
@@ -3706,7 +3819,7 @@ export enum MenuItemNodeIdTypeEnum {
 }
 
 /** Deprecated in favor of MenuItemLinkable Interface */
-export type MenuItemObjectUnion = Category | Event | Page | Post | PostFormat | Tag;
+export type MenuItemObjectUnion = Category | Event | Page | Post | PostFormat | Tag | Teacher;
 
 /** Connection between the MenuItem type and the Menu type */
 export type MenuItemToMenuConnectionEdge = Edge & MenuConnectionEdge & OneToOneConnection & {
@@ -4190,7 +4303,7 @@ export enum OrderEnum {
 }
 
 /** A standalone content entry generally used for static, non-chronological content such as &quot;About Us&quot; or &quot;Contact&quot; pages. */
-export type Page = ContentNode & DatabaseIdentifier & HierarchicalContentNode & HierarchicalNode & MenuItemLinkable & Node & NodeWithAuthor & NodeWithComments & NodeWithContentEditor & NodeWithFeaturedImage & NodeWithPageAttributes & NodeWithRevisions & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfAboutPage & WithAcfHomePage & {
+export type Page = ContentNode & DatabaseIdentifier & HierarchicalContentNode & HierarchicalNode & MenuItemLinkable & Node & NodeWithAuthor & NodeWithComments & NodeWithContentEditor & NodeWithFeaturedImage & NodeWithPageAttributes & NodeWithRevisions & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfAboutPage & WithAcfGlobalSettings & WithAcfHomePage & {
   __typename?: 'Page';
   /** Fields of the AboutPage ACF Field Group */
   aboutPage?: Maybe<AboutPage>;
@@ -4238,6 +4351,8 @@ export type Page = ContentNode & DatabaseIdentifier & HierarchicalContentNode & 
   featuredImageDatabaseId?: Maybe<Scalars['Int']['output']>;
   /** Globally unique ID of the featured image assigned to the node */
   featuredImageId?: Maybe<Scalars['ID']['output']>;
+  /** Fields of the GlobalSettings ACF Field Group */
+  globalSettings?: Maybe<GlobalSettings>;
   /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
   guid?: Maybe<Scalars['String']['output']>;
   /** Whether the page object is password protected. */
@@ -6173,6 +6288,8 @@ export type RootMutation = {
   createPostFormat?: Maybe<CreatePostFormatPayload>;
   /** The createTag mutation */
   createTag?: Maybe<CreateTagPayload>;
+  /** The createTeacher mutation */
+  createTeacher?: Maybe<CreateTeacherPayload>;
   /** The createUser mutation */
   createUser?: Maybe<CreateUserPayload>;
   /** The deleteCategory mutation */
@@ -6191,6 +6308,8 @@ export type RootMutation = {
   deletePostFormat?: Maybe<DeletePostFormatPayload>;
   /** The deleteTag mutation */
   deleteTag?: Maybe<DeleteTagPayload>;
+  /** The deleteTeacher mutation */
+  deleteTeacher?: Maybe<DeleteTeacherPayload>;
   /** The deleteUser mutation */
   deleteUser?: Maybe<DeleteUserPayload>;
   /** Increase the count. */
@@ -6221,6 +6340,8 @@ export type RootMutation = {
   updateSettings?: Maybe<UpdateSettingsPayload>;
   /** The updateTag mutation */
   updateTag?: Maybe<UpdateTagPayload>;
+  /** The updateTeacher mutation */
+  updateTeacher?: Maybe<UpdateTeacherPayload>;
   /** The updateUser mutation */
   updateUser?: Maybe<UpdateUserPayload>;
 };
@@ -6275,6 +6396,12 @@ export type RootMutationCreateTagArgs = {
 
 
 /** The root mutation */
+export type RootMutationCreateTeacherArgs = {
+  input: CreateTeacherInput;
+};
+
+
+/** The root mutation */
 export type RootMutationCreateUserArgs = {
   input: CreateUserInput;
 };
@@ -6325,6 +6452,12 @@ export type RootMutationDeletePostFormatArgs = {
 /** The root mutation */
 export type RootMutationDeleteTagArgs = {
   input: DeleteTagInput;
+};
+
+
+/** The root mutation */
+export type RootMutationDeleteTeacherArgs = {
+  input: DeleteTeacherInput;
 };
 
 
@@ -6415,6 +6548,12 @@ export type RootMutationUpdateSettingsArgs = {
 /** The root mutation */
 export type RootMutationUpdateTagArgs = {
   input: UpdateTagInput;
+};
+
+
+/** The root mutation */
+export type RootMutationUpdateTeacherArgs = {
+  input: UpdateTeacherInput;
 };
 
 
@@ -6520,6 +6659,15 @@ export type RootQuery = {
   taxonomies?: Maybe<RootQueryToTaxonomyConnection>;
   /** Fetch a Taxonomy node by unique Identifier */
   taxonomy?: Maybe<Taxonomy>;
+  /** An object of the teacher Type.  */
+  teacher?: Maybe<Teacher>;
+  /**
+   * A teacher object
+   * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
+   */
+  teacherBy?: Maybe<Teacher>;
+  /** Connection between the RootQuery type and the teacher type */
+  teachers?: Maybe<RootQueryToTeacherConnection>;
   /** A node in a taxonomy used to group and relate content nodes */
   termNode?: Maybe<TermNode>;
   /** Connection between the RootQuery type and the TermNode type */
@@ -6856,6 +7004,33 @@ export type RootQueryTaxonomiesArgs = {
 export type RootQueryTaxonomyArgs = {
   id: Scalars['ID']['input'];
   idType?: InputMaybe<TaxonomyIdTypeEnum>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryTeacherArgs = {
+  asPreview?: InputMaybe<Scalars['Boolean']['input']>;
+  id: Scalars['ID']['input'];
+  idType?: InputMaybe<TeacherIdType>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryTeacherByArgs = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  teacherId?: InputMaybe<Scalars['Int']['input']>;
+  uri?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryTeachersArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<RootQueryToTeacherConnectionWhereArgs>;
 };
 
 
@@ -7986,6 +8161,77 @@ export type RootQueryToTaxonomyConnectionPageInfo = PageInfo & TaxonomyConnectio
   startCursor?: Maybe<Scalars['String']['output']>;
 };
 
+/** Connection between the RootQuery type and the teacher type */
+export type RootQueryToTeacherConnection = Connection & TeacherConnection & {
+  __typename?: 'RootQueryToTeacherConnection';
+  /** Edges for the RootQueryToTeacherConnection connection */
+  edges: Array<RootQueryToTeacherConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<Teacher>;
+  /** Information about pagination in a connection. */
+  pageInfo: RootQueryToTeacherConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type RootQueryToTeacherConnectionEdge = Edge & TeacherConnectionEdge & {
+  __typename?: 'RootQueryToTeacherConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The item at the end of the edge */
+  node: Teacher;
+};
+
+/** Pagination metadata specific to &quot;RootQueryToTeacherConnection&quot; collections. Provides cursors and flags for navigating through sets of RootQueryToTeacherConnection Nodes. */
+export type RootQueryToTeacherConnectionPageInfo = PageInfo & TeacherConnectionPageInfo & WpPageInfo & {
+  __typename?: 'RootQueryToTeacherConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Arguments for filtering the RootQueryToTeacherConnection connection */
+export type RootQueryToTeacherConnectionWhereArgs = {
+  /** Filter the connection based on dates */
+  dateQuery?: InputMaybe<DateQueryInput>;
+  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
+  hasPassword?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Specific database ID of the object */
+  id?: InputMaybe<Scalars['Int']['input']>;
+  /** Array of IDs for the objects to retrieve */
+  in?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Get objects with a specific mimeType property */
+  mimeType?: InputMaybe<MimeTypeEnum>;
+  /** Slug / post_name of the object */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** Specify objects to retrieve. Use slugs */
+  nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** What parameter to use to order the objects by. */
+  orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
+  /** Use ID to return only children. Use 0 to return only top-level items */
+  parent?: InputMaybe<Scalars['ID']['input']>;
+  /** Specify objects whose parent is in an array */
+  parentIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Specify posts whose parent is not in an array */
+  parentNotIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  /** Show posts with a specific password. */
+  password?: InputMaybe<Scalars['String']['input']>;
+  /** Show Posts based on a keyword search */
+  search?: InputMaybe<Scalars['String']['input']>;
+  /** Retrieve posts where post status is in an array. */
+  stati?: InputMaybe<Array<InputMaybe<PostStatusEnum>>>;
+  /** Show posts with a specific status. */
+  status?: InputMaybe<PostStatusEnum>;
+  /** Title of the object */
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
 /** Connection between the RootQuery type and the TermNode type */
 export type RootQueryToTermNodeConnection = Connection & TermNodeConnection & {
   __typename?: 'RootQueryToTermNodeConnection';
@@ -8773,6 +9019,274 @@ export type TaxonomyToTermNodeConnectionPageInfo = PageInfo & TermNodeConnection
   startCursor?: Maybe<Scalars['String']['output']>;
 };
 
+/** The teacher type */
+export type Teacher = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithContentEditor & NodeWithFeaturedImage & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable & WithAcfTeachers & {
+  __typename?: 'Teacher';
+  /**
+   * The ancestors of the content node.
+   * @deprecated This content type is not hierarchical and typically will not have ancestors
+   */
+  ancestors?: Maybe<TeacherToTeacherConnection>;
+  /** The content of the post. */
+  content?: Maybe<Scalars['String']['output']>;
+  /** Connection between the ContentNode type and the ContentType type */
+  contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>;
+  /** The name of the Content Type the node belongs to */
+  contentTypeName: Scalars['String']['output'];
+  /** The unique identifier stored in the database */
+  databaseId: Scalars['Int']['output'];
+  /** Post publishing date. */
+  date?: Maybe<Scalars['String']['output']>;
+  /** The publishing date set in GMT. */
+  dateGmt?: Maybe<Scalars['String']['output']>;
+  /** The desired slug of the post */
+  desiredSlug?: Maybe<Scalars['String']['output']>;
+  /** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
+  editingLockedBy?: Maybe<ContentNodeToEditLockConnectionEdge>;
+  /** The RSS enclosure for the object */
+  enclosure?: Maybe<Scalars['String']['output']>;
+  /** Connection between the ContentNode type and the EnqueuedScript type */
+  enqueuedScripts?: Maybe<ContentNodeToEnqueuedScriptConnection>;
+  /** Connection between the ContentNode type and the EnqueuedStylesheet type */
+  enqueuedStylesheets?: Maybe<ContentNodeToEnqueuedStylesheetConnection>;
+  /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
+  featuredImage?: Maybe<NodeWithFeaturedImageToMediaItemConnectionEdge>;
+  /** The database identifier for the featured image node assigned to the content node */
+  featuredImageDatabaseId?: Maybe<Scalars['Int']['output']>;
+  /** Globally unique ID of the featured image assigned to the node */
+  featuredImageId?: Maybe<Scalars['ID']['output']>;
+  /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+  guid?: Maybe<Scalars['String']['output']>;
+  /** Whether the teacher object is password protected. */
+  hasPassword?: Maybe<Scalars['Boolean']['output']>;
+  /** The globally unique identifier of the teacher object. */
+  id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
+  /** Whether the node is a Content Node */
+  isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
+  /** Whether the object is a node in the preview state */
+  isPreview?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether the object is restricted from the current viewer */
+  isRestricted?: Maybe<Scalars['Boolean']['output']>;
+  /** Whether the node is a Term */
+  isTermNode: Scalars['Boolean']['output'];
+  /** The user that most recently edited the node */
+  lastEditedBy?: Maybe<ContentNodeToEditLastConnectionEdge>;
+  /** The permalink of the post */
+  link?: Maybe<Scalars['String']['output']>;
+  /** The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time. */
+  modified?: Maybe<Scalars['String']['output']>;
+  /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
+  modifiedGmt?: Maybe<Scalars['String']['output']>;
+  /**
+   * The parent of the content node.
+   * @deprecated This content type is not hierarchical and typically will not have a parent
+   */
+  parent?: Maybe<TeacherToParentConnectionEdge>;
+  /** The password for the teacher object. */
+  password?: Maybe<Scalars['String']['output']>;
+  /** Connection between the teacher type and the teacher type */
+  preview?: Maybe<TeacherToPreviewConnectionEdge>;
+  /** The database id of the preview node */
+  previewRevisionDatabaseId?: Maybe<Scalars['Int']['output']>;
+  /** Whether the object is a node in the preview state */
+  previewRevisionId?: Maybe<Scalars['ID']['output']>;
+  /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+  slug?: Maybe<Scalars['String']['output']>;
+  /** The current status of the object */
+  status?: Maybe<Scalars['String']['output']>;
+  /**
+   * The id field matches the WP_Post-&gt;ID field.
+   * @deprecated Deprecated in favor of the databaseId field
+   */
+  teacherId: Scalars['Int']['output'];
+  /** Fields of the Teachers ACF Field Group */
+  teachers?: Maybe<Teachers>;
+  /** The template assigned to the node */
+  template?: Maybe<ContentTemplate>;
+  /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
+  title?: Maybe<Scalars['String']['output']>;
+  /** The unique resource identifier path */
+  uri?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** The teacher type */
+export type TeacherAncestorsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** The teacher type */
+export type TeacherContentArgs = {
+  format?: InputMaybe<PostObjectFieldFormatEnum>;
+};
+
+
+/** The teacher type */
+export type TeacherEnqueuedScriptsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** The teacher type */
+export type TeacherEnqueuedStylesheetsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** The teacher type */
+export type TeacherTitleArgs = {
+  format?: InputMaybe<PostObjectFieldFormatEnum>;
+};
+
+/** A paginated collection of teacher Nodes, Supports cursor-based pagination and filtering to efficiently retrieve sets of teacher Nodes */
+export type TeacherConnection = {
+  /** A list of edges (relational context) between RootQuery and connected teacher Nodes */
+  edges: Array<TeacherConnectionEdge>;
+  /** A list of connected teacher Nodes */
+  nodes: Array<Teacher>;
+  /** Information about pagination in a connection. */
+  pageInfo: TeacherConnectionPageInfo;
+};
+
+/** Represents a connection to a teacher. Contains both the teacher Node and metadata about the relationship. */
+export type TeacherConnectionEdge = {
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The connected teacher Node */
+  node: Teacher;
+};
+
+/** Pagination metadata specific to &quot;TeacherConnectionEdge&quot; collections. Provides cursors and flags for navigating through sets of &quot;TeacherConnectionEdge&quot; Nodes. */
+export type TeacherConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** Identifier types for retrieving a specific Teacher. Specifies which unique attribute is used to find an exact Teacher. */
+export enum TeacherIdType {
+  /** Identify a resource by the Database ID. */
+  DatabaseId = 'DATABASE_ID',
+  /** Identify a resource by the (hashed) Global ID. */
+  Id = 'ID',
+  /** Identify a resource by the slug. Available to non-hierarchcial Types where the slug is a unique identifier. */
+  Slug = 'SLUG',
+  /** Identify a resource by the URI. */
+  Uri = 'URI'
+}
+
+/** Connection between the teacher type and the teacher type */
+export type TeacherToParentConnectionEdge = Edge & OneToOneConnection & TeacherConnectionEdge & {
+  __typename?: 'TeacherToParentConnectionEdge';
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /**
+   * The node of the connection, without the edges
+   * @deprecated This content type is not hierarchical and typically will not have a parent
+   */
+  node: Teacher;
+};
+
+/** Connection between the teacher type and the teacher type */
+export type TeacherToPreviewConnectionEdge = Edge & OneToOneConnection & TeacherConnectionEdge & {
+  __typename?: 'TeacherToPreviewConnectionEdge';
+  /** Opaque reference to the nodes position in the connection. Value can be used with pagination args. */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /** The node of the connection, without the edges */
+  node: Teacher;
+};
+
+/** Connection between the teacher type and the teacher type */
+export type TeacherToTeacherConnection = Connection & TeacherConnection & {
+  __typename?: 'TeacherToTeacherConnection';
+  /** Edges for the TeacherToTeacherConnection connection */
+  edges: Array<TeacherToTeacherConnectionEdge>;
+  /** The nodes of the connection, without the edges */
+  nodes: Array<Teacher>;
+  /** Information about pagination in a connection. */
+  pageInfo: TeacherToTeacherConnectionPageInfo;
+};
+
+/** An edge in a connection */
+export type TeacherToTeacherConnectionEdge = Edge & TeacherConnectionEdge & {
+  __typename?: 'TeacherToTeacherConnectionEdge';
+  /**
+   * A cursor for use in pagination
+   * @deprecated This content type is not hierarchical and typically will not have ancestors
+   */
+  cursor?: Maybe<Scalars['String']['output']>;
+  /**
+   * The item at the end of the edge
+   * @deprecated This content type is not hierarchical and typically will not have ancestors
+   */
+  node: Teacher;
+};
+
+/** Pagination metadata specific to &quot;TeacherToTeacherConnection&quot; collections. Provides cursors and flags for navigating through sets of TeacherToTeacherConnection Nodes. */
+export type TeacherToTeacherConnectionPageInfo = PageInfo & TeacherConnectionPageInfo & WpPageInfo & {
+  __typename?: 'TeacherToTeacherConnectionPageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
+/** The &quot;Teachers&quot; Field Group. Added to the Schema by &quot;WPGraphQL for ACF&quot;. */
+export type Teachers = AcfFieldGroup & AcfFieldGroupFields & Teachers_Fields & {
+  __typename?: 'Teachers';
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;Teachers&quot; Field Group */
+  socialMediaFacebook?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;Teachers&quot; Field Group */
+  socialMediaInstagram?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;Teachers&quot; Field Group */
+  teacherTitle?: Maybe<Scalars['String']['output']>;
+};
+
+/** Interface representing fields of the ACF &quot;Teachers&quot; Field Group */
+export type Teachers_Fields = {
+  /**
+   * The name of the field group
+   * @deprecated Use __typename instead
+   */
+  fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;Teachers&quot; Field Group */
+  socialMediaFacebook?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;Teachers&quot; Field Group */
+  socialMediaInstagram?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;Teachers&quot; Field Group */
+  teacherTitle?: Maybe<Scalars['String']['output']>;
+};
+
 /** The template assigned to the node */
 export type Template_PageNoTitle = ContentTemplate & {
   __typename?: 'Template_PageNoTitle';
@@ -9386,6 +9900,39 @@ export type UpdateTagPayload = {
   clientMutationId?: Maybe<Scalars['String']['output']>;
   /** The created post_tag */
   tag?: Maybe<Tag>;
+};
+
+/** Input for the updateTeacher mutation. */
+export type UpdateTeacherInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** The content of the object */
+  content?: InputMaybe<Scalars['String']['input']>;
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
+  date?: InputMaybe<Scalars['String']['input']>;
+  /** The ID of the teacher object */
+  id: Scalars['ID']['input'];
+  /** Override the edit lock when another user is editing the post */
+  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
+  /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
+  menuOrder?: InputMaybe<Scalars['Int']['input']>;
+  /** The password used to protect the content of the object */
+  password?: InputMaybe<Scalars['String']['input']>;
+  /** The slug of the object */
+  slug?: InputMaybe<Scalars['String']['input']>;
+  /** The status of the object */
+  status?: InputMaybe<PostStatusEnum>;
+  /** The title of the object */
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** The payload for the updateTeacher mutation. */
+export type UpdateTeacherPayload = {
+  __typename?: 'UpdateTeacherPayload';
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** The Post object mutation type. */
+  teacher?: Maybe<Teacher>;
 };
 
 /** Input for the updateUser mutation. */
@@ -10303,10 +10850,22 @@ export type WithAcfEventDetails = {
   eventDetails?: Maybe<EventDetails>;
 };
 
+/** Provides access to fields of the &quot;GlobalSettings&quot; ACF Field Group via the &quot;globalSettings&quot; field */
+export type WithAcfGlobalSettings = {
+  /** Fields of the GlobalSettings ACF Field Group */
+  globalSettings?: Maybe<GlobalSettings>;
+};
+
 /** Provides access to fields of the &quot;HomePage&quot; ACF Field Group via the &quot;homePage&quot; field */
 export type WithAcfHomePage = {
   /** Fields of the HomePage ACF Field Group */
   homePage?: Maybe<HomePage>;
+};
+
+/** Provides access to fields of the &quot;Teachers&quot; ACF Field Group via the &quot;teachers&quot; field */
+export type WithAcfTeachers = {
+  /** Fields of the Teachers ACF Field Group */
+  teachers?: Maybe<Teachers>;
 };
 
 /** The writing setting type */
