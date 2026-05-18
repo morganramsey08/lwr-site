@@ -12,8 +12,8 @@ interface SanctuaryProps {
 
 const Sanctuary = ({ title, subtitle, address, phone, email, hours }: SanctuaryProps) => {
   // Encodes the address for the Google Maps Embed URL
-  const mapUrl = `https://maps.google.com/maps?q=${encodeURIComponent(address)}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
-
+  const addressMap = `898 County Road 1260, Quitman, Texas 75783`;
+  const mapUrl = `https://maps.google.com/maps?q=${encodeURIComponent(addressMap)}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
   return (
     <section className={styles.sanctuary}>
       <div className="container">
@@ -31,7 +31,9 @@ const Sanctuary = ({ title, subtitle, address, phone, email, hours }: SanctuaryP
               </div>
               <div>
                 <strong>Location</strong>
-                <p>{address}</p>
+                <div 
+    dangerouslySetInnerHTML={{ __html: address }} 
+  />
               </div>
             </div>
 
@@ -64,7 +66,10 @@ const Sanctuary = ({ title, subtitle, address, phone, email, hours }: SanctuaryP
               </div>
               <div>
                 <strong>Hours</strong>
-                <p className={styles.hoursText}>{hours}</p>
+                
+                <div className={styles.hoursText}><div 
+    dangerouslySetInnerHTML={{ __html: hours }} 
+  /></div>
               </div>
             </div>
           </div>
