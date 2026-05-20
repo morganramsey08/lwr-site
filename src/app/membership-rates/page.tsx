@@ -70,6 +70,38 @@ const MEMBERSHIPS_CONTENT = {
       }
     ]
   },
+
+  waterYoga: {
+    title: "Water Yoga",
+    cards: [
+      {
+        tag: "Premium Commitment",
+        title: "Full Membership",
+        price: "free",
+        period: "/ month",
+        checklist: [
+          "Unlimited Classes",
+          "1 Sound Journey per month",
+          "Unlimited Sauna & Cave Shower",
+          "Greenhouse Privileges & Free Ice"
+        ]
+      },
+      {
+        tag: "Cash Discount",
+        title: "Cash Membership",
+        price: "$20",
+        period: "/ drop in",
+        description: "Save $4 every month when paying with Cash or Check. Prorated at time of purchase."
+      },
+      {
+        tag: "Cash Discount",
+        title: "10 Series",
+        price: "$220",
+        period: "/ drop in",
+        description: "Save $4 every month when paying with Cash or Check. Prorated at time of purchase."
+      }
+    ]
+  },
   elderOfferings: {
     title: "Silver Sage Light Offerings for Elders",
     description: "Monday, Wednesday & some Fridays at 2 PM. Specifically curated for our elder community members.",
@@ -180,6 +212,42 @@ export default function MembershipsRatesPage() {
                       {card.badge}
                     </span>
                   )}
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* 4. Water Yoga Memberships */}
+        <section className={s.sectionCenter} style={{ marginBottom: '60px' }}>
+          <h2 className={s.sectionTitle}>{c.waterYoga.title}</h2>
+          <div className={s.divider} />
+
+          <div className={s.grid3}>
+            {c.waterYoga.cards.map((card, i) => {
+              const cardClass = card.isFeatured ? s.cardFeatured : s.card;
+              return (
+                <div key={i} className={cardClass}>
+                  <div style={{ width: '100%' }}>
+                    <span className={s.tag}>{card.tag}</span>
+                    <h3 className={s.cardTitle}>{card.title}</h3>
+                    <div className={s.priceContainer}>
+                      <span className={s.price}>{card.price}</span>
+                      {card.period && <span className={s.period}>{card.period}</span>}
+                    </div>
+                    
+                    {card.checklist && (
+                      <ul className={s.checklist}>
+                        {card.checklist.map((item, idx) => (
+                          <li key={idx}>
+                            <span className={s.check}>✓</span> {item}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                    
+                    {card.description && <p className={s.description}>{card.description}</p>}
+                  </div>
                 </div>
               );
             })}
