@@ -1,111 +1,347 @@
 @import '../../styles/variables';
 
-.membershipsPage {
-  background-color: #ffffff;
+.pageWrapper {
+  background-color: $linen;
+  min-height: 100vh;
+  color: $forest;
 }
 
-.hero {
-  position: relative;
-  height: 90vh;
+
+
+// Global site container wrapping the content sections
+.contentContainer {
+  composes: container from global;
+  padding-top: 60px;
+  padding-bottom: 80px;
+}
+
+.sectionCenter {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.sectionTitle {
+  font-size: 28px;
+  font-weight: 700;
+  color: $forest;
+  margin-bottom: 10px;
+  
+  @media (max-width: 768px) {
+    font-size: 24px;
+  }
+}
+
+.divider {
+  width: 50px;
+  height: 3px;
+  background-color: $clay;
+  margin: 0 auto 40px auto;
+}
+
+// Pricing Responsive Grids
+.grid3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 30px;
+  }
+}
+
+// Pricing Cards
+.card {
+  background-color: $white;
+  border: 1px solid rgba($forest, 0.08);
+  border-radius: 12px;
+  padding: 40px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.01);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  @media (max-width: 768px) {
+    padding: 30px 20px;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba($forest, 0.04);
+  }
+}
+
+.cardFeatured {
+  @extend .card;
+  border-top: 4px solid $clay;
+}
+
+.tag {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: $clay;
+  margin-bottom: 8px;
+}
+
+.cardTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: $forest;
+  margin-bottom: 15px;
+}
+
+.priceContainer {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.price {
+  font-size: 42px;
+  font-weight: 800;
+  color: $forest;
+}
+
+.period {
+  font-size: 14px;
+  color: rgba($forest, 0.6);
+  margin-left: 4px;
+}
+
+.description {
+  font-size: 13.5px;
+  color: rgba($forest, 0.8);
+  line-height: 1.6;
+  text-align: center;
+}
+
+.badge {
+  display: inline-block;
+  background-color: rgba($forest, 0.05);
+  color: $forest;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  margin-top: 15px;
+}
+
+.badgeOrange {
+  @extend .badge;
+  background-color: rgba($clay, 0.15);
+  color: darken($clay, 15%);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+// Checklists
+.checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  width: 100%;
+  max-width: 220px;
+
+  li {
+    font-size: 13.5px;
+    color: rgba($forest, 0.9);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+
+    .check {
+      color: $clay;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+  }
+}
+
+// Elder Banner Section
+.elderBanner {
+  background-color: $forest;
+  color: $white;
+  border-radius: 12px;
+  padding: 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+
+  @media (min-width: 900px) {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.elderLeft {
+  h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: $white;
+  }
+  p {
+    font-size: 13.5px;
+    color: rgba($white, 0.8);
+    line-height: 1.5;
+  }
+}
+
+.pillContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 15px;
+
+  @media (min-width: 480px) {
+    flex-direction: row;
+    gap: 10px;
+  }
+}
+
+.pill {
+  background-color: rgba($white, 0.08);
+  border: 1px solid rgba($white, 0.15);
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  color: rgba($white, 0.9);
+}
+
+.pillOrange {
+  @extend .pill;
+  background-color: $clay;
+  border-color: $clay;
+  color: $white;
+  font-weight: 600;
+}
+
+.elderRight {
+  margin-top: 25px;
+  border-top: 1px solid rgba($white, 0.15);
+  padding-top: 20px;
+  
+  @media (min-width: 900px) {
+    margin-top: 0;
+    border-top: 0;
+    padding-top: 0;
+    text-align: right;
+    min-width: 180px;
+  }
+
+  .sponsored {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: rgba($white, 0.5);
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .supporter {
+    font-size: 15px;
+    font-weight: 500;
+    color: $white;
+  }
+}
+
+// Split Grid Layout (Amenities & Questions)
+.splitGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+  }
+
+  h4 {
+    font-size: 18px;
+    font-weight: 700;
+    color: $forest;
+    margin-bottom: 20px;
+  }
+}
+
+.amenityRow {
+  background-color: $white;
+  border: 1px solid rgba($forest, 0.08);
+  border-radius: 12px;
+  padding: 20px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+
+  h5 {
+    font-size: 15px;
+    font-weight: 700;
+    color: $forest;
+    margin-bottom: 0;
+  }
+  
+  p {
+    font-size: 11px;
+    color: rgba($forest, 0.6);
+    margin-top: 3px;
+    margin-bottom: 0;
+  }
+
+  .amenityPrice {
+    font-size: 28px;
+    font-weight: 800;
+    color: $clay;
+  }
+}
+
+.noticeBar {
+  border-left: 4px solid rgba($forest, 0.2);
+  background-color: $white;
+  padding: 12px 16px;
+  border-radius: 0 8px 8px 0;
   display: flex;
   align-items: center;
-  padding: 0 10%;
-  color: #ffffff;
-  overflow: hidden;
+  gap: 10px;
+  font-size: 12px;
+  color: rgba($forest, 0.8);
+}
 
-  .heroImage {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
-    filter: brightness(0.6); 
-  }
+.faqBlock {
+  margin-bottom: 25px;
 
-  .content {
-    max-width: 800px;
-    z-index: 1;
+  h5 {
+    font-size: 14px;
+    font-weight: 700;
+    color: $forest;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: flex-start;
 
-    h1 {
-      font-family: $font-main;
-      font-size: clamp(3rem, 7vw, 5rem);
-      font-weight: 300;
-      line-height: 1.1;
+    .icon {
+      margin-right: 8px;
     }
   }
-}
 
-.mainContent {
-  padding: 100px 24px;
-  max-width: 1000px; // Slightly wider to accommodate tables
-  margin: 0 auto;
-}
+  p {
+    font-size: 13px;
+    color: rgba($forest, 0.75);
+    line-height: 1.6;
+    padding-left: 22px;
+    margin-bottom: 0;
+  }
 
-.bodyText {
-  font-family: $font-main;
-  font-size: 1.1rem;
-  line-height: 1.8;
-  color: #333;
-
-  h2 {
-    font-size: 2rem;
-    color: #2d372d;
-    margin: 4rem 0 1.5rem;
+  .alertText {
+    display: block;
+    margin-top: 6px;
     font-weight: 600;
-  }
-
-  /* Styling WordPress Tables */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 2rem 0;
-    font-size: 1rem;
-
-    th, td {
-      padding: 1.5rem;
-      border-bottom: 1px solid #eee;
-      text-align: left;
-    }
-
-    th {
-      color: #b38054; // Brand accent
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      font-size: 0.85rem;
-    }
-
-    tr:hover {
-      background-color: #fcfaf8;
-    }
-  }
-
-  /* Styling WordPress Lists/Rates */
-  ul {
-    list-style: none;
-    padding: 0;
-    
-    li {
-      padding: 1rem 0;
-      border-bottom: 1px dashed #ddd;
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-
-      &::after {
-        content: "";
-        flex: 1;
-        border-bottom: 1px dashed #ddd;
-        margin: 0 1rem;
-        order: 2;
-      }
-
-      // If the client writes "Yoga Session - $25" 
-      // we can style the price specifically if they use a span or strong
-      strong {
-        order: 3;
-        color: #2d372d;
-      }
-    }
+    color: darken($clay, 5%);
   }
 }

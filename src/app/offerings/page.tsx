@@ -16,7 +16,7 @@ export default async function EventsPage() {
   }
 
   const data = await fetchGraphQL(getQueryString(EventsPageQuery), {
-    id: "35", 
+    id: "97", 
     idType: "DATABASE_ID"
   });
 
