@@ -37,7 +37,7 @@ const Navigation = ({ menuItems }: { menuItems: any[] }) => {
     <nav className={`${styles.nav} ${isScrolled ? styles.scrolled : ''}`}>
       <div className={`container ${styles.wrap}`}>
         <Link href="/" className={styles.logo} onClick={() => setIsOpen(false)}>
-          Lightworker
+          Lightworker Ranch
         </Link>
         
         <button 
