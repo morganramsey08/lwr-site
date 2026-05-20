@@ -2,6 +2,7 @@
 import React from 'react';
 import { Clock, Users, Leaf, Heart, Flower2 } from 'lucide-react';
 import styles from './EventCard.module.scss';
+import Link from 'next/link';
 
 export default function EventCard({ event }: { event: any }) {
   const { title, eventDetails } = event;
@@ -15,30 +16,32 @@ export default function EventCard({ event }: { event: any }) {
   };
 
   return (
-    <div className={styles.card}>
-      <div className={styles.iconCircle}>
-        {getIcon(title)}
-      </div>
-
-      <div className={styles.content}>
-        <div className={styles.cardHeader}>
-          <h4>{title}</h4>
-          <span className={styles.date}>{eventDetails.eventDate}</span>
+    <Link href={`/offerings/${event.slug}`} className={styles.cardLink}>
+      <div className={styles.card}>
+        <div className={styles.iconCircle}>
+          {getIcon(title)}
         </div>
 
-        <p className={styles.description}>{eventDetails.shortDescription}</p>
-
-        <div className={styles.metaRow}>
-          <div className={styles.metaItem}>
-            <Clock size={16} />
-            <span>{eventDetails.startTime} - {eventDetails.endTime}</span>
+        <div className={styles.content}>
+          <div className={styles.cardHeader}>
+            <h4>{title}</h4>
+            <span className={styles.date}>{eventDetails.eventDate}</span>
           </div>
-          <div className={styles.metaItem}>
-            <Users size={16} />
-            <span>12 spots available</span>
+
+          <p className={styles.description}>{eventDetails.shortDescription}</p>
+
+          <div className={styles.metaRow}>
+            <div className={styles.metaItem}>
+              <Clock size={16} />
+              <span>{eventDetails.startTime} - {eventDetails.endTime}</span>
+            </div>
+            <div className={styles.metaItem}>
+              <Users size={16} />
+              <span>12 spots available</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

@@ -1,0 +1,252 @@
+@import '../../../styles/variables';
+
+.pageWrapper {
+  background-color: $linen;
+  min-height: 100vh;
+  color: $forest;
+}
+
+.contentContainer {
+  composes: container from global;
+  padding-top: 50px;
+  padding-bottom: 80px;
+}
+
+// Back to list button link layouts
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba($forest, 0.7);
+  margin-bottom: 25px;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $clay;
+  }
+}
+
+.splitLayout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+
+  @media (min-width: 960px) {
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 70px;
+  }
+}
+
+// Main Left Article Elements
+.mainArticle {
+  h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: $forest;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba($forest, 0.08);
+  }
+}
+
+.richContent {
+  font-size: 15px;
+  line-height: 1.7;
+  color: rgba($forest, 0.85);
+  margin-bottom: 40px;
+
+  p {
+    margin-bottom: 20px;
+  }
+}
+
+// Facilitator Block
+.facilitatorBox {
+  background-color: rgba($forest, 0.02);
+  border: 1px solid rgba($forest, 0.06);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 45px;
+}
+
+.avatarWrapper {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: rgba($forest, 0.1);
+}
+
+.facilitatorMeta {
+  span {
+    display: block;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: $clay;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: $forest;
+    margin-bottom: 0;
+  }
+}
+
+// Checklists ("What To Bring")
+.bringSection {
+  h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: $forest;
+    margin-bottom: 20px;
+  }
+}
+
+.bringGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+
+  @media (min-width: 480px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.bringItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: rgba($forest, 0.85);
+
+  .bullet {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: $clay;
+  }
+}
+
+// Right Floating Sidebar Card Components
+.sidebarCard {
+  background-color: $white;
+  border: 1px solid rgba($forest, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+  padding: 30px 24px;
+  align-self: flex-start;
+  position: sticky;
+  top: 40px; // Sticks smoothly as window scrolls
+}
+
+.investmentRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 20px;
+}
+
+.priceLabel {
+  font-size: 12px;
+  color: rgba($forest, 0.5);
+  font-weight: 500;
+}
+
+.priceContainer {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+
+  .amount {
+    font-size: 32px;
+    font-weight: 800;
+    color: $forest;
+  }
+  
+  .suffix {
+    font-size: 14px;
+    color: rgba($forest, 0.6);
+  }
+}
+
+.spotsBadge {
+  background-color: #fef3c7;
+  color: #b45309;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 9999px;
+}
+
+.detailsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.detailRowItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: rgba($forest, 0.03);
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: $forest;
+
+  .icon {
+    color: $clay;
+    flex-shrink: 0;
+  }
+}
+
+// Non-actionable Calendar Export Utilities
+.calendarButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: $clay;
+  color: $white;
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  margin-bottom: 16px;
+
+  &:hover {
+    transform: translateY(-1px);
+    background-color: darken($clay, 4%);
+  }
+}
+
+.memberNotice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: rgba(#3b82f6, 0.08);
+  border: 1px solid rgba(#3b82f6, 0.15);
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #1d4ed8;
+  text-align: center;
+}
