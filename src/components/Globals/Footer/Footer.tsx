@@ -14,7 +14,7 @@ const Footer = () => {
           <div className={styles.columnIntro}>
             <h3>Light Worker Ranch</h3>
             <p>
-              A sanctuary for wellness, healing, and spiritual growth in harmony with nature's wisdom.
+              A wellness center immersed in nature and faith.
             </p>
             
             <div className={styles.socials}>
