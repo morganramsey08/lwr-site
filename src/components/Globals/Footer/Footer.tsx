@@ -56,7 +56,7 @@ const Footer = () => {
         </div>
 
         <div className={styles.copyright}>
-          <p>© {new Date().getFullYear()} Living Water Retreat. All rights reserved. Designed with love for your wellness journey.</p>
+          <p>© {new Date().getFullYear()} Light Worker Ranch. All rights reserved. Designed with love for your wellness journey.</p>
         </div>
       </div>
     </footer>
