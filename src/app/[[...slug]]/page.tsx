@@ -49,6 +49,8 @@ try {
         buttonLabel={acf.buttonLabel}
         imageUrl={acf.aboutImage?.node?.sourceUrl} 
       />
+      {/* Only render if the globalSettings data was successfully retrieved */}
+      {newsletterData && <Newsletter data={newsletterData} />}
       <Sanctuary 
         title={acf.sanctuaryTitle} 
         subtitle={acf.sanctuarySubtitle} 
@@ -59,8 +61,6 @@ try {
       />
       <CommunityCTA/>
       
-      {/* Only render if the globalSettings data was successfully retrieved */}
-      {newsletterData && <Newsletter data={newsletterData} />}
     </main>
   );
 }

@@ -75,30 +75,38 @@ const MEMBERSHIPS_CONTENT = {
     title: "Water Yoga",
     cards: [
       {
-        tag: "Premium Commitment",
-        title: "Full Membership",
+        tag: "Community Offering",
+        title: "Sizzling Seniors Free Water Wellness",
         price: "free",
-        period: "/ month",
+        period: "/ thursdays 10am",
         checklist: [
-          "Unlimited Classes",
-          "1 Sound Journey per month",
-          "Unlimited Sauna & Cave Shower",
-          "Greenhouse Privileges & Free Ice"
+          "First Class June 4th",
+          "Quitman City Pool",
         ]
       },
       {
-        tag: "Cash Discount",
-        title: "Cash Membership",
+        tag: "Drop In",
+        title: "Lands Zen Water Yoga Drop In",
         price: "$20",
         period: "/ drop in",
-        description: "Save $4 every month when paying with Cash or Check. Prorated at time of purchase."
+        description: "The Links at Lands End Pool, 285 Private Road 5980 Yantis, TX",
+        checklist: [
+          "The Links at Lands End Pool",
+          "LandZen Water Yoga Series",
+          "Rain outs made up"
+        ]
       },
       {
-        tag: "Cash Discount",
-        title: "10 Series",
+        tag: "Series Deal",
+        title: "10 Series at Lands Zen Water Yoga",
         price: "$220",
-        period: "/ drop in",
-        description: "Save $4 every month when paying with Cash or Check. Prorated at time of purchase."
+        period: "/ 10 series",
+        description: "The Links at Lands End Pool, 285 Private Road 5980 Yantis, TX",
+        checklist: [
+          "The Links at Lands End Pool",
+          "LandZen Water Yoga Series",
+          "Rain outs made up"
+        ]
       }
     ]
   },

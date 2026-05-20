@@ -5,7 +5,7 @@ import styles from './CommunityCTA.module.scss';
 
 // Variables for quick access
 const TITLE = "Join Our WhatsApp Community";
-const DESCRIPTION = "Receive daily inspiration, weekly wellness reminders, and stay connected with our community of mindful souls.";
+const DESCRIPTION = "LightWorkers! This community is for class reminders, cancelations, and prayer requests.";
 const BUTTON_TEXT = "Join WhatsApp Group";
 const WHATSAPP_LINK = "#"; 
 
