@@ -12,7 +12,7 @@ const Footer = () => {
           
           {/* Column 1: Intro */}
           <div className={styles.columnIntro}>
-            <h3>Living Water Retreat</h3>
+            <h3>Light Worker Ranch</h3>
             <p>
               A sanctuary for wellness, healing, and spiritual growth in harmony with nature's wisdom.
             </p>
