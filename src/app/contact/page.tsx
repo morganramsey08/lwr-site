@@ -208,7 +208,7 @@ export default function ContactPage() {
         {/* 3. Embedded Map */}
         <div className={s.mapContainer}>
           <iframe
-            title="Light Worker Ranch Map Location"
+            title="LightWorker Ranch Map Location"
             src={mapUrl}
             loading="lazy"
             allowFullScreen

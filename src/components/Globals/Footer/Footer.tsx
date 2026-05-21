@@ -12,7 +12,7 @@ const Footer = () => {
           
           {/* Column 1: Intro */}
           <div className={styles.columnIntro}>
-            <h3>Light Worker Ranch</h3>
+            <h3>LightWorker Ranch</h3>
             <p>
               A wellness center immersed in nature and faith.
             </p>
@@ -56,7 +56,7 @@ const Footer = () => {
         </div>
 
         <div className={styles.copyright}>
-          <p>© {new Date().getFullYear()} Light Worker Ranch. All rights reserved. Designed with love for your wellness journey.</p>
+          <p>© {new Date().getFullYear()} LightWorker Ranch. All rights reserved. Designed with love for your wellness journey.</p>
         </div>
       </div>
     </footer>
