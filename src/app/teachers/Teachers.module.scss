@@ -19,7 +19,8 @@
 
 .hero {
   position: relative;
-  height: 90vh; // Matches your other pages
+  height: 46vh; // Drastically drops the height layout footprint
+  min-height: 300px; 
   display: flex;
   align-items: center;
   padding: 0; // Aligns content with your global layout
@@ -29,8 +30,26 @@
   background: 
     linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), // Darkens the image
     url('/images/your-nature-bg.jpg') no-repeat center center; // Path to your image
-  background-size: cover;
+background-size: cover;
   background-attachment: fixed; // Optional: creates a subtle parallax effect
+
+  h1 {
+    font-family: $font-main; // Uses 'Teachers' from your variables
+    font-size: clamp(.75rem, 5vw, 4rem);
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+    margin-top: 3rem;
+    line-height: 1.1;
+  }
+
+  p {
+    font-family: $font-main;
+    font-size: 1.25rem;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    opacity: 0.9;
+    max-width: 450px;
+  }
 
   .heroImage {
     position: absolute;
@@ -95,6 +114,20 @@
     p {
       margin-bottom: 12px;
       &:last-child { margin-bottom: 0; }
+    }
+
+    .wp-block-image {
+      display: flex;
+      justify-self: left;
+    }
+    .wp-block-gallery {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    img {
+      max-width: 100px;
+      height: auto;
     }
   }
 }

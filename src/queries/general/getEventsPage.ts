@@ -28,6 +28,10 @@ export const EventsPageQuery = gql`
           eventDate
           eventCategory
           capacityText
+          startTime
+          endTime
+          repeatType
+          repeatUntil
         }
       }
     }

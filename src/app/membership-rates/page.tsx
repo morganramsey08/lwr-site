@@ -64,8 +64,8 @@ const MEMBERSHIPS_CONTENT = {
         title: "Soft Opening Special",
         price: "$100",
         period: "/ month",
-        description: "Grand Opening Special available for the first week only. Prorated at time of purchase.",
-        badge: "Week of Grand Opening Only!",
+        description: "Grand Opening Special available for the first week only.",
+        badge: "June 15th through the week of Grand Opening Only!",
         isFeatured: false
       }
     ]

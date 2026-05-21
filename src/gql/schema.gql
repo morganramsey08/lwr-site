@@ -3794,8 +3794,23 @@ type EventDetails implements AcfFieldGroup & AcfFieldGroupFields & EventDetails_
   """
   eventDate: String
 
+  """
+  Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;EventDetails&quot; Field Group
+  """
+  facilitatorName: String
+
   """The name of the field group"""
   fieldGroupName: String @deprecated(reason: "Use __typename instead")
+
+  """
+  Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;EventDetails&quot; Field Group
+  """
+  locationName: String
+
+  """
+  Field of the &quot;button_group&quot; Field Type added to the schema as part of the &quot;EventDetails&quot; Field Group
+  """
+  repeatType: String
 
   """
   Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;EventDetails&quot; Field Group
@@ -3830,8 +3845,23 @@ interface EventDetails_Fields implements AcfFieldGroup & AcfFieldGroupFields {
   """
   eventDate: String
 
+  """
+  Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;EventDetails&quot; Field Group
+  """
+  facilitatorName: String
+
   """The name of the field group"""
   fieldGroupName: String @deprecated(reason: "Use __typename instead")
+
+  """
+  Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;EventDetails&quot; Field Group
+  """
+  locationName: String
+
+  """
+  Field of the &quot;button_group&quot; Field Type added to the schema as part of the &quot;EventDetails&quot; Field Group
+  """
+  repeatType: String
 
   """
   Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;EventDetails&quot; Field Group

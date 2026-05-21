@@ -8,6 +8,7 @@
   padding: 0;
   color: #ffffff;
   z-index: 1;
+  transition: height 0.3s ease; // Smooth transition if swapping dynamically
 
   .heroImage {
     position: absolute;
@@ -43,6 +44,31 @@
       
       &:hover {
         transform: translateY(-2px);
+      }
+    }
+  }
+
+  // --- SHORT HERO MODIFIER OPTION ---
+  &.short {
+    height: 40vh; // Drastically drops the height layout footprint
+    min-height: 300px; // Ensures text doesn't overflow on small vertical viewports
+
+    .content {
+      max-width: 800px; // Gives the text slightly more horizontal breathing room since it's shorter
+
+      h1 {
+        font-size: clamp(2rem, 4vw, 2.75rem); // Scales font size down slightly
+        margin-bottom: 0.75rem; // Tightens typography gaps
+      }
+
+      p {
+        font-size: 1.1rem;
+        margin-bottom: 0; // Completely eliminates bottom margin if there's no button
+      }
+
+      // If a button is present inside a short layout, keep a clean, snug spacing
+      .button {
+        margin-top: 1.25rem;
       }
     }
   }

@@ -146,6 +146,7 @@ export default async function SingleEventPage({ params }: PageParams) {
         title={title}
         subtitle={`${dateStr} | ${timeStr} | ${locationStr}`}
         bgImage={heroBackground}
+        isShort
       />
 
       {/* 2. Content Layout Grid */}

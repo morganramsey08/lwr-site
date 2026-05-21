@@ -29,18 +29,18 @@ const CONTACT_CONTENT = {
       {
         icon: Phone,
         label: "Phone",
-        line1: "(355) 123-PEACE"
+        line1: "(903) 638-4087"
       },
       {
         icon: Mail,
         label: "Email",
-        line1: "hello@livingwaterretreat.com"
+        line1: "dani@lightworkerranch.com"
       },
       {
         icon: Clock,
         label: "Hours",
-        line1: "Monday - Friday: 7:00 AM - 7:00 PM",
-        line2: "Saturday - Sunday: 8:00 AM - 6:00 PM"
+        line1: "Hours Fluctuate - see calendar for current offerings",
+        line2: "Closed on Sundays"
       }
     ]
   },
@@ -59,7 +59,8 @@ export default function ContactPage() {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
   // Correct URL encoding template syntax
-  const mapUrl = `https://maps.google.com/maps?q=$?q=${encodeURIComponent(c.map.address)}&t=&z=14&ie=UTF8&iwloc=&output=embed`;
+  const addressMap = `898 County Road 1260, Quitman, Texas 75783`;
+  const mapUrl = `https://maps.google.com/maps?q=${encodeURIComponent(addressMap)}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -100,6 +101,7 @@ export default function ContactPage() {
         title={c.hero.title}
         subtitle={c.hero.subtitle}
         bgImage={c.hero.bgImage}
+        isShort
       />
 
       <div className={s.contentContainer}>

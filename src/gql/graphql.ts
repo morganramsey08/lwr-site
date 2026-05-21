@@ -2561,11 +2561,17 @@ export type EventDetails = AcfFieldGroup & AcfFieldGroupFields & EventDetails_Fi
   eventCategory?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   /** Field of the &quot;date_picker&quot; Field Type added to the schema as part of the &quot;EventDetails&quot; Field Group (ACF Fields of the date_picker type return a date string according to the RFC3339 spec: https://datatracker.ietf.org/doc/html/rfc3339.) */
   eventDate?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;EventDetails&quot; Field Group */
+  facilitatorName?: Maybe<Scalars['String']['output']>;
   /**
    * The name of the field group
    * @deprecated Use __typename instead
    */
   fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;EventDetails&quot; Field Group */
+  locationName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;button_group&quot; Field Type added to the schema as part of the &quot;EventDetails&quot; Field Group */
+  repeatType?: Maybe<Scalars['String']['output']>;
   /** Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;EventDetails&quot; Field Group */
   shortDescription?: Maybe<Scalars['String']['output']>;
   /** Field of the &quot;time_picker&quot; Field Type added to the schema as part of the &quot;EventDetails&quot; Field Group */
@@ -2582,11 +2588,17 @@ export type EventDetails_Fields = {
   eventCategory?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   /** Field of the &quot;date_picker&quot; Field Type added to the schema as part of the &quot;EventDetails&quot; Field Group (ACF Fields of the date_picker type return a date string according to the RFC3339 spec: https://datatracker.ietf.org/doc/html/rfc3339.) */
   eventDate?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;EventDetails&quot; Field Group */
+  facilitatorName?: Maybe<Scalars['String']['output']>;
   /**
    * The name of the field group
    * @deprecated Use __typename instead
    */
   fieldGroupName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;text&quot; Field Type added to the schema as part of the &quot;EventDetails&quot; Field Group */
+  locationName?: Maybe<Scalars['String']['output']>;
+  /** Field of the &quot;button_group&quot; Field Type added to the schema as part of the &quot;EventDetails&quot; Field Group */
+  repeatType?: Maybe<Scalars['String']['output']>;
   /** Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;EventDetails&quot; Field Group */
   shortDescription?: Maybe<Scalars['String']['output']>;
   /** Field of the &quot;time_picker&quot; Field Type added to the schema as part of the &quot;EventDetails&quot; Field Group */

@@ -31,18 +31,12 @@ export default async function EventsPage() {
         bgImage={page?.featuredImage?.node?.sourceUrl}
         buttonText={page?.homePage?.heroButtonText || ""} 
         buttonLink={page?.homePage?.heroButtonUrl || "#"}
+        isShort
       />
       
       <div className="container">
         {/* DYNAMIC HEADER SECTION */}
         <div className={styles.pageHeader}>
-          <h1>{page?.title || "Event Calendar"}</h1>
-          {page?.content && (
-            <div 
-              className={styles.subtitle}
-              dangerouslySetInnerHTML={{ __html: page.content }} 
-            />
-          )}
         </div>
 
         <div className={styles.eventsLayout}>
