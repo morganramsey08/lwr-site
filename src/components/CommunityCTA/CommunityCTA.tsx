@@ -7,7 +7,7 @@ import styles from './CommunityCTA.module.scss';
 const TITLE = "Join Our WhatsApp Community";
 const DESCRIPTION = "LightWorkers! This community is for class reminders, cancelations, and prayer requests.";
 const BUTTON_TEXT = "Join WhatsApp Group";
-const WHATSAPP_LINK = "#"; 
+const WHATSAPP_LINK = "https://chat.whatsapp.com/JnZYHFGlCUABogDbEXDpZG?mode=gi_t"; 
 
 export default function CommunityCTA() {
   return (

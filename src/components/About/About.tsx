@@ -24,7 +24,7 @@ const About = ({ title, content, buttonLabel, imageUrl, imageAlt }: AboutProps) 
               ))}
             </div>
             {buttonLabel && (
-              <button className={styles.button}>{buttonLabel}</button>
+              <a className={styles.button} href="/about">{buttonLabel}</a>
             )}
           </div>
 
