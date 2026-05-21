@@ -15,6 +15,38 @@ export default function EventCard({ event }: { event: any }) {
     return <Flower2 size={24} color="white" fill="white" />;
   };
 
+  // Robust helper to format dates, handling both ISO strings and DD/MM/YYYY slash formats
+  const formatCardDate = (dateString: string) => {
+    if (!dateString) return "";
+    try {
+      // If it's a WordPress DD/MM/YYYY format, convert it to something JS natively likes
+      if (dateString.includes('/')) {
+        const [day, month, year] = dateString.split('/');
+        // Rearrange to YYYY-MM-DD so it parses cleanly everywhere
+        const normalizedDate = new Date(`${year}-${month}-${day}T00:00:00`);
+        if (!isNaN(normalizedDate.getTime())) {
+          return normalizedDate.toLocaleDateString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric'
+          });
+        }
+      }
+
+      // Fallback for standard ISO strings
+      const date = new Date(dateString);
+      if (isNaN(date.getTime())) return dateString;
+      
+      return date.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+      });
+    } catch (e) {
+      return dateString;
+    }
+  };
+
   return (
     <Link href={`/offerings/${event.slug}`} className={styles.cardLink}>
       <div className={styles.card}>
@@ -25,19 +57,30 @@ export default function EventCard({ event }: { event: any }) {
         <div className={styles.content}>
           <div className={styles.cardHeader}>
             <h4>{title}</h4>
-            <span className={styles.date}>{eventDetails.eventDate}</span>
+            <span className={styles.date}>
+              {formatCardDate(eventDetails?.eventDate)}
+            </span>
           </div>
 
-          <p className={styles.description}>{eventDetails.shortDescription}</p>
+          {eventDetails?.shortDescription && (
+            <p 
+              className={styles.description}
+              dangerouslySetInnerHTML={{ __html: eventDetails.shortDescription }}
+            />
+          )}
 
           <div className={styles.metaRow}>
             <div className={styles.metaItem}>
               <Clock size={16} />
-              <span>{eventDetails.startTime} - {eventDetails.endTime}</span>
+              <span>
+                {eventDetails?.startTime || "Time Pending"}
+              </span>
             </div>
             <div className={styles.metaItem}>
               <Users size={16} />
-              <span>12 spots available</span>
+              <span>
+                {eventDetails?.capacityText || "12 spots available"}
+              </span>
             </div>
           </div>
         </div>

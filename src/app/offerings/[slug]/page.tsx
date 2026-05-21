@@ -6,7 +6,7 @@ import Link from "next/link";
 import s from "./eventSingle.module.scss";
 
 // Lucide structural assets
-import { ChevronLeft, Calendar, MapPin, Gift, Award, Heart, Leaf, Users, ShieldAlert } from 'lucide-react';
+import { ChevronLeft, Calendar, MapPin, Plus, Award, Heart, Leaf, Users } from 'lucide-react';
 
 interface PageParams {
   params: Promise<{
@@ -36,22 +36,49 @@ export default async function SingleEventPage({ params }: PageParams) {
   }
 
   const { title, content, featuredImage, eventDetails } = event;
+
+  // Robust parsing to clean up raw WordPress/ISO string formats seamlessly
+  const formatDisplayDate = (dateString: string) => {
+    if (!dateString) return "Date Pending";
+    try {
+      // If it's a WordPress DD/MM/YYYY slash format
+      if (dateString.includes('/')) {
+        const [day, month, year] = dateString.split('/');
+        const normalizedDate = new Date(`${year}-${month}-${day}T00:00:00`);
+        if (!isNaN(normalizedDate.getTime())) {
+          return normalizedDate.toLocaleDateString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric'
+          });
+        }
+      }
+      // Parse ISO standard string stamps natively
+      const date = new Date(dateString);
+      if (isNaN(date.getTime())) return dateString;
+      return date.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+      });
+    } catch (e) {
+      return dateString;
+    }
+  };
   
-  // Map out fallback variables directly from the clean GraphQL fields
-  const dateStr = eventDetails?.eventDate || "Date Pending";
-  const timeStr = eventDetails?.startTime && eventDetails?.endTime 
-    ? `${eventDetails.startTime} - ${eventDetails.endTime}`
-    : "Hours Pending";
+  // Set clean human readable data parameters
+  const dateStr = formatDisplayDate(eventDetails?.eventDate);
+  const timeStr = eventDetails?.startTime || "Time Pending";
   
   const locationStr = eventDetails?.locationName || "Garden Sanctuary";
   const facilitatorName = eventDetails?.facilitatorName || "Sarah Jenkins";
   const capacityStr = eventDetails?.capacityText || "12 spots available";
   const heroBackground = featuredImage?.node?.sourceUrl || "/img/homepage-hero.jpg";
 
-  // Hardcode investment prices if not explicitly assigned in schema yet
+  // Fixed investment baseline price assignment values
   const priceVal = "$25"; 
 
-  // Format short descriptions for use in rich metadata tags (strips HTML paragraph elements if returned from WYSIWYG)
+  // Format short descriptions for clean plain text fallback usage limits
   const plainTextDescription = eventDetails?.shortDescription 
     ? eventDetails.shortDescription.replace(/<[^>]*>/g, '') 
     : "Join us in our garden sanctuary for a transformative experience.";
@@ -69,7 +96,7 @@ export default async function SingleEventPage({ params }: PageParams) {
     icon: <Award size={18} className={s.icon} />
   };
 
-  // Safe split parsing for static list data grids
+  // Safe standard default items checklists variables strings array sets
   const itemsList = [
     "Comfortable clothing",
     "A reusable water bottle",
@@ -83,8 +110,15 @@ export default async function SingleEventPage({ params }: PageParams) {
     const cleanTitle = title.replace(/,/g, '\\,');
     const cleanDesc = plainTextDescription.replace(/,/g, '\\,');
     
-    // Sanitize dates to clean ICS string standard formats (YYYYMMDD)
-    const normalizedDate = dateStr.split('/').reverse().join(''); 
+    // Normalize date array sequence safely for standard microformat inputs
+    let normalizedDate = "20260101";
+    if (eventDetails?.eventDate) {
+      if (eventDetails.eventDate.includes('/')) {
+        normalizedDate = eventDetails.eventDate.split('/').reverse().join('');
+      } else {
+        normalizedDate = eventDetails.eventDate.split('T')[0].replace(/-/g, '');
+      }
+    }
 
     const icsContent = [
       "BEGIN:VCALENDAR",
@@ -174,22 +208,19 @@ export default async function SingleEventPage({ params }: PageParams) {
               
               {/* Investment price calculations display row */}
               <div className={s.investmentRow}>
-                <span className={s.priceLabel}>Investment</span>
+                {/* 12 spots available badge sitting exactly in the top left layout slot */}
+                <span className={s.spotsBadge}>
+                  <Users size={12} style={{ display: 'inline', marginRight: '4px', verticalAlign: 'middle' }} />
+                  {capacityStr}
+                </span>
+                
                 <div className={s.priceContainer}>
                   <span className={s.amount}>{priceVal}</span>
                   <span className={s.suffix}>/ person</span>
                 </div>
               </div>
 
-              {/* Dynamic Capacity Badges */}
-              <div style={{ marginBottom: '25px', display: 'flex', justifyContent: 'flex-end' }}>
-                <span className={s.spotsBadge}>
-                  <Users size={12} style={{ display: 'inline', marginRight: '4px', verticalAlign: 'middle' }} />
-                  {capacityStr}
-                </span>
-              </div>
-
-              {/* Hardcoded Informational Property Data Arrays */}
+              {/* Informational Property Data Arrays */}
               <div className={s.detailsList}>
                 <div className={s.detailRowItem}>
                   {selectedCategory.icon}
@@ -197,7 +228,7 @@ export default async function SingleEventPage({ params }: PageParams) {
                 </div>
                 <div className={s.detailRowItem}>
                   <Calendar className={s.icon} size={18} />
-                  <span>{dateStr} · {eventDetails?.startTime || "7:00 AM"}</span>
+                  <span>{dateStr} · {timeStr}</span>
                 </div>
                 <div className={s.detailRowItem}>
                   <MapPin className={s.icon} size={18} />
@@ -205,19 +236,14 @@ export default async function SingleEventPage({ params }: PageParams) {
                 </div>
               </div>
 
-              {/* Add to Native Smartphone Devices */}
+              {/* Add to Native Smartphone Devices via Plus Icon Link */}
               <a 
                 href={icsDownloadUrl} 
                 download={`${slug}-event.ics`}
                 className={s.calendarButton}
               >
-                <Gift size={18} /> Add to Calendar
+                <Plus size={18} /> Add to Calendar
               </a>
-
-              {/* Membership Benefits Label Container */}
-              <div className={s.memberNotice}>
-                <span>🎁 Available for members at 20% off</span>
-              </div>
 
             </div>
           </aside>
