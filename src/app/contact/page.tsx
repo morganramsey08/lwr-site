@@ -67,7 +67,7 @@ export default function ContactPage() {
     setStatus('submitting');
 
     try {
-      const response = await fetch('https://admin.lightworkerranch.com/wp-json/contact-form-7/v1/contact-forms/YOUR_FORM_ID/feedback', {
+      const response = await fetch('https://admin.lightworkerranch.com/wp-json/contact-form-7/v1/contact-forms/1cd46ef/feedback', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
