@@ -5,13 +5,13 @@ import s from "./Memberships.module.scss";
 // ==========================================
 // CONTENT CONFIGURATION (Edit text & prices here)
 // ==========================================
-import heroSrc from "../../../public/img/homepage-hero.jpg";
+const heroSrc="https://admin.lightworkerranch.com/wp-content/uploads/2026/05/IMG_1176.jpg";
 
 const MEMBERSHIPS_CONTENT = {
   hero: {
     title: "Rates & Memberships",
     subtitle: '"You are the light of the world. A town built on a hill cannot be hidden. Neither do people light a lamp and put it under a bowl. Instead they put it on its stand, and it gives light to everyone in the house. In the same way, let your light shine before others..." — Matthew 5:14-16',
-    bgImage: heroSrc.src
+    bgImage: heroSrc
   },
   visitors: {
     title: "Visitors of the Light",
