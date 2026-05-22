@@ -36,7 +36,7 @@ export default async function EventsPage() {
 
   const page = data?.page;
   const events = data?.events?.nodes || [];
-
+console.log("Events data passed to calendar:", JSON.stringify(events, null, 2));
   return (
     <main>
       <Hero 
@@ -57,7 +57,7 @@ export default async function EventsPage() {
         <div className={styles.eventsLayout}>
           {/* Child 1: Calendar */}
           <div className={styles.calendarContainer}>
-            <EventsCalendar events={events} />
+            <EventsCalendar events={events}  />
           </div>
 
           {/* Child 2: Sidebar List */}
