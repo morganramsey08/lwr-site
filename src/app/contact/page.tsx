@@ -10,7 +10,7 @@ const CONTACT_CONTENT = {
   hero: {
     title: "Contact Us",
     subtitle: "Reach out to us with any questions about our retreat, sessions, or events. We're here to support your journey.",
-    bgImage: "/img/homepage-hero.jpg"
+    bgImage: "https://admin.lightworkerranch.com/wp-content/uploads/2026/05/IMG_1171.jpg"
   },
   formSection: {
     title: "Send us a Message",
