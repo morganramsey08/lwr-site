@@ -32,6 +32,7 @@ export default async function EventsPage() {
         buttonText={page?.homePage?.heroButtonText || ""} 
         buttonLink={page?.homePage?.heroButtonUrl || "#"}
         isShort
+        bgPosition="center"
       />
       
       <div className="container">
