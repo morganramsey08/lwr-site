@@ -1,9 +1,12 @@
 import { fetchGraphQL } from "@/utils/fetchGraphQL";
 import { EventsPageQuery } from "@/queries/general/getEventsPage";
+import { GetNewsletterSettings } from "@/queries/general/getNewsletter"; // Added import
 import Hero from "@/components/Hero/Hero";
 import EventCard from "@/components/Events/EventCard";
 import EventsCalendar from "@/components/Events/EventCalendar";
+import Newsletter from "@/components/Newsletter/Newsletter"; // Added import
 import styles from "./Events.module.scss";
+import CommunityCTA from "@/components/CommunityCTA/CommunityCTA";
 
 export const revalidate = 0;
 export const dynamic = 'force-dynamic';
@@ -15,10 +18,21 @@ export default async function EventsPage() {
     return query?.loc?.source?.body || "";
   }
 
+  // 1. Fetch Events Page Content
   const data = await fetchGraphQL(getQueryString(EventsPageQuery), {
     id: "97", 
     idType: "DATABASE_ID"
   });
+
+  // 2. Fetch Newsletter/Community Settings from Options Page
+  let newsletterData = null;
+  try {
+    const newsletterRes = await fetchGraphQL(GetNewsletterSettings);
+    // Map from page instead of acfOptionsPage (matching homepage logic)
+    newsletterData = newsletterRes?.page?.globalSettings;
+  } catch (error) {
+    console.error("Newsletter query failed on Events page:", error);
+  }
 
   const page = data?.page;
   const events = data?.events?.nodes || [];
@@ -26,7 +40,7 @@ export default async function EventsPage() {
   return (
     <main>
       <Hero 
-        title={page?.homePage?.heroTitle || "Upcoming Events"}
+        title={page?.title || "Upcoming Events"}
         subtitle={page?.homePage?.heroSubTitle}
         bgImage={page?.featuredImage?.node?.sourceUrl}
         buttonText={page?.homePage?.heroButtonText || ""} 
@@ -58,6 +72,11 @@ export default async function EventsPage() {
           </section>
         </div>
       </div>
+
+      {/* Renders dynamic email and WhatsApp invitations from WordPress settings */}
+      {newsletterData && <Newsletter data={newsletterData} />}
+            
+      <CommunityCTA />
     </main>
   );
 }

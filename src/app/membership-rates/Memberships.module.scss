@@ -6,8 +6,6 @@
   color: $forest;
 }
 
-
-
 // Global site container wrapping the content sections
 .contentContainer {
   composes: container from global;
@@ -21,18 +19,18 @@
 }
 
 .sectionTitle {
-  font-size: 28px;
+  font-size: 32px; // Increased from 28px
   font-weight: 700;
   color: $forest;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   
   @media (max-width: 768px) {
-    font-size: 24px;
+    font-size: 26px; // Increased from 24px
   }
 }
 
 .divider {
-  width: 50px;
+  width: 60px; // Slightly wider to balance the bigger text
   height: 3px;
   background-color: $clay;
   margin: 0 auto 40px auto;
@@ -55,7 +53,7 @@
   background-color: $white;
   border: 1px solid rgba($forest, 0.08);
   border-radius: 12px;
-  padding: 40px 24px;
+  padding: 44px 28px; // Expanded padding for breathing room
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -64,7 +62,7 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 
   @media (max-width: 768px) {
-    padding: 30px 20px;
+    padding: 34px 24px;
   }
 
   &:hover {
@@ -79,19 +77,19 @@
 }
 
 .tag {
-  font-size: 11px;
+  font-size: 12px; // Increased from 11px
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
   color: $clay;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .cardTitle {
-  font-size: 20px;
+  font-size: 22px; // Increased from 20px
   font-weight: 700;
   color: $forest;
-  margin-bottom: 15px;
+  margin-bottom: 8px;
 }
 
 .priceContainer {
@@ -102,31 +100,33 @@
 }
 
 .price {
-  font-size: 42px;
+  font-size: 46px; // Increased from 42px
   font-weight: 800;
   color: $forest;
 }
 
 .period {
-  font-size: 14px;
+  font-size: 15px; // Increased from 14px
   color: rgba($forest, 0.6);
-  margin-left: 4px;
+  margin-left: 5px;
 }
 
 .description {
-  font-size: 13.5px;
+  font-size: 15px; // Increased from 13.5px
   color: rgba($forest, 0.8);
   line-height: 1.6;
   text-align: center;
+  text-align: left;
+  text-wrap: balance;
 }
 
 .badge {
   display: inline-block;
   background-color: rgba($forest, 0.05);
   color: $forest;
-  font-size: 11px;
+  font-size: 12px; // Increased from 11px
   font-weight: 500;
-  padding: 4px 12px;
+  padding: 5px 14px;
   border-radius: 9999px;
   margin-top: 15px;
 }
@@ -146,19 +146,21 @@
   margin: 0;
   text-align: left;
   width: 100%;
-  max-width: 220px;
+  max-width: 240px;
 
   li {
-    font-size: 13.5px;
+    font-size: 15px; // Increased from 13.5px
     color: rgba($forest, 0.9);
-    margin-bottom: 12px;
+    margin-bottom: 14px;
     display: flex;
     align-items: flex-start;
 
     .check {
       color: $clay;
-      font-weight: bold;
-      margin-right: 10px;
+      display: flex;
+      align-items: center;
+      margin-right: 12px;
+      margin-top: 2px; // Aligns the lucide icon cleanly with text top line
     }
   }
 }
@@ -168,7 +170,7 @@
   background-color: $forest;
   color: $white;
   border-radius: 12px;
-  padding: 35px;
+  padding: 40px; // Extra spacing inside banner
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -182,15 +184,15 @@
 
 .elderLeft {
   h3 {
-    font-size: 20px;
+    font-size: 24px; // Increased from 20px
     font-weight: 700;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     color: $white;
   }
   p {
-    font-size: 13.5px;
-    color: rgba($white, 0.8);
-    line-height: 1.5;
+    font-size: 15px; // Increased from 13.5px
+    color: rgba($white, 0.85);
+    line-height: 1.6;
   }
 }
 
@@ -198,7 +200,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-top: 15px;
+  margin-top: 18px;
 
   @media (min-width: 480px) {
     flex-direction: row;
@@ -209,8 +211,8 @@
 .pill {
   background-color: rgba($white, 0.08);
   border: 1px solid rgba($white, 0.15);
-  font-size: 12px;
-  padding: 6px 12px;
+  font-size: 16px; // Increased from 12px
+  padding: 8px 14px;
   border-radius: 6px;
   color: rgba($white, 0.9);
 }
@@ -233,20 +235,20 @@
     border-top: 0;
     padding-top: 0;
     text-align: right;
-    min-width: 180px;
+    min-width: 200px;
   }
 
   .sponsored {
-    font-size: 10px;
+    font-size: 11px; // Increased from 10px
     text-transform: uppercase;
     letter-spacing: 1.5px;
     color: rgba($white, 0.5);
     display: block;
-    margin-bottom: 2px;
+    margin-bottom: 4px;
   }
 
   .supporter {
-    font-size: 15px;
+    font-size: 17px; // Increased from 15px
     font-weight: 500;
     color: $white;
   }
@@ -264,10 +266,10 @@
   }
 
   h4 {
-    font-size: 18px;
+    font-size: 20px; // Increased from 18px
     font-weight: 700;
     color: $forest;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
   }
 }
 
@@ -275,28 +277,28 @@
   background-color: $white;
   border: 1px solid rgba($forest, 0.08);
   border-radius: 12px;
-  padding: 20px 25px;
+  padding: 22px 28px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 16px;
 
   h5 {
-    font-size: 15px;
+    font-size: 16px; // Increased from 15px
     font-weight: 700;
     color: $forest;
     margin-bottom: 0;
   }
   
   p {
-    font-size: 11px;
+    font-size: 16px; // Increased from 11px
     color: rgba($forest, 0.6);
-    margin-top: 3px;
+    margin-top: 4px;
     margin-bottom: 0;
   }
 
   .amenityPrice {
-    font-size: 28px;
+    font-size: 32px; // Increased from 28px
     font-weight: 800;
     color: $clay;
   }
@@ -305,36 +307,46 @@
 .noticeBar {
   border-left: 4px solid rgba($forest, 0.2);
   background-color: $white;
-  padding: 12px 16px;
+  padding: 14px 18px;
   border-radius: 0 8px 8px 0;
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 12px;
+  gap: 12px;
+  font-size: 16px; // Increased from 12px
   color: rgba($forest, 0.8);
+
+  .noticeIcon {
+    display: flex;
+    align-items: center;
+    color: $clay;
+  }
 }
 
 .faqBlock {
-  margin-bottom: 25px;
+  margin-bottom: 28px;
 
   h5 {
-    font-size: 14px;
+    font-size: 16px; // Increased from 14px
     font-weight: 700;
     color: $forest;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     display: flex;
     align-items: flex-start;
 
     .icon {
-      margin-right: 8px;
+      margin-right: 10px;
+      margin-top: 2px; // Centers Lucide cleanly next to headline text
+      color: rgba($forest, 0.6);
+      display: flex;
+      align-items: center;
     }
   }
 
   p {
-    font-size: 13px;
+    font-size: 16px;
     color: rgba($forest, 0.75);
     line-height: 1.6;
-    padding-left: 22px;
+    padding-left: 28px;
     margin-bottom: 0;
   }
 

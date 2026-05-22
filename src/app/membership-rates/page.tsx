@@ -1,5 +1,14 @@
 import React from 'react';
 import Hero from "@/components/Hero/Hero";
+import { 
+  Check, 
+  HelpCircle, 
+  CreditCard, 
+  Heart, 
+  Calendar,
+  Sparkles,
+  Info
+} from 'lucide-react'; // Added Lucide imports
 import s from "./Memberships.module.scss";
 
 // ==========================================
@@ -64,8 +73,8 @@ const MEMBERSHIPS_CONTENT = {
         title: "Soft Opening Special",
         price: "$100",
         period: "/ month",
-        description: "Grand Opening Special available for the first week only.",
-        badge: "June 15th through the week of Grand Opening Only!",
+        description: "June 15th through the week of Grand Opening Only!",
+        badge: "$100  Grand Opening Special",
         isFeatured: false
       }
     ]
@@ -100,9 +109,10 @@ const MEMBERSHIPS_CONTENT = {
         tag: "Series Deal",
         title: "10 Series at Lands Zen Water Yoga",
         price: "$220",
-        period: "/ 10 series",
+        period: "/ 10 Week Series",
         description: "The Links at Lands End Pool, 285 Private Road 5980 Yantis, TX",
         checklist: [
+          "Begins June 2nd",
           "The Links at Lands End Pool",
           "LandZen Water Yoga Series",
           "Rain outs made up"
@@ -130,15 +140,19 @@ const MEMBERSHIPS_CONTENT = {
     title: "Common Questions",
     list: [
       {
-        icon: "❓",
+        icon: <HelpCircle size={18} />,
         question: "How do I register for a class?",
         answer: "At this time there is no need to pre-register. Just arrive 15-20 minutes early for your first class to meet & greet, sign our digital waiver, and get a tour of the space."
       },
       {
-        icon: "💼",
+        icon: <CreditCard size={18} />,
         question: "How do I pay for a class?",
-        answer: "We accept Credit Card, Venmo, Check, and Cash.",
-        alertText: "Reminder: Payment by Cash or Check for monthly dues saves you a $4 discount!"
+        answer: "We accept Credit Card, Venmo, Check, and Cash."
+      },
+      {
+        icon: <Heart size={18} />,
+        question: "Do I need to bring anything?",
+        answer: "An open heart. We have everything you need to practice yoga including a mat. If you have a personal mat and props you are welcome to bring them but not necessary.",
       }
     ]
   }
@@ -207,7 +221,10 @@ export default function MembershipsRatesPage() {
                       <ul className={s.checklist}>
                         {card.checklist.map((item, idx) => (
                           <li key={idx}>
-                            <span className={s.check}>✓</span> {item}
+                            <span className={s.check}>
+                              <Check size={14} strokeWidth={3} />
+                            </span> 
+                            {item}
                           </li>
                         ))}
                       </ul>
@@ -248,7 +265,10 @@ export default function MembershipsRatesPage() {
                       <ul className={s.checklist}>
                         {card.checklist.map((item, idx) => (
                           <li key={idx}>
-                            <span className={s.check}>✓</span> {item}
+                            <span className={s.check}>
+                              <Check size={14} strokeWidth={3} />
+                            </span> 
+                            {item}
                           </li>
                         ))}
                       </ul>
@@ -295,7 +315,9 @@ export default function MembershipsRatesPage() {
               <span className={s.amenityPrice}>{c.amenities.price}</span>
             </div>
             <div className={s.noticeBar}>
-              <span>🕒</span>
+              <span className={s.noticeIcon}>
+                <Calendar size={16} />
+              </span>
               <p>{c.amenities.notice}</p>
             </div>
           </div>
