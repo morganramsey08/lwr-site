@@ -35,7 +35,7 @@
 
     p {
       font-family: $font-main;
-      font-size: 1.25rem;
+      font-size: 1.45rem;
       line-height: 1.6;
       margin-bottom: 2.5rem;
       opacity: 0.9;
@@ -51,11 +51,11 @@
   }
 
   &.short {
-    height: 40vh; 
+    height: 50vh; 
     min-height: 300px; 
 
     .content {
-      max-width: 800px; 
+      max-width: 550px; 
 
       h1 {
         font-size: clamp(2rem, 4vw, 2.75rem); 
@@ -63,7 +63,7 @@
       }
 
       p {
-        font-size: 1.1rem;
+        font-size: 1.45rem;
         margin-bottom: 0; 
       }
 
