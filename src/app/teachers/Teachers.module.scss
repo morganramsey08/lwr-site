@@ -105,6 +105,14 @@ background-size: cover;
     margin-bottom: 20px;
   }
 
+    .lightworker-button {
+       @include primary-button;
+      
+      &:hover {
+        transform: translateY(-2px);
+      }
+    }
+
 .bio {
     font-family: $font-main;
     font-size: 0.95rem;
@@ -117,7 +125,19 @@ background-size: cover;
       margin-bottom: 12px;
       &:last-child { margin-bottom: 0; }
     }
-
+// Target the paragraph that carries your custom class
+  :global(.lightworker-button) {
+    display: inline-block;
+    @include primary-button;
+    margin-top: 1rem;
+    
+    // Ensure the link inside takes the full button hit area
+    a {
+      color: inherit;
+      text-decoration: none;
+      text-transform: none;
+    }
+  }
     // --- OVERRIDE WORDPRESS GALLERY BLOCKS ---
     :global(.wp-block-gallery) {
       display: flex !important;
