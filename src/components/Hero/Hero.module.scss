@@ -8,7 +8,7 @@
   padding: 0;
   color: #ffffff;
   z-index: 1;
-  transition: height 0.3s ease; // Smooth transition if swapping dynamically
+  transition: height 0.3s ease; 
 
   .heroImage {
     position: absolute;
@@ -16,16 +16,17 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: bottom;
+    // Reads the CSS variable passed from React, falling back to 'bottom' if undefined
+    object-position: var(--hero-bg-pos, bottom); 
     z-index: -1;
-    filter: brightness(0.5); // Darkens the image so the Teachers font is readable
+    filter: brightness(0.5); 
   }
 
   .content {
     max-width: 650px;
 
     h1 {
-      font-family: $font-main; // Uses 'Teachers' from your variables
+      font-family: $font-main; 
       font-size: clamp(2.5rem, 5vw, 4rem);
       font-weight: 300;
       margin-bottom: 1.5rem;
@@ -49,25 +50,23 @@
     }
   }
 
-  // --- SHORT HERO MODIFIER OPTION ---
   &.short {
-    height: 40vh; // Drastically drops the height layout footprint
-    min-height: 300px; // Ensures text doesn't overflow on small vertical viewports
+    height: 40vh; 
+    min-height: 300px; 
 
     .content {
-      max-width: 800px; // Gives the text slightly more horizontal breathing room since it's shorter
+      max-width: 800px; 
 
       h1 {
-        font-size: clamp(2rem, 4vw, 2.75rem); // Scales font size down slightly
-        margin-bottom: 0.75rem; // Tightens typography gaps
+        font-size: clamp(2rem, 4vw, 2.75rem); 
+        margin-bottom: 0.75rem; 
       }
 
       p {
         font-size: 1.1rem;
-        margin-bottom: 0; // Completely eliminates bottom margin if there's no button
+        margin-bottom: 0; 
       }
 
-      // If a button is present inside a short layout, keep a clean, snug spacing
       .button {
         margin-top: 1.25rem;
       }

@@ -102,6 +102,7 @@ export default function ContactPage() {
         subtitle={c.hero.subtitle}
         bgImage={c.hero.bgImage}
         isShort
+        bgPosition="center"
       />
 
       <div className={s.contentContainer}>
