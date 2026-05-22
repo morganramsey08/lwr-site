@@ -17,6 +17,7 @@ export const GetSingleEventQuery = `
         eventCategory
         facilitatorName
         locationName
+        price
       }
     }
   }

@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState, useMemo, useEffect } from "react";
+import React, { useRef, useState, useMemo } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -25,7 +25,6 @@ interface EventsCalendarProps {
   events: CalendarEvent[];
 }
 
-// 1. Memoized inner calendar component to prevent unnecessary re-renders
 const CalendarRenderer = React.memo(({ 
   calendarRef, 
   events, 
@@ -39,6 +38,7 @@ const CalendarRenderer = React.memo(({
     ref={calendarRef}
     plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
     initialView="dayGridMonth"
+    initialDate="2026-06-01"
     events={events}
     headerToolbar={false}
     datesSet={onDatesSet}
@@ -60,19 +60,34 @@ export default function EventsCalendar({ events }: EventsCalendarProps) {
   const [currentTitle, setCurrentTitle] = useState("");
   const [currentView, setCurrentView] = useState("dayGridMonth");
 
-  // 2. Memoize events to maintain a stable reference
-  const formattedEvents = useMemo(() => (events || []).map((event) => {
-    const details = event.eventDetails;
-    const startDateStr = details.eventDate.split('T')[0];
-    return {
-      id: event.id,
-      title: event.title,
-      url: `/offerings/${event.slug}`,
-      allDay: !details.startTime,
-      start: startDateStr,
-      end: startDateStr,
+  const formattedEvents = useMemo(() => {
+    // Helper placed inside to keep it scoped to the memoized mapping
+    const formatTime = (timeStr: string | null | undefined) => {
+      if (!timeStr) return null;
+      const [time, modifier] = timeStr.split(' ');
+      let [hours, minutes] = time.split(':');
+      if (modifier?.toLowerCase() === 'pm' && hours !== '12') hours = (parseInt(hours) + 12).toString();
+      if (modifier?.toLowerCase() === 'am' && hours === '12') hours = '00';
+      return `${hours.padStart(2, '0')}:${minutes}:00`;
     };
-  }), [events]);
+
+    return (events || []).map((event) => {
+      const details = event.eventDetails;
+      const startDateStr = details.eventDate.split('T')[0];
+      
+      const startDateTime = details.startTime 
+        ? `${startDateStr}T${formatTime(details.startTime)}` 
+        : startDateStr;
+
+      return {
+        id: event.id,
+        title: event.title,
+        url: `/offerings/${event.slug}`,
+        allDay: !details.startTime,
+        start: startDateTime,
+      };
+    });
+  }, [events]);
 
   return (
     <div className={styles.calendarWrapper}>
