@@ -20,12 +20,30 @@ export default function Newsletter({ data }: NewsletterProps) {
     e.preventDefault();
     setStatus('loading');
 
-    // Here you would connect to your provider (Mailchimp, ConvertKit, etc.)
-    // via a Next.js API route
+    // Pack the data into FormData exactly how Contact Form 7 expects it
+    const formData = new FormData();
+    formData.append('_wpcf7', '375');
+    formData.append('_wpcf7_unit_tag', 'wpcf7-f375-o1');
+    formData.append('your-email', email);
+
     try {
-      // const res = await fetch('/api/subscribe', { method: 'POST', body: JSON.stringify({ email }) });
-      setStatus('success');
+      const response = await fetch('https://admin.lightworkerranch.com/wp-json/contact-form-7/v1/contact-forms/375/feedback', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      // Verify that the server processing status evaluates to an absolute success
+      if (response.ok && result.status === 'mail_sent') {
+        setStatus('success');
+        setEmail('');
+      } else {
+        console.error("Contact Form 7 newsletter submission error:", result);
+        setStatus('error');
+      }
     } catch (err) {
+      console.error("Newsletter submission network error:", err);
       setStatus('error');
     }
   };
@@ -55,6 +73,7 @@ export default function Newsletter({ data }: NewsletterProps) {
           </form>
           
           {status === 'success' && <p className={styles.message}>Thank you for joining our community!</p>}
+          {status === 'error' && <p className={styles.errorMessage} style={{ color: '#ff4d4d', marginTop: '1rem' }}>Something went wrong. Please try again.</p>}
         </div>
       </div>
     </section>
