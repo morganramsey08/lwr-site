@@ -66,31 +66,38 @@ export default function ContactPage() {
     e.preventDefault();
     setStatus('submitting');
 
+    const formData = new FormData();
+    
+    // --- ADD THESE INTERNAL WP FIELDS TO SATISFY THE API COMPLIANCE ---
+    formData.append('_wpcf7', '372');                  // Confirms the explicit form ID context
+    formData.append('_wpcf7_unit_tag', 'wpcf7-f372-o1'); // Resolves the exact error from image_43a141.png
+    
+    // Your existing form fields
+    formData.append('your-name', name);
+    formData.append('your-email', email);
+    formData.append('your-subject', subject);
+    formData.append('your-message', message);
+
     try {
-      const response = await fetch('https://admin.lightworkerranch.com/wp-json/contact-form-7/v1/contact-forms/1cd46ef/feedback', {
+      const response = await fetch('https://admin.lightworkerranch.com/wp-json/contact-form-7/v1/contact-forms/372/feedback', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams({
-          'your-name': name,
-          'your-email': email,
-          'your-subject': subject,
-          'your-message': message,
-        }),
+        body: formData,
       });
 
-      if (response.ok) {
+      const data = await response.json();
+
+      if (response.ok && data.status === 'mail_sent') {
         setStatus('success');
         setName('');
         setEmail('');
         setSubject('');
         setMessage('');
       } else {
+        console.log("Contact Form 7 Validation Error:", data);
         setStatus('error');
       }
     } catch (error) {
-      console.error("Form transmission error:", error);
+      console.error("Form transmission network error:", error);
       setStatus('error');
     }
   };
@@ -101,6 +108,7 @@ export default function ContactPage() {
         title={c.hero.title}
         subtitle={c.hero.subtitle}
         bgImage={c.hero.bgImage}
+        buttonText=""
         isShort
         bgPosition="center"
       />
