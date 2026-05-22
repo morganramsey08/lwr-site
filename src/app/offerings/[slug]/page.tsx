@@ -70,9 +70,9 @@ export default async function SingleEventPage({ params }: PageParams) {
   const dateStr = formatDisplayDate(eventDetails?.eventDate);
   const timeStr = eventDetails?.startTime || "Time Pending";
   
-  const locationStr = eventDetails?.locationName || "Garden Sanctuary";
-  const facilitatorName = eventDetails?.facilitatorName || "Sarah Jenkins";
-  const capacityStr = eventDetails?.capacityText || "12 spots available";
+  const locationStr = eventDetails?.locationName || "";
+  const facilitatorName = eventDetails?.facilitatorName || "";
+  const capacityStr = eventDetails?.capacityText;
   const heroBackground = featuredImage?.node?.sourceUrl || "/img/homepage-hero.jpg";
 
   // Fixed investment baseline price assignment values
@@ -209,11 +209,12 @@ export default async function SingleEventPage({ params }: PageParams) {
               
               {/* Investment price calculations display row */}
               <div className={s.investmentRow}>
-                {/* 12 spots available badge sitting exactly in the top left layout slot */}
-                <span className={s.spotsBadge}>
-                  <Users size={12} style={{ display: 'inline', marginRight: '4px', verticalAlign: 'middle' }} />
-                  {capacityStr}
-                </span>
+                {capacityStr && (
+                  <span className={s.spotsBadge}>
+                    <Users size={12} style={{ display: 'inline', marginRight: '4px', verticalAlign: 'middle' }} />
+                    {capacityStr}
+                  </span>
+                )}
                 
                 <div className={s.priceContainer}>
                   <span className={s.amount}>{priceVal}</span>

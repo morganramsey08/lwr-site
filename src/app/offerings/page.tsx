@@ -62,7 +62,7 @@ export default async function EventsPage() {
 
           {/* Child 2: Sidebar List */}
           <section className={styles.upcomingSection}>
-            <h3>Upcoming Events</h3>
+            <h3>Upcoming Offerings</h3>
             {events.map((event: any, index: number) => (
               <EventCard 
                 key={event.id || index} 

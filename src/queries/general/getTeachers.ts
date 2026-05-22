@@ -9,7 +9,7 @@ export const TeachersPageQuery = `
         }
       }
     }
-    teachers(first: 100) {
+    teachers(where: { orderby: { field: MENU_ORDER, order: ASC } }) {
       nodes {
         title
         content

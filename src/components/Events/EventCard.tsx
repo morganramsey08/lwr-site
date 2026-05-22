@@ -76,12 +76,12 @@ export default function EventCard({ event }: { event: any }) {
                 {eventDetails?.startTime || "Time Pending"}
               </span>
             </div>
-            <div className={styles.metaItem}>
-              <Users size={16} />
-              <span>
-                {eventDetails?.capacityText || "12 spots available"}
-              </span>
-            </div>
+            {eventDetails?.capacityText && (
+              <div className={styles.metaItem}>
+                <Users size={16} />
+                <span>{eventDetails.capacityText}</span>
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -33,7 +33,7 @@ const MEMBERSHIPS_CONTENT = {
       },
       {
         tag: "Healing Experience",
-        title: "Sound Journey",
+        title: "Sacred Sound Journey",
         price: "$20",
         description: "A deep meditative sound immersion for the soul."
       },
@@ -42,7 +42,7 @@ const MEMBERSHIPS_CONTENT = {
         title: "Rising Star Punch Card",
         price: "$130",
         description: "10 classes. Journey ends 3 months from purchase.",
-        badge: "11th Class is free!"
+        badge: "Complete the journey and the 11th Class is free!"
       }
     ]
   },
@@ -107,7 +107,7 @@ const MEMBERSHIPS_CONTENT = {
       },
       {
         tag: "Series Deal",
-        title: "10 Series at Lands Zen Water Yoga",
+        title: "10 Week Series at Lands Zen Water Yoga",
         price: "$220",
         period: "/ 10 Week Series",
         description: "The Links at Lands End Pool, 285 Private Road 5980 Yantis, TX",
