@@ -3808,9 +3808,14 @@ type EventDetails implements AcfFieldGroup & AcfFieldGroupFields & EventDetails_
   locationName: String
 
   """
-  Field of the &quot;button_group&quot; Field Type added to the schema as part of the &quot;EventDetails&quot; Field Group
+  Field of the &quot;select&quot; Field Type added to the schema as part of the &quot;EventDetails&quot; Field Group
   """
-  repeatType: String
+  repeatType: [String]
+
+  """
+  Field of the &quot;date_picker&quot; Field Type added to the schema as part of the &quot;EventDetails&quot; Field Group (ACF Fields of the date_picker type return a date string according to the RFC3339 spec: https://datatracker.ietf.org/doc/html/rfc3339.)
+  """
+  repeatUntil: String
 
   """
   Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;EventDetails&quot; Field Group
@@ -3859,9 +3864,14 @@ interface EventDetails_Fields implements AcfFieldGroup & AcfFieldGroupFields {
   locationName: String
 
   """
-  Field of the &quot;button_group&quot; Field Type added to the schema as part of the &quot;EventDetails&quot; Field Group
+  Field of the &quot;select&quot; Field Type added to the schema as part of the &quot;EventDetails&quot; Field Group
   """
-  repeatType: String
+  repeatType: [String]
+
+  """
+  Field of the &quot;date_picker&quot; Field Type added to the schema as part of the &quot;EventDetails&quot; Field Group (ACF Fields of the date_picker type return a date string according to the RFC3339 spec: https://datatracker.ietf.org/doc/html/rfc3339.)
+  """
+  repeatUntil: String
 
   """
   Field of the &quot;wysiwyg&quot; Field Type added to the schema as part of the &quot;EventDetails&quot; Field Group
