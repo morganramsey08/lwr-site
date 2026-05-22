@@ -27,6 +27,7 @@ export default async function AboutPage() {
         buttonText={fields?.heroButtonText}
         buttonLink={fields?.heroButtonLink}
         bgImage={page?.featuredImage?.node?.sourceUrl}
+        bgPosition="center"
       />
 
       <AboutIntroduction data={fields} />
