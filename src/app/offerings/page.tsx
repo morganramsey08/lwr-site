@@ -41,7 +41,7 @@ console.log("Events data passed to calendar:", JSON.stringify(events, null, 2));
     <main>
       <Hero 
         title={page?.title || "Upcoming Events"}
-        subtitle={page?.homePage?.heroSubTitle}
+        subtitle="Explore our upcoming sessions, workshops, and gatherings."
         bgImage={page?.featuredImage?.node?.sourceUrl}
         buttonText={page?.homePage?.heroButtonText || ""} 
         buttonLink={page?.homePage?.heroButtonUrl || "#"}
