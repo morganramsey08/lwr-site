@@ -42,7 +42,7 @@ const Footer = () => {
             
             {/* Column 3: Programs */}
             <div className={styles.columnLinks}>
-              <h4><strong>Programs</strong></h4>
+              <h4><strong><br /></strong></h4>
               <ul>
                 <li><Link href="/teachers">Guides</Link></li>
                 <li><Link href="/membership-rates">Rates & Memberships</Link></li>

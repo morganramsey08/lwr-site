@@ -86,18 +86,18 @@ const MEMBERSHIPS_CONTENT = {
       {
         tag: "Community Offering",
         title: "Sizzling Seniors Free Water Wellness",
-        price: "free",
-        period: "/ thursdays 10am",
+        price: "Free",
+        period: "/ Thursdays 10am",
         checklist: [
           "First Class June 4th",
           "Quitman City Pool",
         ]
       },
       {
-        tag: "Drop In",
-        title: "Lands Zen Water Yoga Drop In",
+        tag: "Drop-In",
+        title: "Lands Zen Water Yoga Drop-In",
         price: "$20",
-        period: "/ drop in",
+        period: "/ Drop-In",
         description: "The Links at Lands End Pool, 285 Private Road 5980 Yantis, TX",
         checklist: [
           "The Links at Lands End Pool",
