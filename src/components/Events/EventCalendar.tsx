@@ -38,7 +38,6 @@ const CalendarRenderer = React.memo(({
     ref={calendarRef}
     plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
     initialView="dayGridMonth"
-    initialDate="2026-06-01"
     events={events}
     headerToolbar={false}
     datesSet={onDatesSet}
