@@ -15,37 +15,24 @@ export default function EventCard({ event }: { event: any }) {
     return <Flower2 size={24} color="white" fill="white" />;
   };
 
-  // Robust helper to format dates, handling both ISO strings and DD/MM/YYYY slash formats
-  const formatCardDate = (dateString: string) => {
-    if (!dateString) return "";
-    try {
-      // If it's a WordPress DD/MM/YYYY format, convert it to something JS natively likes
-      if (dateString.includes('/')) {
-        const [day, month, year] = dateString.split('/');
-        // Rearrange to YYYY-MM-DD so it parses cleanly everywhere
-        const normalizedDate = new Date(`${year}-${month}-${day}T00:00:00`);
-        if (!isNaN(normalizedDate.getTime())) {
-          return normalizedDate.toLocaleDateString('en-US', {
-            month: 'short',
-            day: 'numeric',
-            year: 'numeric'
-          });
-        }
-      }
+const formatDisplayDate = (dateString: string) => {
+  if (!dateString) return "Date Pending";
+  
+  // 1. Split string to get just YYYY-MM-DD
+  // This avoids timezone issues entirely by not using Date parsing on strings
+  const [datePart] = dateString.split('T'); 
+  const [year, month, day] = datePart.split('-');
 
-      // Fallback for standard ISO strings
-      const date = new Date(dateString);
-      if (isNaN(date.getTime())) return dateString;
-      
-      return date.toLocaleDateString('en-US', {
-        month: 'short',
-        day: 'numeric',
-        year: 'numeric'
-      });
-    } catch (e) {
-      return dateString;
-    }
-  };
+  // 2. Create the date using UTC to ensure it never shifts
+  const date = new Date(Date.UTC(parseInt(year), parseInt(month) - 1, parseInt(day)));
+
+  return date.toLocaleDateString('en-US', {
+    timeZone: 'UTC',
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric'
+  });
+};
 
   return (
     <Link href={`/offerings/${event.slug}`} className={styles.cardLink}>
@@ -58,7 +45,7 @@ export default function EventCard({ event }: { event: any }) {
           <div className={styles.cardHeader}>
             <h4>{title}</h4>
             <span className={styles.date}>
-              {formatCardDate(eventDetails?.eventDate)}
+              {formatDisplayDate(eventDetails?.eventDate)}
             </span>
           </div>
 

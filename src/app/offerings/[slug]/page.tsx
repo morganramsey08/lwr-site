@@ -50,23 +50,24 @@ export default async function SingleEventPage({ params }: PageParams) {
 
   const { title, content, featuredImage, eventDetails } = event;
 
-  const formatDisplayDate = (dateString: string) => {
-    if (!dateString) return "Date Pending";
-    try {
-      if (dateString.includes('/')) {
-        const [day, month, year] = dateString.split('/');
-        const normalizedDate = new Date(`${year}-${month}-${day}T00:00:00`);
-        if (!isNaN(normalizedDate.getTime())) {
-          return normalizedDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-        }
-      }
-      const date = new Date(dateString);
-      if (isNaN(date.getTime())) return dateString;
-      return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-    } catch (e) {
-      return dateString;
-    }
-  };
+const formatDisplayDate = (dateString: string) => {
+  if (!dateString) return "Date Pending";
+  
+  // 1. Split string to get just YYYY-MM-DD
+  // This avoids timezone issues entirely by not using Date parsing on strings
+  const [datePart] = dateString.split('T'); 
+  const [year, month, day] = datePart.split('-');
+
+  // 2. Create the date using UTC to ensure it never shifts
+  const date = new Date(Date.UTC(parseInt(year), parseInt(month) - 1, parseInt(day)));
+
+  return date.toLocaleDateString('en-US', {
+    timeZone: 'UTC',
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric'
+  });
+};
   
   const dateStr = formatDisplayDate(eventDetails?.eventDate);
   const timeStr = eventDetails?.startTime || "Time Pending";
