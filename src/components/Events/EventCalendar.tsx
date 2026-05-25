@@ -60,7 +60,6 @@ export default function EventsCalendar({ events }: EventsCalendarProps) {
   const [currentView, setCurrentView] = useState("dayGridMonth");
 
   const formattedEvents = useMemo(() => {
-    // Helper placed inside to keep it scoped to the memoized mapping
     const formatTime = (timeStr: string | null | undefined) => {
       if (!timeStr) return null;
       const [time, modifier] = timeStr.split(' ');
@@ -73,18 +72,29 @@ export default function EventsCalendar({ events }: EventsCalendarProps) {
     return (events || []).map((event) => {
       const details = event.eventDetails;
       const startDateStr = details.eventDate.split('T')[0];
-      
-      const startDateTime = details.startTime 
-        ? `${startDateStr}T${formatTime(details.startTime)}` 
-        : startDateStr;
+      const startDateTime = details.startTime ? `${startDateStr}T${formatTime(details.startTime)}` : startDateStr;
 
-      return {
+      // Basic event properties
+      const eventObj: any = {
         id: event.id,
         title: event.title,
         url: `/offerings/${event.slug}`,
         allDay: !details.startTime,
         start: startDateTime,
       };
+
+      // Only add recurrence properties if it's explicitly set to repeat
+      if (details.repeatType && details.repeatType !== "none") {
+        // Calculate the specific day index (0 = Sunday, 1 = Monday, etc.)
+        const eventDayIndex = new Date(startDateStr).getUTCDay();
+        
+        eventObj.startTime = details.startTime ? formatTime(details.startTime) : undefined;
+        eventObj.startRecur = startDateStr;
+        eventObj.endRecur = details.repeatUntil ? details.repeatUntil.split('T')[0] : undefined;
+        eventObj.daysOfWeek = [eventDayIndex]; // Forces it to only repeat on the start day
+      }
+
+      return eventObj;
     });
   }, [events]);
 
