@@ -1,159 +1,42 @@
-@import "../../styles/variables.scss"; 
+@import '../../styles/variables'; // Make sure this path points to your variables file
 
 .pageWrapper {
-  min-height: 100vh;
   background-color: $linen;
+  min-height: 100vh;
+  color: $forest;
 }
 
-// 1. Align the outer container edge perfectly with the Hero grid layout
 .contentContainer {
-  width: 100%;
-  max-width: 1480px; // Matches your global site grid maximum width
-  margin: 0 auto;    // Centers the container on large screens
-  padding: 4rem 2rem;
-
-  @media (max-width: 768px) {
-    padding: 2.5rem 1.5rem;
-  }
+  composes: container from global;
+  padding-top: 60px;
+  padding-bottom: 80px;
 }
 
 .mainContent {
+  margin-bottom: 40px; // Adds space before the practitioners section begins
+}
+
+// --- New Header Styles Extracted from Memberships ---
+.sectionCenter {
+  text-align: center;
+  margin-top: 80px; 
+  margin-bottom: 60px;
+}
+
+.sectionTitle {
+  font-size: 32px; 
+  font-weight: 700;
   color: $forest;
-  font-family: var(--font-teachers), sans-serif;
-  line-height: 1.7;
-  width: 100%;
-
-  // 2. Keep standard standalone text blocks comfortable to read
-  p, ul, ol, h2, h3 {
-    max-width: 750px; // Keeps typography lines from stretching too wide across the screen
-  }
-
-  // 3. Backport WordPress Gutenberg layout structure styles
-  .wp-block-media-text {
-    display: grid;
-    grid-template-columns: 1fr 1fr; // Creates the clean 50/50 side-by-side split
-    gap: 3rem;                     // Space between the image panel and text panel
-    align-items: start;
-    margin: 3rem 0;
-    max-width: 100%; // Overrides the individual max-width constraint for rows
-
-    // Reset standard reading constraints strictly when nested inside layout grids
-    p, ul, ol, h2, h3 {
-      max-width: 100%;
-    }
-
-    .wp-block-media-text__media {
-      margin: 0;
-      width: 100%;
-      
-      img {
-        margin: 0;
-        width: 100%;
-        height: auto;
-        max-height: 65vh;
-        border-radius: 4px;
-        object-fit: cover;
-      }
-    }
-
-    .wp-block-media-text__content {
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-
-      p:last-child {
-        margin-bottom: 0;
-      }
-    }
-
-    // Responsive structural fallback for mobile devices
-    @media (max-width: 768px) {
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-      margin: 2rem 0;
-    }
-  }
-
-  // Multi-column row layout engine backup
-  .wp-block-columns {
-    display: flex;
-    gap: 2rem;
-    margin: 3rem 0;
-    max-width: 100%;
-
-    p, ul, ol, h2, h3 {
-      max-width: 100%;
-    }
-
-    @media (max-width: 768px) {
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-  }
-
-  .wp-block-column {
-    flex: 1;
-    min-width: 0;
-  }
-
-  // 4. Global Dynamic Typography & Element Targets
-  h2 {
-    font-size: 2.25rem;
-    color: $forest;
-    margin-top: 3rem;
-    margin-bottom: 1.25rem;
-    font-weight: 500;
-  }
-
-  h3 {
-    font-size: 1.65rem;
-    color: $clay;
-    margin-top: 2.25rem;
-    margin-bottom: 1rem;
-    font-weight: 500;
-  }
-
-  p {
-    margin-bottom: 1.5rem;
-    font-size: 1.125rem;
-  }
-
-  ul, ol {
-    margin-bottom: 1.5rem;
-    padding-left: 2rem;
-
-    li {
-      margin-bottom: 0.65rem;
-      font-size: 1.125rem;
-    }
-  }
-
-  a {
-    color: $clay;
-    text-decoration: underline;
-
-    &:hover {
-      opacity: 0.8;
-    }
-  }
-
-  // Standalone WordPress media styling rules
-  img {
-    max-width: 100%;
-    height: auto;
-    max-height: 70vh; // Prevents vertical images from overflowing the screen viewport height
-    object-fit: cover;
-    margin: 2.5rem 0;
-    border-radius: 4px;
+  margin-bottom: 12px;
+  
+  @media (max-width: 768px) {
+    font-size: 26px; 
   }
 }
 
-.errorContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 40vh;
-  color: $clay;
-  font-family: var(--font-teachers), sans-serif;
+.divider {
+  width: 60px; 
+  height: 3px;
+  background-color: $clay;
+  margin: 0 auto;
 }
