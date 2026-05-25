@@ -40,3 +40,56 @@
   background-color: $clay;
   margin: 0 auto;
 }
+
+.mainContent {
+  padding: 4rem 0;
+  margin: 0 auto;
+
+  // Media & Text block layout
+  .wp-block-media-text {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 3rem;
+    align-items: center;
+    margin-bottom: 4rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+
+    .wp-block-media-text__media img {
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  // Paragraph styling
+  .wp-block-paragraph {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: #4b5563;
+    margin-bottom: 1.5rem;
+  }
+
+  // Quote styling
+  .wp-block-quote {
+    border-left: 4px solid #75BD43; // Using your leaf green
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: #1D2650; // Using your deep navy
+    font-weight: 500;
+  }
+
+  // Call to Action Headline
+  h2.wp-block-heading {
+    font-size: 1.5rem;
+    line-height: 1.4;
+    color: #1D2650;
+    margin-top: 3rem;
+    padding: 2rem;
+    background: #f9fafb;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+  }
+}

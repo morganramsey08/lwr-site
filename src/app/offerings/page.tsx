@@ -80,8 +80,21 @@ export default async function EventsPage() {
   }, []);
 
   // Sort chronologically based on the newly calculated display dates
-  const sortedUpcomingEvents = processedEvents.sort((a, b) => {
-    return parseWPDate(a.displayDate).getTime() - parseWPDate(b.displayDate).getTime();
+const sortedUpcomingEvents = processedEvents.sort((a, b) => {
+    // Helper to convert time string (e.g., "10:30 am") to minutes since midnight
+    const timeToMinutes = (timeStr?: string) => {
+      if (!timeStr) return 0;
+      const [time, modifier] = timeStr.split(' ');
+      let [hours, minutes] = time.split(':').map(Number);
+      if (modifier?.toLowerCase() === 'pm' && hours !== 12) hours += 12;
+      if (modifier?.toLowerCase() === 'am' && hours === 12) hours = 0;
+      return hours * 60 + minutes;
+    };
+
+    const dateA = parseWPDate(a.displayDate).getTime() + (timeToMinutes(a.eventDetails.startTime) * 60000);
+    const dateB = parseWPDate(b.displayDate).getTime() + (timeToMinutes(b.eventDetails.startTime) * 60000);
+
+    return dateA - dateB;
   });
 
   return (
