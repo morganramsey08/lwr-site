@@ -29,11 +29,30 @@
     align-items: flex-start;
     margin-bottom: 0.25rem;
 
-    h4 {
-      margin: 0;
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: #2d372d;
+    .titleWrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      
+      h4 {
+        margin: 0;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #2d372d;
+      }
+
+      .repeatBadge {
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        background-color: rgba(45, 55, 45, 0.08);
+        color: #2d372d;
+        padding: 3px 10px;
+        border-radius: 9999px;
+        margin-top: 2px;
+      }
     }
 
     .date {

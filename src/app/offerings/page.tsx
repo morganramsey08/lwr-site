@@ -11,6 +11,11 @@ import CommunityCTA from "@/components/CommunityCTA/CommunityCTA";
 export const revalidate = 0;
 export const dynamic = 'force-dynamic';
 
+// Helper to reliably parse WP dates to UTC
+const parseWPDate = (dateStr: string) => {
+  return new Date(dateStr.includes('T') ? dateStr : `${dateStr}T00:00:00Z`);
+};
+
 export default async function EventsPage() {
   function getQueryString(query: any): string {
     if (typeof query === 'string') return query;
@@ -31,13 +36,52 @@ export default async function EventsPage() {
   }
 
   const page = data?.page;
-  const events = data?.events?.nodes || [];
+  const rawEvents = data?.events?.nodes || [];
 
-  // Helper to ensure we sort by consistent UTC dates
-  const sortedEvents = [...events].sort((a, b) => {
-    const dateA = new Date(a.eventDetails.eventDate.includes('T') ? a.eventDetails.eventDate : `${a.eventDetails.eventDate}T00:00:00Z`).getTime();
-    const dateB = new Date(b.eventDetails.eventDate.includes('T') ? b.eventDetails.eventDate : `${b.eventDetails.eventDate}T00:00:00Z`).getTime();
-    return dateA - dateB;
+  // --- NEW LOGIC: Calculate Next Instances & 4-Week Window ---
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // Reset time to midnight for accurate day comparison
+  
+  const fourWeeksFromNow = new Date(today.getTime() + 28 * 24 * 60 * 60 * 1000);
+
+  const processedEvents = rawEvents.reduce((acc: any[], event: any) => {
+    const details = event.eventDetails;
+    const startDate = parseWPDate(details.eventDate);
+    
+    const rawRepeat = Array.isArray(details.repeatType) ? details.repeatType[0] : details.repeatType;
+    const isRepeating = rawRepeat && rawRepeat.toLowerCase() !== "none";
+
+    if (!isRepeating) {
+      // For single events, just check if they fall in our 4-week window
+      if (startDate >= today && startDate <= fourWeeksFromNow) {
+        acc.push({ ...event, displayDate: details.eventDate });
+      }
+    } else {
+      // For repeating events, find the NEXT valid occurrence
+      const endDate = details.repeatUntil ? parseWPDate(details.repeatUntil) : new Date('2099-01-01');
+      
+      if (endDate >= today) {
+        let nextDate = new Date(startDate);
+        
+        // Fast-forward to the next upcoming date (assuming weekly repeats)
+        while (nextDate < today && nextDate <= endDate) {
+          nextDate.setDate(nextDate.getDate() + 7);
+        }
+
+        // If that next occurrence is within 4 weeks, add it to the sidebar
+        if (nextDate >= today && nextDate <= fourWeeksFromNow && nextDate <= endDate) {
+          // Format back to YYYY-MM-DD for the EventCard to consume
+          const displayDateStr = nextDate.toISOString().split('T')[0];
+          acc.push({ ...event, displayDate: displayDateStr });
+        }
+      }
+    }
+    return acc;
+  }, []);
+
+  // Sort chronologically based on the newly calculated display dates
+  const sortedUpcomingEvents = processedEvents.sort((a, b) => {
+    return parseWPDate(a.displayDate).getTime() - parseWPDate(b.displayDate).getTime();
   });
 
   return (
@@ -56,17 +100,25 @@ export default async function EventsPage() {
         <div className={styles.pageHeader}></div>
 
         <div className={styles.eventsLayout}>
-          {/* Child 1: Calendar - uses sorted events */}
           <div className={styles.calendarContainer}>
-            <EventsCalendar events={sortedEvents} />
+            {/* The calendar still gets the raw events to handle its own complex rendering */}
+            <EventsCalendar events={rawEvents} />
           </div>
 
-          {/* Child 2: Sidebar List - uses sorted events */}
           <section className={styles.upcomingSection}>
             <h3>Upcoming Offerings</h3>
-            {sortedEvents.map((event: any, index: number) => (
-              <EventCard key={event.id || index} event={event} />
-            ))}
+            {sortedUpcomingEvents.length > 0 ? (
+              sortedUpcomingEvents.map((event: any, index: number) => {
+                // Pass the calculated 'displayDate' into the card by temporarily overriding eventDate
+                const eventForCard = {
+                  ...event,
+                  eventDetails: { ...event.eventDetails, eventDate: event.displayDate }
+                };
+                return <EventCard key={`${event.id}-${index}`} event={eventForCard} />;
+              })
+            ) : (
+              <p>No upcoming events in the next 4 weeks.</p>
+            )}
           </section>
         </div>
       </div>
