@@ -59,7 +59,7 @@ export default function EventsCalendar({ events }: EventsCalendarProps) {
   const [currentTitle, setCurrentTitle] = useState("");
   const [currentView, setCurrentView] = useState("dayGridMonth");
 
-  const formattedEvents = useMemo(() => {
+const formattedEvents = useMemo(() => {
     const formatTime = (timeStr: string | null | undefined) => {
       if (!timeStr) return null;
       const [time, modifier] = timeStr.split(' ');
@@ -83,8 +83,14 @@ export default function EventsCalendar({ events }: EventsCalendarProps) {
         start: startDateTime,
       };
 
-      // Only add recurrence properties if it's explicitly set to repeat
-      if (details.repeatType && details.repeatType !== "none") {
+      // 1. Safely extract the string whether it's an array ["none"] or a string "none"
+      const rawRepeat = Array.isArray(details.repeatType) ? details.repeatType[0] : details.repeatType;
+      
+      // 2. Safely check if it's repeating, ignoring case
+      const isRepeating = rawRepeat && rawRepeat.toLowerCase() !== "none";
+
+      // 3. Only add recurrence properties if it's explicitly set to repeat
+      if (isRepeating) {
         // Calculate the specific day index (0 = Sunday, 1 = Monday, etc.)
         const eventDayIndex = new Date(startDateStr).getUTCDay();
         
