@@ -4,7 +4,6 @@ import { HealingHandsPageQuery } from "@/queries/general/getHealingHandPage";
 import Hero from "@/components/Hero/Hero";
 import PractitionerCard from "@/components/PractitionerCard/PractitionerCard";
 import s from "./HealingHands.module.scss";
-import t from "@/app/teachers/Teachers.module.scss"; 
 
 export default async function HealingHandsPage() {
   const data = await fetchGraphQL(HealingHandsPageQuery);
@@ -33,17 +32,15 @@ export default async function HealingHandsPage() {
 
       <div className={s.contentContainer}>
         
-        {/* 1. Featured Content from the WordPress Editor */}
         <article className={s.mainContent} dangerouslySetInnerHTML={{ __html: page.content || "" }} />
         
-        {/* 2. New Styled Header Section */}
         <div className={s.sectionCenter}>
           <h2 className={s.sectionTitle}>Healing Hands Practitioners</h2>
           <div className={s.divider}></div>
         </div>
         
-        {/* 3. Practitioner Grid */}
-        <div className={t.teacherGrid}>
+        {/* Updated class here to point to the local practitionerGrid */}
+        <div className={s.practitionerGrid}>
           {practitioners.map((p: any) => (
             <PractitionerCard key={p.id} practitioner={p} />
           ))}

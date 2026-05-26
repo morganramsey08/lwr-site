@@ -1,4 +1,4 @@
-@import '../../styles/variables'; // Make sure this path points to your variables file
+@import '../../styles/variables';
 
 .pageWrapper {
   background-color: $linen;
@@ -12,11 +12,17 @@
   padding-bottom: 80px;
 }
 
-.mainContent {
-  margin-bottom: 40px; // Adds space before the practitioners section begins
+// --- Grid Logic for Practitioners ---
+.practitionerGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 80px 40px;
+  margin-top: 60px;
+
+  @media (max-width: 1024px) { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 640px) { grid-template-columns: 1fr; }
 }
 
-// --- New Header Styles Extracted from Memberships ---
 .sectionCenter {
   text-align: center;
   margin-top: 80px; 
@@ -46,6 +52,41 @@
   margin: 0 auto;
 
   // Media & Text block layout
+  :global(.wp-block-media-text) {
+    display: grid;
+    grid-template-columns: 400px 1fr; // Matches the image width proportions
+    gap: 3rem;
+    align-items: center;
+    margin-bottom: 4rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+
+    :global(.wp-block-media-text__media) img {
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  // Paragraph styling for better readability
+  :global(.wp-block-paragraph) {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: #4b5563;
+    margin-bottom: 1.5rem;
+  }
+
+  // Quote styling with brand accents
+  :global(.wp-block-quote) {
+    border-left: 4px solid #75BD43; // Leaf green accent
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: #1D2650; // Deep navy text
+    font-weight: 500;
+  }
+
   .wp-block-media-text {
     display: grid;
     grid-template-columns: 350px 1fr;
@@ -63,7 +104,6 @@
     }
   }
 
-  // Paragraph styling
   .wp-block-paragraph {
     font-size: 1.15rem;
     line-height: 1.7;
@@ -71,17 +111,15 @@
     margin-bottom: 1.5rem;
   }
 
-  // Quote styling
   .wp-block-quote {
-    border-left: 4px solid #75BD43; // Using your leaf green
+    border-left: 4px solid #75BD43;
     padding-left: 1.5rem;
     margin: 2rem 0;
     font-style: italic;
-    color: #1D2650; // Using your deep navy
+    color: #1D2650;
     font-weight: 500;
   }
 
-  // Call to Action Headline
   h2.wp-block-heading {
     font-size: 1.5rem;
     line-height: 1.4;
@@ -92,4 +130,27 @@
     border-radius: 12px;
     border: 1px solid #e5e7eb;
   }
+
+  // Update your list styling inside .mainContent
+:global(.wp-block-list) {
+  list-style-type: none !important;
+  padding: 0 !important;
+  margin: 0 auto !important;
+  display: table;            // Ensures the list acts as a block centered on the page
+  text-align: left;          // Keeps text inside the items left-aligned
+
+  li {
+    margin-bottom: 0.5rem;
+    position: relative;
+    padding-left: 20px;      // Creates space for the bullet
+
+    &::before {
+      content: "•";          // Custom bullet
+      position: absolute;
+      left: 0;
+      color: #374151;        // Matches your text color
+      font-weight: bold;
+    }
+  }
+}
 }
