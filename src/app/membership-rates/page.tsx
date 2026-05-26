@@ -100,6 +100,7 @@ const MEMBERSHIPS_CONTENT = {
         period: "/ Drop-In",
         description: "The Links at Lands End Pool, 285 Private Road 5980 Yantis, TX",
         checklist: [
+          "Tuesdays 10 A.M.",
           "The Links at Lands End Pool",
           "LandZen Water Yoga Series",
           "Rain outs made up"
@@ -113,6 +114,7 @@ const MEMBERSHIPS_CONTENT = {
         description: "The Links at Lands End Pool, 285 Private Road 5980 Yantis, TX",
         checklist: [
           "Begins June 2nd",
+          "Tuesdays 10 A.M.",
           "The Links at Lands End Pool",
           "LandZen Water Yoga Series",
           "Rain outs made up"
