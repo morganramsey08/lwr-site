@@ -18,6 +18,7 @@ export const GetSingleEventQuery = `
         facilitatorName
         locationName
         price
+        bringItems
       }
     }
   }

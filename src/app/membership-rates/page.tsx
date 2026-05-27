@@ -89,6 +89,7 @@ const MEMBERSHIPS_CONTENT = {
         price: "Free",
         period: "/ Thursdays 10am",
         checklist: [
+          "Thanks to local light sponsors",
           "First Class June 4th",
           "Quitman City Pool",
         ]
@@ -102,8 +103,6 @@ const MEMBERSHIPS_CONTENT = {
         checklist: [
           "Tuesdays 10 A.M.",
           "The Links at Lands End Pool",
-          "LandZen Water Yoga Series",
-          "Rain outs made up"
         ]
       },
       {

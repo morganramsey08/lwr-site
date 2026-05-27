@@ -5,16 +5,12 @@ import Hero from "@/components/Hero/Hero";
 import Link from "next/link";
 import s from "./eventSingle.module.scss";
 
-// Lucide structural assets
 import { ChevronLeft, Calendar, MapPin, Plus, Award, Heart, Leaf, Users } from 'lucide-react';
 
 interface PageParams {
-  params: Promise<{
-    slug: string;
-  }>;
+  params: Promise<{ slug: string; }>;
 }
 
-// 1. Updated interface to include price
 interface CalendarEvent {
   eventDetails: {
     eventDate: string;
@@ -22,9 +18,10 @@ interface CalendarEvent {
     locationName?: string;
     facilitatorName?: string;
     capacityText?: string;
-    price?: string; // Add this
+    price?: string;
     shortDescription?: string;
     eventCategory?: string;
+    bringItems?: string;
   };
 }
 
@@ -33,7 +30,6 @@ export const dynamic = 'force-dynamic';
 
 export default async function SingleEventPage({ params }: PageParams) {
   const { slug } = await params;
-
   const response = await fetchGraphQL(GetSingleEventQuery, { id: slug });
   const event = response?.event;
 
@@ -50,37 +46,28 @@ export default async function SingleEventPage({ params }: PageParams) {
 
   const { title, content, featuredImage, eventDetails } = event;
 
-const formatDisplayDate = (dateString: string) => {
-  if (!dateString) return "Date Pending";
-  
-  // 1. Split string to get just YYYY-MM-DD
-  // This avoids timezone issues entirely by not using Date parsing on strings
-  const [datePart] = dateString.split('T'); 
-  const [year, month, day] = datePart.split('-');
+  // Logic for dynamic "What to bring" list using bringItems
+  const bringText = eventDetails?.bringItems || "";
+  const dynamicItems = bringText.split('\n').filter((item: string) => item.trim() !== "");
+  const defaultList = ["Comfortable clothing", "A reusable water bottle", "Journal (optional)", "An open heart"];
+  const itemsList = dynamicItems.length > 0 ? dynamicItems : defaultList;
 
-  // 2. Create the date using UTC to ensure it never shifts
-  const date = new Date(Date.UTC(parseInt(year), parseInt(month) - 1, parseInt(day)));
-
-  return date.toLocaleDateString('en-US', {
-    timeZone: 'UTC',
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric'
-  });
-};
+  const formatDisplayDate = (dateString: string) => {
+    if (!dateString) return "Date Pending";
+    const [datePart] = dateString.split('T'); 
+    const [year, month, day] = datePart.split('-');
+    const date = new Date(Date.UTC(parseInt(year), parseInt(month) - 1, parseInt(day)));
+    return date.toLocaleDateString('en-US', { timeZone: 'UTC', month: 'short', day: 'numeric', year: 'numeric' });
+  };
   
   const dateStr = formatDisplayDate(eventDetails?.eventDate);
   const timeStr = eventDetails?.startTime || "Time Pending";
   const locationStr = eventDetails?.locationName || "";
   const facilitatorName = eventDetails?.facilitatorName || "";
   const capacityStr = eventDetails?.capacityText;
-  
   const priceVal = eventDetails?.price || ""; 
-
   const heroBackground = featuredImage?.node?.sourceUrl || "/img/homepage-hero.jpg";
-  const plainTextDescription = eventDetails?.shortDescription 
-    ? eventDetails.shortDescription.replace(/<[^>]*>/g, '') 
-    : "Join us in our garden sanctuary for a transformative experience.";
+  const plainTextDescription = eventDetails?.shortDescription ? eventDetails.shortDescription.replace(/<[^>]*>/g, '') : "Join us in our garden sanctuary for a transformative experience.";
 
   const categoryMap: Record<string, { label: string; icon: React.ReactNode }> = {
     meditation: { label: "Meditation & Mindfulness", icon: <Leaf size={18} className={s.icon} /> },
@@ -89,12 +76,7 @@ const formatDisplayDate = (dateString: string) => {
     workshops: { label: "Workshops", icon: <Award size={18} className={s.icon} /> }
   };
 
-  const selectedCategory = categoryMap[eventDetails?.eventCategory] || {
-    label: "Special Offering",
-    icon: <Award size={18} className={s.icon} />
-  };
-
-  const itemsList = ["Comfortable clothing", "A reusable water bottle", "Journal (optional)", "An open heart"];
+  const selectedCategory = categoryMap[eventDetails?.eventCategory] || { label: "Special Offering", icon: <Award size={18} className={s.icon} /> };
 
   const generateIcsAction = async () => {
     'use server';
@@ -102,11 +84,7 @@ const formatDisplayDate = (dateString: string) => {
     const cleanDesc = plainTextDescription.replace(/,/g, '\\,');
     let normalizedDate = "20260101";
     if (eventDetails?.eventDate) {
-      if (eventDetails.eventDate.includes('/')) {
-        normalizedDate = eventDetails.eventDate.split('/').reverse().join('');
-      } else {
-        normalizedDate = eventDetails.eventDate.split('T')[0].replace(/-/g, '');
-      }
+      normalizedDate = eventDetails.eventDate.split('T')[0].replace(/-/g, '');
     }
     const icsContent = [
       "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Living Water Retreat//NONSGML Offering//EN", "BEGIN:VEVENT",
