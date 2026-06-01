@@ -36,6 +36,17 @@ try {
 
   return (
     <main>
+      <section className="announcementBanner">
+        <div className="container">
+          <p className="bannerContent">
+            <span className="bannerBadge">Updates</span>
+            <span>
+              Join us for our <strong>Soft Opening on June 15th</strong>, 
+              followed by our <strong>Grand Opening in October 2026</strong>.
+            </span>
+          </p>
+        </div>
+      </section>
       <Hero 
         title={acf.heroTitle || page?.title}
         subtitle={acf.heroSubTitle}
