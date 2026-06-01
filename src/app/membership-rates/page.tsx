@@ -108,7 +108,7 @@ const MEMBERSHIPS_CONTENT = {
       {
         tag: "Series Deal",
         title: "10 Week Series at Lands Zen Water Yoga",
-        price: "$220",
+        price: "$120",
         period: "/ 10 Week Series",
         description: "The Links at Lands End Pool, 285 Private Road 5980 Yantis, TX",
         checklist: [
