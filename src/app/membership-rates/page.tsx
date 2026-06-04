@@ -112,7 +112,7 @@ const MEMBERSHIPS_CONTENT = {
         period: "/ 10 Week Series",
         description: "The Links at Lands End Pool, 285 Private Road 5980 Yantis, TX",
         checklist: [
-          "Begins June 2nd",
+          "Begins June 9th",
           "Tuesdays 10:30 A.M.",
           "The Links at Lands End Pool",
           "LandZen Water Yoga Series",
