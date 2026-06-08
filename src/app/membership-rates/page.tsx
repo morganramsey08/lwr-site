@@ -34,7 +34,7 @@ const MEMBERSHIPS_CONTENT = {
       {
         tag: "Healing Experience",
         title: "Sacred Sound Journey",
-        price: "$20",
+        price: "$25",
         description: "A deep meditative sound immersion for the soul."
       },
       {
@@ -122,11 +122,11 @@ const MEMBERSHIPS_CONTENT = {
     ]
   },
   elderOfferings: {
-    title: "Silver Sage Light Offerings for Elders",
+    title: "Silver Sage Light Offerings for Elders - $5 Suggested Contribution",
     description: "Monday, Wednesday & some Fridays at 2 PM. Specifically curated for our elder community members.",
     pills: [
-      { text: "Suggested Heart-Centered Contribution: $5", isOrange: false },
-      { text: "Free Community Offerings Available", isOrange: true }
+      { text: "Suggested Heart-Centered Contribution: $5", isOrange: true },
+      { text: "Free Community Offerings Available", isOrange: false }
     ],
     sponsoredBy: "Local Light Supporters"
   },
