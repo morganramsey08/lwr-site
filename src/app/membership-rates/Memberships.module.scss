@@ -1,359 +1,64 @@
 @import '../../styles/variables';
 
-.pageWrapper {
-  background-color: $linen;
-  min-height: 100vh;
-  color: $forest;
-}
+.pageWrapper { background-color: $linen; min-height: 100vh; color: $forest; }
+.contentContainer { composes: container from global; padding-top: 60px; padding-bottom: 80px; }
+.sectionCenter { text-align: center; margin-bottom: 60px; }
+.sectionTitle { font-size: 32px; font-weight: 700; color: $forest; margin-bottom: 30px; }
 
-// Global site container wrapping the content sections
-.contentContainer {
-  composes: container from global;
-  padding-top: 60px;
-  padding-bottom: 80px;
-}
-
-.sectionCenter {
-  text-align: center;
-  margin-bottom: 60px;
-}
-
-.sectionTitle {
-  font-size: 32px; // Increased from 28px
-  font-weight: 700;
-  color: $forest;
-  margin-bottom: 12px;
-  
-  @media (max-width: 768px) {
-    font-size: 26px; // Increased from 24px
-  }
-}
-
-.divider {
-  width: 60px; // Slightly wider to balance the bigger text
-  height: 3px;
-  background-color: $clay;
-  margin: 0 auto 40px auto;
-}
-
-// Pricing Responsive Grids
 .grid3 {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 24px;
-  
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 30px;
-  }
+  display: grid; grid-template-columns: 1fr; gap: 20px;
+  @media (min-width: 768px) { grid-template-columns: repeat(3, 1fr); }
 }
 
-// Pricing Cards
 .card {
-  background-color: $white;
-  border: 1px solid rgba($forest, 0.08);
-  border-radius: 12px;
-  padding: 44px 28px; // Expanded padding for breathing room
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.01);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-
-  @media (max-width: 768px) {
-    padding: 34px 24px;
-  }
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba($forest, 0.04);
-  }
+  background-color: $white; border: 1px solid rgba($forest, 0.08); border-radius: 12px; padding: 24px 20px;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  .tag { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: $clay; margin-bottom: 12px; }
+  .cardTitle { font-size: 1.5rem; font-weight: 700; color: $forest; margin-bottom: 15px; }
 }
 
-.cardFeatured {
-  @extend .card;
-  border-top: 4px solid $clay;
-}
+.priceWrapper { margin: 15px 0; }
+.priceComparison { display: flex; align-items: flex-start; justify-content: center; gap: 12px; }
+.priceBlock { display: flex; flex-direction: column; align-items: center; }
+.priceValue { font-size: 26px; font-weight: 700; color: rgba($forest, 0.5); }
+.priceValueCash { font-size: 26px; font-weight: 800; color: $clay; }
+.priceLabel { font-size: 10px; color: rgba($forest, 0.7); text-transform: uppercase; }
+.priceLabelCash { font-size: 10px; color: $clay; text-transform: uppercase; font-weight: 600; }
+.separator { font-size: 20px; color: rgba($forest, 0.2); margin-top: 2px; }
 
-.tag {
-  font-size: 12px; // Increased from 11px
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: $clay;
-  margin-bottom: 10px;
-}
+.description { font-size: 15px; color: rgba($forest, 0.7); line-height: 1.5; margin: 10px 0; }
+.badge { background-color: rgba($forest, 0.05); color: $forest; font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: 9999px; margin-top: auto; }
 
-.cardTitle {
-  font-size: 22px; // Increased from 20px
-  font-weight: 700;
-  color: $forest;
-  margin-bottom: 8px;
-}
-
-.priceContainer {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  margin-bottom: 25px;
-}
-
-.price {
-  font-size: 46px; // Increased from 42px
-  font-weight: 800;
-  color: $forest;
-}
-
-.period {
-  font-size: 15px; // Increased from 14px
-  color: rgba($forest, 0.6);
-  margin-left: 5px;
-}
-
-.description {
-  font-size: 15px; // Increased from 13.5px
-  color: rgba($forest, 0.8);
-  line-height: 1.6;
-  text-align: center;
-  text-align: left;
-  text-wrap: balance;
-}
-
-.badge {
-  display: inline-block;
-  background-color: rgba($forest, 0.05);
-  color: $forest;
-  font-size: 12px; // Increased from 11px
-  font-weight: 500;
-  padding: 5px 14px;
-  border-radius: 9999px;
-  margin-top: 15px;
-}
-
-.badgeOrange {
-  @extend .badge;
-  background-color: rgba($clay, 0.15);
-  color: darken($clay, 15%);
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
-
-// Checklists
-.checklist {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  text-align: left;
-  width: 100%;
-  max-width: 240px;
-
-  li {
-    font-size: 15px; // Increased from 13.5px
-    color: rgba($forest, 0.9);
-    margin-bottom: 14px;
-    display: flex;
-    align-items: flex-start;
-
-    .check {
-      color: $clay;
-      display: flex;
-      align-items: center;
-      margin-right: 12px;
-      margin-top: 2px; // Aligns the lucide icon cleanly with text top line
-    }
-  }
-}
-
-// Elder Banner Section
 .elderBanner {
-  background-color: $forest;
-  color: $white;
-  border-radius: 12px;
-  padding: 40px; // Extra spacing inside banner
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
-
-  @media (min-width: 900px) {
-    flex-direction: row;
-    align-items: center;
-  }
+  background-color: $forest; color: $white; border-radius: 12px; padding: 30px; margin-bottom: 40px; display: flex; flex-direction: column; gap: 20px;
+  @media (min-width: 900px) { flex-direction: row; align-items: center; justify-content: space-between; }
+  h3 { font-size: 24px; color: $white; }
+  p { color: rgba($white, 0.85); margin-top: 8px; }
+  .elderRight { text-align: left; @media (min-width: 900px) { text-align: right; } }
 }
 
-.elderLeft {
-  h3 {
-    font-size: 24px; // Increased from 20px
-    font-weight: 700;
-    margin-bottom: 10px;
-    color: $white;
-  }
-  p {
-    font-size: 15px; // Increased from 13.5px
-    color: rgba($white, 0.85);
-    line-height: 1.6;
-  }
-}
-
-.pillContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 18px;
-
-  @media (min-width: 480px) {
-    flex-direction: row;
-    gap: 10px;
-  }
-}
-
-.pill {
-  background-color: rgba($white, 0.08);
-  border: 1px solid rgba($white, 0.15);
-  font-size: 16px; // Increased from 12px
-  padding: 8px 14px;
-  border-radius: 6px;
-  color: rgba($white, 0.9);
-}
-
-.pillOrange {
-  @extend .pill;
-  background-color: $clay;
-  border-color: $clay;
-  color: $white;
-  font-weight: 600;
-}
-
-.elderRight {
-  margin-top: 25px;
-  border-top: 1px solid rgba($white, 0.15);
-  padding-top: 20px;
-  
-  @media (min-width: 900px) {
-    margin-top: 0;
-    border-top: 0;
-    padding-top: 0;
-    text-align: right;
-    min-width: 200px;
-  }
-
-  .sponsored {
-    font-size: 11px; // Increased from 10px
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: rgba($white, 0.5);
-    display: block;
-    margin-bottom: 4px;
-  }
-
-  .supporter {
-    font-size: 17px; // Increased from 15px
-    font-weight: 500;
-    color: $white;
-  }
-}
-
-// Split Grid Layout (Amenities & Questions)
 .splitGrid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 40px;
-  
-  @media (min-width: 768px) {
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
-  }
-
-  h4 {
-    font-size: 20px; // Increased from 18px
-    font-weight: 700;
-    color: $forest;
-    margin-bottom: 24px;
-  }
+  display: grid; grid-template-columns: 1fr; gap: 40px;
+  @media (min-width: 768px) { grid-template-columns: 1fr 1fr; }
+  h4 { font-size: 20px; margin-bottom: 20px; color: $forest; }
 }
 
 .amenityRow {
-  background-color: $white;
-  border: 1px solid rgba($forest, 0.08);
-  border-radius: 12px;
-  padding: 22px 28px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
-
-  h5 {
-    font-size: 16px; // Increased from 15px
-    font-weight: 700;
-    color: $forest;
-    margin-bottom: 0;
-  }
-  
-  p {
-    font-size: 16px; // Increased from 11px
-    color: rgba($forest, 0.6);
-    margin-top: 4px;
-    margin-bottom: 0;
-  }
-
-  .amenityPrice {
-    font-size: 32px; // Increased from 28px
-    font-weight: 800;
-    color: $clay;
-  }
+  background-color: $white; border: 1px solid rgba($forest, 0.08); padding: 20px; border-radius: 12px;
+  display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;
+  h5 { font-size: 16px; color: $forest; margin: 0; }
+  p { font-size: 14px; color: rgba($forest, 0.6); margin: 0; }
 }
 
 .noticeBar {
-  border-left: 4px solid rgba($forest, 0.2);
-  background-color: $white;
-  padding: 14px 18px;
-  border-radius: 0 8px 8px 0;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 16px; // Increased from 12px
-  color: rgba($forest, 0.8);
-
-  .noticeIcon {
-    display: flex;
-    align-items: center;
-    color: $clay;
-  }
+  background: $white; padding: 14px; border-radius: 8px; border-left: 4px solid $clay;
+  display: flex; align-items: center; gap: 10px; font-size: 14px; color: $forest;
 }
 
 .faqBlock {
-  margin-bottom: 28px;
-
-  h5 {
-    font-size: 16px; // Increased from 14px
-    font-weight: 700;
-    color: $forest;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: flex-start;
-
-    .icon {
-      margin-right: 10px;
-      margin-top: 2px; // Centers Lucide cleanly next to headline text
-      color: rgba($forest, 0.6);
-      display: flex;
-      align-items: center;
-    }
-  }
-
-  p {
-    font-size: 16px;
-    color: rgba($forest, 0.75);
-    line-height: 1.6;
-    padding-left: 28px;
-    margin-bottom: 0;
-  }
-
-  .alertText {
-    display: block;
-    margin-top: 6px;
-    font-weight: 600;
-    color: darken($clay, 5%);
-  }
+  margin-bottom: 20px;
+  h5 { font-size: 16px; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+  p { font-size: 14px; color: rgba($forest, 0.7); padding-left: 26px; }
 }
+
+.checklist { list-style-type: none; padding: 0; margin: 10px 0; text-align: left; li { margin-bottom: 6px; font-size: 14px; color: rgba($forest, 0.8); display: flex; gap: 8px; } }
