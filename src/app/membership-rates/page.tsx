@@ -19,7 +19,6 @@ const MEMBERSHIPS_CONTENT = {
     title: "Eternal Flame Memberships",
     cards: [
       { tag: "Premium Commitment", title: "Full Membership", cardPrice: "$124.80", cashPrice: "$120", period: "/ month", checklist: ["Unlimited Classes", "1 Sound Journey per month", "Unlimited Sauna & Cave Shower", "Greenhouse Privileges & Free Ice"] },
-      { tag: "Cash Discount", title: "Cash Membership", cardPrice: "$124.80", cashPrice: "$120", period: "/ month", description: "Save $4 every month when paying with Cash or Check." },
       { tag: "Limited Time", title: "Soft Opening Special", cardPrice: "$104.00", cashPrice: "$100", period: "/ month", description: "June 15th through the week of Grand Opening Only!", badge: "$100 Grand Opening Special" }
     ]
   },
@@ -49,7 +48,7 @@ const MEMBERSHIPS_CONTENT = {
     title: "Common Questions",
     list: [
       { icon: <HelpCircle size={18} />, question: "How do I register?", answer: "Just arrive 15-20 minutes early." },
-      { icon: <CreditCard size={18} />, question: "How do I pay?", answer: "We accept Credit Card, Venmo, Check, and Cash." },
+      { icon: <CreditCard size={18} />, question: "How do I pay?", answer: "We accept Credit Card, Check, and Cash." },
       { icon: <Heart size={18} />, question: "Bring anything?", answer: "An open heart." }
     ]
   }
@@ -62,7 +61,7 @@ export default function MembershipsRatesPage() {
     <div className={s.priceWrapper}>
       <div className={s.priceComparison}>
         {cardPrice === "Free" ? (
-          <span className={s.priceCash}>Free</span>
+          <span className={`${s.priceCash} ${s.free}`}>Free</span>
         ) : (
           <>
             <div className={s.priceBlock}>

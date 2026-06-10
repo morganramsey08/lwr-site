@@ -62,3 +62,9 @@
 }
 
 .checklist { list-style-type: none; padding: 0; margin: 10px 0; text-align: left; li { margin-bottom: 6px; font-size: 14px; color: rgba($forest, 0.8); display: flex; gap: 8px; } }
+
+.free {
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: $clay;
+}
