@@ -1,0 +1,123 @@
+@import '../../../styles/variables';
+
+.pageWrapper {
+  background-color: $forest; // Uses your global variable if imported, or use #f9f7f2
+  min-height: 100vh;
+  
+  // This is the magic fix! Pushes everything down below the transparent header
+  padding-top: 140px; 
+  padding-bottom: 80px;
+}
+
+.container {
+  max-width: 900px; // Keeps the list from stretching too wide on big screens
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.header {
+  margin-bottom: 40px;
+  text-align: left;
+  
+  .adminLabel {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: rgba($white, 0.6); // Or #2d3e2f
+    font-weight: 600;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  h1 {
+    font-size: 36px;
+    font-weight: 700;
+    color: $white;
+    margin: 0 0 12px 0;
+  }
+
+  p {
+    font-size: 16px;
+    color: rgba($white, 0.7);
+    margin: 0;
+  }
+}
+
+.eventList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.eventRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $white;
+  border: 1px solid rgba($white, 0.08);
+  border-radius: 8px;
+  padding: 20px 24px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba($white, 0.06);
+    border-color: rgba($clay, 0.4);
+
+    .chevron {
+      color: $clay;
+      transform: translateX(4px);
+    }
+  }
+}
+
+.eventInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: $forest;
+    margin: 0;
+  }
+}
+
+.eventMeta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.dateTag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: rgba($forest, 0.6);
+  font-weight: 500;
+}
+
+.specialTag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  background-color: rgba($clay, 0.1);
+  color: darken($clay, 10%);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.chevron {
+  color: rgba($forest, 0.3);
+  transition: all 0.2s ease;
+}

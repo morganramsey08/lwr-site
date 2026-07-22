@@ -1,10 +1,12 @@
 @import '../../../../styles/variables';
 
 .pageWrapper {
-  background-color: $linen;
+  background-color: $forest; // Updated to match your dark forest background
   min-height: 100vh;
-  padding: 80px 20px;
-  color: $forest;
+  
+  // The magic fix: top padding for the transparent header
+  padding: 140px 20px 80px; 
+  color: $white; // Default text to white for the header area
 }
 
 .container {
@@ -16,7 +18,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: rgba($forest, 0.6);
+  color: rgba($white, 0.6); // Updated to white to show on dark background
   font-size: 14px;
   text-decoration: none;
   margin-bottom: 30px;
@@ -33,20 +35,21 @@
   align-items: flex-end;
   margin-bottom: 40px;
   padding-bottom: 20px;
-  border-bottom: 2px solid rgba($forest, 0.1);
+  border-bottom: 2px solid rgba($white, 0.1); // Updated to white border
 
   .adminLabel {
     display: inline-block;
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: $clay;
+    color: rgba($white, 0.6); // Matches the new styling from your first file
     font-weight: 700;
     margin-bottom: 8px;
   }
 
   h1 {
     font-size: 32px;
+    color: $white; // Updated to white
     margin: 0;
   }
 }
@@ -55,8 +58,8 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background-color: rgba($clay, 0.15);
-  color: darken($clay, 10%);
+  background-color: rgba($clay, 0.2); 
+  color: $clay; // Removed the 'darken' so it remains legible against the dark background
   padding: 8px 16px;
   border-radius: 20px;
   font-weight: 600;
@@ -68,6 +71,7 @@
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
   overflow: hidden;
+  color: $forest; // Ensures all text inside the white table stays dark!
 }
 
 .emptyState {

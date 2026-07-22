@@ -62,8 +62,8 @@ export default async function AdminEventRegistrantsPage({
   return (
     <div className={s.pageWrapper}>
       <div className={s.container}>
-        <Link href="/offerings" className={s.backLink}>
-          <ChevronLeft size={16} /> Back to Public Calendar
+        <Link href="/admin/events" className={s.backLink}>
+          <ChevronLeft size={16} /> Back to Special Events
         </Link>
 
         <header className={s.header}>

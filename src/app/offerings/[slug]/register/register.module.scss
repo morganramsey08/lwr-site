@@ -2,30 +2,34 @@
 @import '../../../../styles/variables';
 
 .pageWrapper {
-  background-color: $linen;
+  background-color: $forest; // Dark forest background
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 60px 20px;
-  color: $forest;
+  
+  // Pushes the form down so it doesn't collide with your transparent global header
+  padding: 140px 20px 60px; 
+  color: $white; // Defaults text to white
 }
 
 .formContainer {
-  background-color: $white;
-  border: 1px solid rgba($forest, 0.08);
+  // Creates a beautiful translucent dark card
+  background-color: rgba($white, 0.03); 
+  border: 1px solid rgba($white, 0.1);
   border-radius: 12px;
   padding: 40px;
   width: 100%;
   max-width: 500px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px); // Subtle glass effect if supported
 
   h1 {
     font-size: 28px;
     font-weight: 700;
     margin-bottom: 30px;
     text-align: center;
-    color: $forest;
+    color: $white; // Updated to white
   }
 }
 
@@ -35,7 +39,7 @@
   gap: 6px;
   font-size: 14px;
   font-weight: 600;
-  color: rgba($forest, 0.6);
+  color: rgba($white, 0.6); // Updated to translucent white
   margin-bottom: 24px;
   text-decoration: none;
   transition: color 0.2s ease;
@@ -59,28 +63,28 @@
   label {
     font-size: 14px;
     font-weight: 600;
-    color: $forest;
+    color: rgba($white, 0.9); // Updated to white
   }
 
   input {
     padding: 14px 16px;
-    border: 1px solid rgba($forest, 0.15);
+    border: 1px solid rgba($white, 0.15); // Lighter border for dark mode
     border-radius: 8px;
     font-size: 16px;
     font-family: inherit;
-    color: $forest;
-    background-color: rgba($linen, 0.5);
+    color: $white; // White text inside inputs
+    background-color: rgba($white, 0.05); // Dark inputs
     transition: all 0.2s ease;
 
     &::placeholder {
-      color: rgba($forest, 0.3);
+      color: rgba($white, 0.3); // Visible but subtle placeholders
     }
 
     &:focus {
       outline: none;
       border-color: $clay;
-      background-color: $white;
-      box-shadow: 0 0 0 3px rgba($clay, 0.1);
+      background-color: rgba($white, 0.1); // Brightens slightly on focus
+      box-shadow: 0 0 0 3px rgba($clay, 0.15);
     }
   }
 }
@@ -115,5 +119,43 @@
 
   h3 {
     font-size: 24px;
+    color: $white; // Updated to white
+    margin-bottom: 12px;
   }
+
+  p {
+    font-size: 16px;
+    color: rgba($white, 0.8); // Updated to translucent white
+    line-height: 1.6;
+    margin-bottom: 30px;
+  }
+}
+
+.primaryBtn {
+  display: inline-block;
+  background-color: $clay;
+  color: $white;
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+
+  &:hover {
+    background-color: darken($clay, 5%);
+    transform: translateY(-1px);
+  }
+}
+
+.errorText {
+  color: #ff8a8a; // Brightened the red so it reads well on a dark background
+  font-size: 14px;
+  font-weight: 500;
+  background-color: rgba(#ff8a8a, 0.1); // Translucent red background
+  padding: 12px 16px;
+  border-radius: 8px;
+  border-left: 3px solid #ff8a8a;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
