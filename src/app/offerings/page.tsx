@@ -7,6 +7,8 @@ import EventsCalendar from "@/components/Events/EventCalendar";
 import Newsletter from "@/components/Newsletter/Newsletter";
 import styles from "./Events.module.scss";
 import CommunityCTA from "@/components/CommunityCTA/CommunityCTA";
+import Link from "next/link";
+import { Sparkles, ArrowRight } from "lucide-react";
 
 export const revalidate = 0;
 export const dynamic = 'force-dynamic';
@@ -38,7 +40,7 @@ export default async function EventsPage() {
   const page = data?.page;
   const rawEvents = data?.events?.nodes || [];
 
-  // --- NEW LOGIC: Calculate Next Instances & 4-Week Window ---
+  // --- Calculate Next Instances & 4-Week Window ---
   const today = new Date();
   today.setHours(0, 0, 0, 0); // Reset time to midnight for accurate day comparison
   
@@ -52,7 +54,7 @@ export default async function EventsPage() {
     const isRepeating = rawRepeat && rawRepeat.toLowerCase() !== "none";
 
     if (!isRepeating) {
-      // For single events, just check if they fall in our 4-week window
+      // For single events, check if they fall in our 4-week window
       if (startDate >= today && startDate <= fourWeeksFromNow) {
         acc.push({ ...event, displayDate: details.eventDate });
       }
@@ -63,14 +65,11 @@ export default async function EventsPage() {
       if (endDate >= today) {
         let nextDate = new Date(startDate);
         
-        // Fast-forward to the next upcoming date (assuming weekly repeats)
         while (nextDate < today && nextDate <= endDate) {
           nextDate.setDate(nextDate.getDate() + 7);
         }
 
-        // If that next occurrence is within 4 weeks, add it to the sidebar
         if (nextDate >= today && nextDate <= fourWeeksFromNow && nextDate <= endDate) {
-          // Format back to YYYY-MM-DD for the EventCard to consume
           const displayDateStr = nextDate.toISOString().split('T')[0];
           acc.push({ ...event, displayDate: displayDateStr });
         }
@@ -80,8 +79,7 @@ export default async function EventsPage() {
   }, []);
 
   // Sort chronologically based on the newly calculated display dates
-const sortedUpcomingEvents = processedEvents.sort((a, b) => {
-    // Helper to convert time string (e.g., "10:30 am") to minutes since midnight
+  const sortedUpcomingEvents = processedEvents.sort((a, b) => {
     const timeToMinutes = (timeStr?: string) => {
       if (!timeStr) return 0;
       const [time, modifier] = timeStr.split(' ');
@@ -91,8 +89,8 @@ const sortedUpcomingEvents = processedEvents.sort((a, b) => {
       return hours * 60 + minutes;
     };
 
-    const dateA = parseWPDate(a.displayDate).getTime() + (timeToMinutes(a.eventDetails.startTime) * 60000);
-    const dateB = parseWPDate(b.displayDate).getTime() + (timeToMinutes(b.eventDetails.startTime) * 60000);
+    const dateA = parseWPDate(a.displayDate).getTime() + (timeToMinutes(a.eventDetails?.startTime) * 60000);
+    const dateB = parseWPDate(b.displayDate).getTime() + (timeToMinutes(b.eventDetails?.startTime) * 60000);
 
     return dateA - dateB;
   });
@@ -114,15 +112,28 @@ const sortedUpcomingEvents = processedEvents.sort((a, b) => {
 
         <div className={styles.eventsLayout}>
           <div className={styles.calendarContainer}>
-            {/* The calendar still gets the raw events to handle its own complex rendering */}
+            {/* Full calendar view */}
             <EventsCalendar events={rawEvents} />
           </div>
 
           <section className={styles.upcomingSection}>
+            {/* SPECIAL EVENTS CALLOUT BANNER */}
+            <div className={styles.specialEventsCta}>
+              <div className={styles.ctaHeader}>
+                <Sparkles className={styles.sparkleIcon} size={20} />
+                <span>Featured Experiences</span>
+              </div>
+              <h4>Looking for Special Events & Workshops?</h4>
+              <p>Explore our upcoming sound journeys, special workshops, and guest practitioner sessions with online registration.</p>
+              <Link href="/special-events" className={styles.ctaButton}>
+                <span>View Special Events</span>
+                <ArrowRight size={16} />
+              </Link>
+            </div>
+
             <h3>Upcoming Offerings</h3>
             {sortedUpcomingEvents.length > 0 ? (
               sortedUpcomingEvents.map((event: any, index: number) => {
-                // Pass the calculated 'displayDate' into the card by temporarily overriding eventDate
                 const eventForCard = {
                   ...event,
                   eventDetails: { ...event.eventDetails, eventDate: event.displayDate }
