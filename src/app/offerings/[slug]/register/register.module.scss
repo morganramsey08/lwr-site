@@ -159,3 +159,20 @@
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+.feeNotice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba($clay, 0.1); // Or rgba(#c58d3e, 0.1)
+  color: $white; // Or #2d3e2f
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.4;
+
+  svg {
+    flex-shrink: 0;
+    color: $clay;
+  }
+}
