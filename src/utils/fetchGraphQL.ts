@@ -8,6 +8,17 @@ export async function fetchGraphQL<T = any>(
   // Unwrapped draftMode promise for Next.js dynamic API updates
   const { isEnabled: preview } = await draftMode();
 
+  // Safe fallback to check both environment variable naming conventions
+  const wpUrl = 
+    process.env.NEXT_PUBLIC_WORDPRESS_URL || 
+    process.env.NEXT_PUBLIC_WORDPRESS_API_URL;
+
+  if (!wpUrl) {
+    throw new Error(
+      "Missing WordPress URL environment variable! Please ensure NEXT_PUBLIC_WORDPRESS_URL is set in your .env.local file."
+    );
+  }
+
   try {
     let authHeader = "";
     if (preview) {
@@ -28,7 +39,7 @@ export async function fetchGraphQL<T = any>(
     });
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/graphql`,
+      `${wpUrl}/graphql`,
       {
         method: "POST",
         headers: {

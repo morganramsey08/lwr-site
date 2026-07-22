@@ -1,0 +1,125 @@
+@import '../../../../styles/variables';
+
+.pageWrapper {
+  background-color: $linen;
+  min-height: 100vh;
+  padding: 80px 20px;
+  color: $forest;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba($forest, 0.6);
+  font-size: 14px;
+  text-decoration: none;
+  margin-bottom: 30px;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $clay;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid rgba($forest, 0.1);
+
+  .adminLabel {
+    display: inline-block;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: $clay;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  h1 {
+    font-size: 32px;
+    margin: 0;
+  }
+}
+
+.statsBadge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba($clay, 0.15);
+  color: darken($clay, 10%);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.tableContainer {
+  background: $white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.emptyState {
+  padding: 60px 20px;
+  text-align: center;
+  color: rgba($forest, 0.6);
+  font-size: 16px;
+}
+
+.registrantTable {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+
+  th, td {
+    padding: 16px 24px;
+    border-bottom: 1px solid rgba($forest, 0.05);
+  }
+
+  th {
+    background-color: rgba($forest, 0.02);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba($forest, 0.5);
+    font-weight: 600;
+  }
+
+  td {
+    font-size: 15px;
+    
+    a {
+      color: $clay;
+      text-decoration: none;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .nameCell {
+    font-weight: 600;
+    color: $forest;
+  }
+  
+  .dateCell {
+    color: rgba($forest, 0.6);
+    font-size: 14px;
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+}

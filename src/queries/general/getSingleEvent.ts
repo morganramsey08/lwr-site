@@ -19,6 +19,10 @@ export const GetSingleEventQuery = `
         locationName
         price
         bringItems
+        isSpecialEvent
+      }
+      registrantsData {
+        registrantsData
       }
     }
   }

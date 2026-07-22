@@ -5,7 +5,7 @@ import Hero from "@/components/Hero/Hero";
 import Link from "next/link";
 import s from "./eventSingle.module.scss";
 
-import { ChevronLeft, Calendar, MapPin, Plus, Award, Heart, Leaf, Users } from 'lucide-react';
+import { ChevronLeft, Calendar, MapPin, Plus, Award, Heart, Leaf, Users, Ticket } from 'lucide-react';
 
 interface PageParams {
   params: Promise<{ slug: string; }>;
@@ -22,6 +22,10 @@ interface CalendarEvent {
     shortDescription?: string;
     eventCategory?: string;
     bringItems?: string;
+    isSpecialEvent?: boolean; 
+  };
+  registrantsData?: {
+    registrantsData?: string;
   };
 }
 
@@ -46,7 +50,37 @@ export default async function SingleEventPage({ params }: PageParams) {
 
   const { title, content, featuredImage, eventDetails } = event;
 
-  // Logic for dynamic "What to bring" list using bringItems
+  // ==========================================
+  // CAPACITY & REGISTRANT MATH
+  // ==========================================
+  const rawJson = event.registrantsData?.registrantsData;
+  let registeredCount = 0;
+  
+  if (rawJson) {
+    try {
+      const parsedArray = JSON.parse(rawJson);
+      registeredCount = Array.isArray(parsedArray) ? parsedArray.length : 0;
+    } catch(e) {
+      console.error("Failed to parse registrants on single event page:", e);
+    }
+  }
+
+  const capacityStr = eventDetails?.capacityText;
+  let maxCapacity = NaN;
+  let spotsRemaining = 0;
+  let isFull = false;
+
+  if (capacityStr) {
+    maxCapacity = parseInt(capacityStr, 10);
+    if (!isNaN(maxCapacity)) {
+      spotsRemaining = Math.max(0, maxCapacity - registeredCount);
+      isFull = spotsRemaining === 0;
+    }
+  }
+
+  // ==========================================
+  // GENERAL DATA FORMATTING
+  // ==========================================
   const bringText = eventDetails?.bringItems || "";
   const dynamicItems = bringText.split('\n').filter((item: string) => item.trim() !== "");
   const defaultList = ["Comfortable clothing", "A reusable water bottle", "Journal (optional)", "An open heart"];
@@ -64,10 +98,10 @@ export default async function SingleEventPage({ params }: PageParams) {
   const timeStr = eventDetails?.startTime || "Time Pending";
   const locationStr = eventDetails?.locationName || "";
   const facilitatorName = eventDetails?.facilitatorName || "";
-  const capacityStr = eventDetails?.capacityText;
   const priceVal = eventDetails?.price || ""; 
   const heroBackground = featuredImage?.node?.sourceUrl || "/img/homepage-hero.jpg";
   const plainTextDescription = eventDetails?.shortDescription ? eventDetails.shortDescription.replace(/<[^>]*>/g, '') : "Join us in our garden sanctuary for a transformative experience.";
+  const isSpecial = eventDetails?.isSpecialEvent === true || eventDetails?.isSpecialEvent === "1";
 
   const categoryMap: Record<string, { label: string; icon: React.ReactNode }> = {
     meditation: { label: "Meditation & Mindfulness", icon: <Leaf size={18} className={s.icon} /> },
@@ -140,7 +174,7 @@ export default async function SingleEventPage({ params }: PageParams) {
                 {capacityStr && (
                   <span className={s.spotsBadge}>
                     <Users size={12} style={{ display: 'inline', marginRight: '4px', verticalAlign: 'middle' }} />
-                    {capacityStr}
+                    {capacityStr} {!isNaN(maxCapacity) && <span>({spotsRemaining} spots left)</span>}
                   </span>
                 )}
                 <div className={s.priceContainer}>
@@ -153,6 +187,23 @@ export default async function SingleEventPage({ params }: PageParams) {
                 <div className={s.detailRowItem}><Calendar className={s.icon} size={18} /><span>{dateStr} · {timeStr}</span></div>
                 <div className={s.detailRowItem}><MapPin className={s.icon} size={18} /><span>{locationStr}</span></div>
               </div>
+
+              {/* Conditional Registration Button for Special Events */}
+              {isSpecial && (
+                isFull ? (
+                  <span 
+                    className={s.registerActionBtn} 
+                    style={{ opacity: 0.6, cursor: 'not-allowed', backgroundColor: '#888', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
+                  >
+                    <Ticket size={18} /> Event Full
+                  </span>
+                ) : (
+                  <Link href={`/offerings/${slug}/register`} className={s.registerActionBtn}>
+                    <Ticket size={18} /> Register for Event
+                  </Link>
+                )
+              )}
+
               <a href={icsDownloadUrl} download={`${slug}-event.ics`} className={s.calendarButton}>
                 <Plus size={18} /> Add to Calendar
               </a>

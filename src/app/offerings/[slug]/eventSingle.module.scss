@@ -236,6 +236,29 @@
   }
 }
 
+.registerActionBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px;
+  background-color: var(--color-primary, $forest); // Matches your theme variables/clay color
+  color: $white;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+  text-decoration: none;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    background-color: darken($forest, 4%);
+  }
+}
+
 .memberNotice {
   display: flex;
   align-items: center;

@@ -1,0 +1,119 @@
+// Adjust the relative path to your variables file depending on your exact folder structure
+@import '../../../../styles/variables';
+
+.pageWrapper {
+  background-color: $linen;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  color: $forest;
+}
+
+.formContainer {
+  background-color: $white;
+  border: 1px solid rgba($forest, 0.08);
+  border-radius: 12px;
+  padding: 40px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-align: center;
+    color: $forest;
+  }
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba($forest, 0.6);
+  margin-bottom: 24px;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $clay;
+  }
+}
+
+.registerForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  label {
+    font-size: 14px;
+    font-weight: 600;
+    color: $forest;
+  }
+
+  input {
+    padding: 14px 16px;
+    border: 1px solid rgba($forest, 0.15);
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: inherit;
+    color: $forest;
+    background-color: rgba($linen, 0.5);
+    transition: all 0.2s ease;
+
+    &::placeholder {
+      color: rgba($forest, 0.3);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $clay;
+      background-color: $white;
+      box-shadow: 0 0 0 3px rgba($clay, 0.1);
+    }
+  }
+}
+
+.submitBtn {
+  background-color: $clay;
+  color: $white;
+  padding: 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  margin-top: 10px;
+
+  &:hover:not(:disabled) {
+    background-color: darken($clay, 5%);
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}
+
+.successBox {
+  text-align: center;
+  padding: 20px 0;
+
+  h3 {
+    font-size: 24px;
+  }
+}
