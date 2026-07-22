@@ -47,7 +47,6 @@ const MEMBERSHIPS_CONTENT = {
   faqs: {
     title: "Common Questions",
     list: [
-      { icon: <HelpCircle size={18} />, question: "How do I register?", answer: "Just arrive 15-20 minutes early." },
       { icon: <CreditCard size={18} />, question: "How do I pay?", answer: "We accept Credit Card, Check, and Cash." },
       { icon: <Heart size={18} />, question: "Bring anything?", answer: "An open heart." }
     ]

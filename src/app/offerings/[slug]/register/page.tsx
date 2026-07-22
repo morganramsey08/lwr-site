@@ -91,7 +91,7 @@ export default function EventRegisterPage() {
             {/* Disclosure Note for Card Fee */}
             <div className={s.feeNotice}>
               <Info size={16} />
-              <span>Note: Online card registrations include a 4% processing surcharge.</span>
+              <span>Note: Online card registrations include a 4% processing fee.</span>
             </div>
 
             {status === 'error' && <p className={s.errorText}>{errorMessage}</p>}
