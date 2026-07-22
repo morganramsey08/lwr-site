@@ -77,15 +77,17 @@ export async function POST(request: Request) {
     if (!updateRes.ok) throw new Error('Failed to save registration to WordPress');
 
     // ==========================================
-    // 6. DYNAMIC PRICE PARSING & VALOR INTEGRATION
+    // 6. DYNAMIC PRICE PARSING + 4% FEE & VALOR INTEGRATION
     // ==========================================
-    // Grab the ACF price field (e.g., "$25", "25.00", or "25")
     const rawPriceString = currentMeta.price || '';
     
-    // Strip out dollar signs or letters so we get a clean float
-    const cleanPriceNumber = parseFloat(rawPriceString.replace(/[^0-9.]/g, '')) || 0;
+    // Clean string down to numbers/decimals
+    const basePrice = parseFloat(rawPriceString.replace(/[^0-9.]/g, '')) || 0;
 
-    if (cleanPriceNumber > 0) {
+    if (basePrice > 0) {
+      // Add 4% surcharge and round to two decimal places
+      const priceWithFee = parseFloat((basePrice * 1.04).toFixed(2));
+
       const valorResponse = await fetch('https://securelink.valorpaytech.com/?pagesale=', {
         method: 'POST',
         headers: { 
@@ -98,7 +100,7 @@ export async function POST(request: Request) {
           epi: process.env.VALOR_EPI,
           txn_type: 'sale',
           epage: 1,
-          amount: cleanPriceNumber, // Pass the sanitized dynamic price here!
+          amount: priceWithFee, // Sent with 4% fee added!
           customer_name: name,
           email: email,
           phone: phone ? phone.replace(/\D/g, '') : '', 
