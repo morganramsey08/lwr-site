@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import { ChevronLeft, Ticket } from 'lucide-react';
+import { ChevronLeft } from 'lucide-react';
 import s from './register.module.scss';
 
 export default function EventRegisterPage() {
@@ -21,12 +21,20 @@ export default function EventRegisterPage() {
       const res = await fetch('/api/register-event', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        // The API route now automatically fetches the dynamic ACF price from WordPress
         body: JSON.stringify({ slug, ...formData }),
       });
 
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || 'Registration failed');
 
+      // If the backend generated a Valor PayNow URL, redirect the user instantly!
+      if (data.redirectUrl) {
+        window.location.href = data.redirectUrl;
+        return;
+      }
+
+      // If it's a free event, show the standard success screen
       setStatus('success');
     } catch (err: any) {
       setStatus('error');

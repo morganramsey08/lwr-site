@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
   try {
+    // 1. Grab form inputs
     const { slug, name, email, phone } = await request.json();
 
     if (!email || !slug || !name) {
@@ -16,37 +17,28 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: 'Server configuration error' }, { status: 500 });
     }
 
-    // 1. Fetch the event post ID by slug
+    // 2. Fetch event details from WordPress
     const postRes = await fetch(`${wpUrl}/wp-json/wp/v2/events?slug=${slug}`);
     const posts = await postRes.json();
-
-    if (!posts || posts.length === 0) {
-      return NextResponse.json({ message: 'Event not found' }, { status: 404 });
-    }
+    if (!posts || posts.length === 0) throw new Error('Event not found');
 
     const postId = posts[0].id;
     const currentMeta = posts[0].acf || {};
     
-    // 2. Parse the existing JSON string from the Text Area (fallback to empty array if blank)
+    // Parse existing registrants
     let existingRegistrants: any[] = [];
     if (currentMeta.event_registrants_json) {
-      try {
-        existingRegistrants = JSON.parse(currentMeta.event_registrants_json);
-      } catch (e) {
-        console.error("Failed to parse existing registrants, starting fresh.", e);
+      try { 
+        existingRegistrants = JSON.parse(currentMeta.event_registrants_json); 
+      } catch (e) { 
+        console.error("Failed to parse existing registrants JSON:", e); 
       }
     }
 
-    // ==========================================
-    // 3. THE CAPACITY CHECK
-    // ==========================================
-    const rawCapacity = currentMeta.capacity_text; 
-    
+    // 3. CAPACITY CHECK
+    const rawCapacity = currentMeta.capacity_text;
     if (rawCapacity) {
-      // Convert the ACF field to a JavaScript integer
       const maxCapacity = parseInt(rawCapacity, 10);
-      
-      // If parsing succeeded and the array is full, block registration
       if (!isNaN(maxCapacity) && existingRegistrants.length >= maxCapacity) {
         return NextResponse.json(
           { message: 'Sorry, this event has reached full capacity!' }, 
@@ -55,35 +47,85 @@ export async function POST(request: Request) {
       }
     }
 
-    // 4. Append the new registrant
+    // 4. Append new registrant as UNPAID
     const updatedRegistrants = [
       ...existingRegistrants,
-      { name, email, phone: phone || '', registeredAt: new Date().toISOString() }
+      { 
+        name, 
+        email, 
+        phone: phone || '', 
+        paymentStatus: 'Unpaid', 
+        registeredAt: new Date().toISOString() 
+      }
     ];
 
-    // 5. Convert back to a JSON string and update WordPress
+    // 5. Save registration to WordPress database
     const updateRes = await fetch(`${wpUrl}/wp-json/wp/v2/events/${postId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Basic ' + Buffer.from(`${username}:${appPassword}`).toString('base64')
       },
-      body: JSON.stringify({
-        acf: {
-          ...currentMeta,
-          event_registrants_json: JSON.stringify(updatedRegistrants) // Save as string
-        }
+      body: JSON.stringify({ 
+        acf: { 
+          ...currentMeta, 
+          event_registrants_json: JSON.stringify(updatedRegistrants) 
+        } 
       })
     });
 
-    if (!updateRes.ok) {
-      const errorData = await updateRes.json();
-      throw new Error(errorData.message || 'Failed to save to WordPress');
+    if (!updateRes.ok) throw new Error('Failed to save registration to WordPress');
+
+    // ==========================================
+    // 6. DYNAMIC PRICE PARSING & VALOR INTEGRATION
+    // ==========================================
+    // Grab the ACF price field (e.g., "$25", "25.00", or "25")
+    const rawPriceString = currentMeta.price || '';
+    
+    // Strip out dollar signs or letters so we get a clean float
+    const cleanPriceNumber = parseFloat(rawPriceString.replace(/[^0-9.]/g, '')) || 0;
+
+    if (cleanPriceNumber > 0) {
+      const valorResponse = await fetch('https://securelink.valorpaytech.com/?pagesale=', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          appid: process.env.VALOR_APP_ID,
+          appkey: process.env.VALOR_APP_KEY,
+          epi: process.env.VALOR_EPI,
+          txn_type: 'sale',
+          epage: 1,
+          amount: cleanPriceNumber, // Pass the sanitized dynamic price here!
+          customer_name: name,
+          email: email,
+          phone: phone ? phone.replace(/\D/g, '') : '', 
+          shipping_country: 'US',
+          success_url: `https://www.lightworkerranch.com/offerings/${slug}?payment=success`,
+          failure_url: `https://www.lightworkerranch.com/offerings/${slug}?payment=failed`
+        })
+      });
+
+      const valorData = await valorResponse.json();
+      console.log("VALOR API RESPONSE:", valorData);
+
+      const checkoutUrl = valorData?.paynow_url || valorData?.url || valorData?.redirect_url;
+
+      if (checkoutUrl) {
+        return NextResponse.json({ success: true, redirectUrl: checkoutUrl });
+      } else {
+        const errorDetails = valorData?.message || valorData?.error || JSON.stringify(valorData);
+        throw new Error(`Valor error: ${errorDetails}`);
+      }
     }
 
-    return NextResponse.json({ success: true });
+    // Free event fallback
+    return NextResponse.json({ success: true, redirectUrl: null });
+
   } catch (error: any) {
-    console.error('Registration error:', error);
+    console.error('Registration/Payment error:', error);
     return NextResponse.json({ message: error.message || 'Server error' }, { status: 500 });
   }
 }

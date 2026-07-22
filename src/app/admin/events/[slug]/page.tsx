@@ -1,10 +1,18 @@
 import { fetchGraphQL } from "@/utils/fetchGraphQL";
 import Link from "next/link";
-import { ChevronLeft, Users } from "lucide-react";
+import { ChevronLeft, Users, CheckCircle, Clock } from "lucide-react";
 import s from "./admin.module.scss";
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
+
+interface Registrant {
+  name: string;
+  email: string;
+  phone?: string;
+  paymentStatus?: 'Paid' | 'Unpaid' | string;
+  registeredAt?: string;
+}
 
 export default async function AdminEventRegistrantsPage({
   params,
@@ -44,12 +52,7 @@ export default async function AdminEventRegistrantsPage({
   // Extract raw JSON string from registrantsData wrapper
   const rawJson = event.registrantsData?.registrantsData;
 
-  let registrants: Array<{
-    name: string;
-    email: string;
-    phone?: string;
-    registeredAt?: string;
-  }> = [];
+  let registrants: Registrant[] = [];
 
   if (rawJson) {
     try {
@@ -89,31 +92,49 @@ export default async function AdminEventRegistrantsPage({
                   <th>Name</th>
                   <th>Email</th>
                   <th>Phone</th>
+                  <th>Status</th>
                   <th>Registration Date</th>
                 </tr>
               </thead>
               <tbody>
-                {registrants.map((person, index) => (
-                  <tr key={index}>
-                    <td className={s.nameCell}>{person.name}</td>
-                    <td>
-                      <a href={`mailto:${person.email}`}>{person.email}</a>
-                    </td>
-                    <td>{person.phone || "—"}</td>
-                    <td className={s.dateCell}>
-                      {person.registeredAt
-                        ? new Date(person.registeredAt).toLocaleDateString(
-                            "en-US",
-                            {
-                              month: "short",
-                              day: "numeric",
-                              year: "numeric",
-                            }
-                          )
-                        : "—"}
-                    </td>
-                  </tr>
-                ))}
+                {registrants.map((person, index) => {
+                  const isPaid = person.paymentStatus === 'Paid';
+                  
+                  return (
+                    <tr key={index}>
+                      <td className={s.nameCell}>{person.name}</td>
+                      <td>
+                        <a href={`mailto:${person.email}`}>{person.email}</a>
+                      </td>
+                      <td>{person.phone || "—"}</td>
+                      <td>
+                        <span className={isPaid ? s.paidBadge : s.unpaidBadge}>
+                          {isPaid ? (
+                            <>
+                              <CheckCircle size={13} /> Paid
+                            </>
+                          ) : (
+                            <>
+                              <Clock size={13} /> Unpaid
+                            </>
+                          )}
+                        </span>
+                      </td>
+                      <td className={s.dateCell}>
+                        {person.registeredAt
+                          ? new Date(person.registeredAt).toLocaleDateString(
+                              "en-US",
+                              {
+                                month: "short",
+                                day: "numeric",
+                                year: "numeric",
+                              }
+                            )
+                          : "—"}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           )}
