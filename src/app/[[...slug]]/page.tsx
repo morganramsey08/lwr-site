@@ -41,7 +41,7 @@ try {
           <p className="bannerContent" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
             <span className="bannerBadge">Construction on County Road 1260 in progress.  </span>
             <span style={{ textAlign: 'center', lineHeight: '1.5' }}>
-              LWR classes on pause tentatively until Monday August 3rd. Water Yoga Pop-Ups will carry on during this time.
+              LWR classes on pause tentatively until Tuesday August 11th. Water Yoga Pop-Ups will carry on during this time.
             </span>
           </p>
         </div>
