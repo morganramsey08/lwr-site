@@ -25,16 +25,17 @@ const MEMBERSHIPS_CONTENT = {
   waterYoga: {
     title: "Water Yoga",
     cards: [
-      { tag: "Community Offering", title: "Sizzling Seniors Free Water Wellness", cardPrice: "Free", cashPrice: "Free", period: "/ Thursdays 10:30am", checklist: ["Thanks to local light sponsors", "First Class June 4th", "Quitman City Pool"] },
-      { tag: "Drop-In", title: "Lands Zen Water Yoga Drop-In", cardPrice: "$20.80", cashPrice: "$20", period: "/ Drop-In", description: "The Links at Lands End Pool, 285 Private Road 5980 Yantis, TX", checklist: ["Tuesdays 10:30 A.M.", "The Links at Lands End Pool"] },
-      { tag: "Series Deal", title: "10 Week Series at Lands Zen Water Yoga", cardPrice: "$124.80", cashPrice: "$120", period: "/ 10 Week Series", description: "The Links at Lands End Pool, 285 Private Road 5980 Yantis, TX", checklist: ["Series Special in session.", "Tuesdays 10:30 A.M.", "Rain outs made up", "New Series special coming in August"] }
+      { tag: "Community Offering", title: "Sizzling Seniors Free Water Wellness", cardPrice: "Free", cashPrice: "Free", period: "/ Thursdays 10:30am", checklist: ["Final Class August 6th", "Thanks to local light sponsors", "Quitman City Pool", "2026 QCP Water Season Complete", "See ya'll next year!"] },
+      { tag: "Drop-In", title: "Lands Zen Water Yoga Drop-In", cardPrice: "$20.80", cashPrice: "$20", period: "/ Drop-In", description: "The Links at Lands End Pool, 285 Private Road 5980 Yantis, TX", checklist: ["Tuesdays & Thursdays 10:30 A.M.", "The Links at Lands End Pool - Yantis, TX"] },
+      //{ tag: "Series Deal", title: "10 Week Series at Lands Zen Water Yoga", cardPrice: "$124.80", cashPrice: "$120", period: "/ 10 Week Series", description: "The Links at Lands End Pool, 285 Private Road 5980 Yantis, TX", checklist: ["Series Special in session.", "Tuesdays 10:30 A.M.", "Rain outs made up", "New Series special coming in August"] },
+      { tag: "Series Deal", title: "4 Week End of Summer Series at Lands Zen Water Yoga", cardPrice: "$116.46", cashPrice: "$112", period: "/ 4 Week Series", description: "The Links at Lands End Pool, 285 Private Road 5980 Yantis, TX", checklist: ["The Links at Lands End Pool - Yantis, TX", "Tuesdays & Thursdays 10:30 A.M.", "Rain outs made up", "Starting August 25th"] }
     ]
   },
   elderOfferings: {
     title: "Silver Sage Light Offerings for Elders - $5 Suggested Contribution",
     description: "Monday's at 2 PM. Specifically curated for our elder community members.",
     pills: [{ text: "Suggested Heart-Centered Contribution: $5", isOrange: true }, { text: "Free Community Offerings Available", isOrange: false }],
-    sponsoredBy: "Local Light Supporters"
+    sponsoredBy: "Holy Ghost Chair Yoga"
   },
   amenities: {
     title: "Single Amenities",
@@ -133,7 +134,7 @@ export default function MembershipsRatesPage() {
               <h3>{c.elderOfferings.title}</h3>
               <p>{c.elderOfferings.description}</p>
             </div>
-            <div className={s.elderRight}><span className={s.sponsored}>Sponsored By</span><span className={s.supporter}>{c.elderOfferings.sponsoredBy}</span></div>
+            <div className={s.elderRight}><span className={s.sponsored}></span><span className={s.supporter}>{c.elderOfferings.sponsoredBy}</span></div>
           </div>
         </section>
 
