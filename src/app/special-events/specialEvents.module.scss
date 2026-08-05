@@ -85,7 +85,7 @@
   }
 
   .registerBtn {
-    margin: auto 24px 24px 24px; // Pushes button to bottom of card
+    margin: auto 16px 16px; // Pushes button to bottom of card
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -124,7 +124,8 @@
   flex-direction: column;
   gap: 6px;
   margin-bottom: 20px;
-  font-size: 13px;
+  font-size: 15px;
+  font-weight: 500;
   color: rgba($white, 0.75);
 
   .metaItem {
