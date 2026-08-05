@@ -1,7 +1,8 @@
 import React from 'react';
 import Hero from "@/components/Hero/Hero";
-import { Check, HelpCircle, CreditCard, Heart, Calendar } from 'lucide-react';
+import { Check, HelpCircle, CreditCard, Heart, Calendar, ArrowRight } from 'lucide-react';
 import s from "./Memberships.module.scss";
+import Link from "next/link";
 
 const heroSrc = "https://admin.lightworkerranch.com/wp-content/uploads/2026/05/IMG_1176.jpg";
 
@@ -135,6 +136,14 @@ export default function MembershipsRatesPage() {
               <p>{c.elderOfferings.description}</p>
             </div>
             <div className={s.elderRight}><span className={s.sponsored}></span><span className={s.supporter}>{c.elderOfferings.sponsoredBy}</span></div>
+          </div>
+        </section>
+
+        <section>
+          <div className={s.specialEventsCta}>
+            <Link href="/special-events" className={s.specialEventsBtn}>
+              View Special Events & Offerings <ArrowRight size={18} />
+            </Link>
           </div>
         </section>
 
