@@ -36,7 +36,7 @@ try {
 
   return (
     <main>
-      <section className="announcementBanner">
+      {/* <section className="announcementBanner">
         <div className="container">
           <p className="bannerContent" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
             <span className="bannerBadge">Construction on County Road 1260 in progress.  </span>
@@ -45,7 +45,7 @@ try {
             </span>
           </p>
         </div>
-      </section>
+      </section> */}
       <Hero 
         title={acf.heroTitle || page?.title}
         subtitle={acf.heroSubTitle}
