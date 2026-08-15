@@ -77,16 +77,16 @@ export async function POST(request: Request) {
     if (!updateRes.ok) throw new Error('Failed to save registration to WordPress');
 
     // ==========================================
-    // 6. DYNAMIC PRICE PARSING + 4% FEE & VALOR INTEGRATION
+    // 6. DYNAMIC PRICE PARSING & VALOR INTEGRATION
     // ==========================================
     const rawPriceString = currentMeta.price || '';
-    
+
     // Clean string down to numbers/decimals
     const basePrice = parseFloat(rawPriceString.replace(/[^0-9.]/g, '')) || 0;
 
     if (basePrice > 0) {
-      // Add 4% surcharge and round to two decimal places
-      const priceWithFee = parseFloat((basePrice * 1.04).toFixed(2));
+      // Pass the original base price to Valor (Valor will add its 4% fee during checkout)
+      const amountToCharge = parseFloat(basePrice.toFixed(2));
 
       const valorResponse = await fetch('https://securelink.valorpaytech.com/?pagesale=', {
         method: 'POST',
@@ -100,7 +100,7 @@ export async function POST(request: Request) {
           epi: process.env.VALOR_EPI,
           txn_type: 'sale',
           epage: 1,
-          amount: priceWithFee, // Sent with 4% fee added!
+          amount: amountToCharge, // Pass basePrice directly
           customer_name: name,
           email: email,
           phone: phone ? phone.replace(/\D/g, '') : '', 
