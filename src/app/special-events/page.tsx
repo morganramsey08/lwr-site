@@ -29,11 +29,21 @@ export default async function SpecialEventsPage() {
 
   const allEvents = data?.events?.nodes || [];
 
-  // 2. Filter programmatically for special events
+  // Get today's date in YYYY-MM-DD format
+  const today = new Date().toLocaleDateString('en-CA');
+
+  // 2. Filter programmatically for special events that haven't passed
   const events = allEvents.filter((event: any) => {
     const details = event.eventDetails;
     if (!details) return false;
-    return details.isSpecialEvent === true || details.isSpecialEvent === "1";
+
+    const isSpecial = details.isSpecialEvent === true || details.isSpecialEvent === "1";
+    if (!isSpecial) return false;
+
+    const eventDateStr = details.eventDate ? details.eventDate.split('T')[0] : '';
+    if (!eventDateStr) return false;
+
+    return eventDateStr >= today;
   });
 
   // Helper to reliably format WP dates to UTC string (e.g., "Jun 15, 2026")
