@@ -36,16 +36,16 @@ try {
 
   return (
     <main>
-      {/* <section className="announcementBanner">
+      <section className="announcementBanner">
         <div className="container">
           <p className="bannerContent" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-            <span className="bannerBadge">Construction on County Road 1260 in progress.  </span>
+            <span className="bannerBadge">Grand Opening and Ribbon Cutting with Chamber for Saturday October 10th</span>
             <span style={{ textAlign: 'center', lineHeight: '1.5' }}>
-              LWR classes on pause tentatively until Tuesday August 11th. Water Yoga Pop-Ups will carry on during this time.
+              FREE Day of Yoga - BreathWork - Sacred Sound - Crystal Ice Reset - FREE Lunch Provided! 
             </span>
           </p>
         </div>
-      </section> */}
+      </section>
       <Hero 
         title={acf.heroTitle || page?.title}
         subtitle={acf.heroSubTitle}
