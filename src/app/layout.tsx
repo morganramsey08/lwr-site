@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { draftMode } from "next/headers";
 import { Inter, Teachers } from 'next/font/google';
+import localFont from 'next/font/local';
 import { fetchGraphQL } from "@/utils/fetchGraphQL";
 import { GetNavigationQuery } from "@/queries/general/getNav";
 
@@ -22,9 +23,15 @@ const teachers = Teachers({
   variable: '--font-teachers', 
 });
 
+const badhorse = localFont({
+  src: '../../public/fonts/Badhorse-Regular.otf', // Adjust relative path if stored elsewhere (e.g. inside src/fonts)
+  variable: '--font-badhorse',
+  display: 'swap',
+});
+
 // Added SEO Metadata
 export const metadata: Metadata = {
-  metadataBase: new URL('https://lightworkerranch.com'), // Replace with your actual domain
+  metadataBase: new URL('https://lightworkerranch.com'),
   title: {
     default: 'LightWorker Ranch',
     template: '%s | LightWorker Ranch',
@@ -69,7 +76,7 @@ export default async function RootLayout({
   const menuItems = navData?.menu?.menuItems?.nodes || [];
 
   return (
-    <html lang="en" className={`${inter.variable} ${teachers.variable}`}>
+    <html lang="en" className={`${inter.variable} ${teachers.variable} ${badhorse.variable}`}>
       <body className={teachers.className}>
         {isEnabled && <PreviewNotice />}
         <Navigation menuItems={menuItems} />
