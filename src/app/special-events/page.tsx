@@ -3,6 +3,9 @@ import s from "./specialEvents.module.scss";
 import Link from "next/link";
 import { Calendar, Clock } from "lucide-react";
 
+export const revalidate = 0;
+export const dynamic = 'force-dynamic';
+
 export default async function SpecialEventsPage() {
   // 1. Fetch all events including eventDate and startTime
   const data = await fetchGraphQL(`
@@ -25,14 +28,14 @@ export default async function SpecialEventsPage() {
         }
       }
     }
-  `);
+  `, {}, { cache: 'no-store' });
 
   const allEvents = data?.events?.nodes || [];
 
-  // Get today's date in YYYY-MM-DD format
-  const today = new Date().toLocaleDateString('en-CA');
+  // Get current date in YYYY-MM-DD format based on UTC to prevent timezone shifts
+  const today = new Date().toISOString().split('T')[0];
 
-  // 2. Filter programmatically for special events that haven't passed
+  // 2. Filter programmatically for special events that are today or in the future
   const events = allEvents.filter((event: any) => {
     const details = event.eventDetails;
     if (!details) return false;
@@ -43,6 +46,7 @@ export default async function SpecialEventsPage() {
     const eventDateStr = details.eventDate ? details.eventDate.split('T')[0] : '';
     if (!eventDateStr) return false;
 
+    // Keeps events whose date is today or later
     return eventDateStr >= today;
   });
 
