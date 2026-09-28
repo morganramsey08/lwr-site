@@ -1,23 +1,204 @@
 @import '../../styles/variables';
 
-.pageWrapper { background-color: $linen; min-height: 100vh; color: $forest; }
-.contentContainer { composes: container from global; padding-top: 60px; padding-bottom: 80px; }
-.sectionCenter { text-align: center; margin-bottom: 60px; }
-.sectionTitle { font-size: 32px; font-weight: 700; color: $forest; margin-bottom: 30px; }
+.pageWrapper { 
+  background-color: $linen; 
+  min-height: 100vh; 
+  color: $forest; 
+}
+
+.contentContainer { 
+  composes: container from global; 
+  padding-top: 60px; 
+  padding-bottom: 80px; 
+}
+
+.sectionCenter { 
+  text-align: center; 
+  margin-bottom: 60px; 
+}
+
+.sectionTitle { 
+  font-size: 32px; 
+  font-weight: 700; 
+  color: $forest; 
+  margin-bottom: 8px; 
+}
+
+.sectionSubtitle {
+  font-size: 15px;
+  color: rgba($forest, 0.75);
+  margin-bottom: 24px;
+}
 
 .grid3 {
-  display: grid; grid-template-columns: 1fr; gap: 20px;
+  display: grid; 
+  grid-template-columns: 1fr; 
+  gap: 24px;
   @media (min-width: 768px) { grid-template-columns: repeat(3, 1fr); }
 }
 
 .card {
-  background-color: $white; border: 1px solid rgba($forest, 0.08); border-radius: 12px; padding: 24px 20px;
-  display: flex; flex-direction: column; align-items: center; text-align: center;
-  .tag { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: $clay; margin-bottom: 12px; }
-  .cardTitle { font-size: 1.5rem; font-weight: 700; color: $forest; margin-bottom: 15px; }
+  background-color: $white; 
+  border: 1px solid rgba($forest, 0.08); 
+  border-radius: 14px; 
+  padding: 28px 20px;
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  text-align: center;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+  }
+
+  .tag { 
+    font-size: 11px; 
+    font-weight: 600; 
+    text-transform: uppercase; 
+    letter-spacing: 1px; 
+    color: $clay; 
+    margin-bottom: 12px; 
+  }
+
+  .cardTitle { 
+    font-size: 1.4rem; 
+    font-weight: 700; 
+    color: $forest; 
+    margin-bottom: 12px; 
+  }
 }
 
-.priceWrapper { margin: 15px 0; }
+.popularCard {
+  border: 2px solid $clay;
+  box-shadow: 0 8px 24px rgba($clay, 0.12);
+}
+
+.popularRibbon {
+  position: absolute;
+  top: -12px;
+  background-color: $clay;
+  color: $white;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 4px 14px;
+  border-radius: 12px;
+}
+
+.heroRateIndicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  color: $clay;
+  background-color: rgba($clay, 0.1);
+  padding: 3px 10px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+/* Heroes Banner */
+.heroesBanner {
+  background-color: rgba($forest, 0.04);
+  border: 1px solid rgba($forest, 0.12);
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin-bottom: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: left;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .heroesLeft {
+    .heroesBadgeHeader {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: $clay;
+
+      h3 {
+        font-size: 18px;
+        font-weight: 700;
+        color: $forest;
+        margin: 0;
+      }
+    }
+
+    p {
+      font-size: 14px;
+      color: rgba($forest, 0.8);
+      margin-top: 4px;
+    }
+  }
+
+  .heroesRight {
+    .groupChips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        background-color: $forest;
+        color: $white;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 6px 12px;
+        border-radius: 20px;
+      }
+    }
+  }
+}
+
+/* Toggle Switcher */
+.toggleContainer {
+  display: inline-flex;
+  background-color: rgba($forest, 0.08);
+  padding: 4px;
+  border-radius: 10px;
+  margin-bottom: 32px;
+  gap: 4px;
+
+  .toggleBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: none;
+    background: transparent;
+    padding: 10px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba($forest, 0.7);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &.active {
+      background-color: $forest;
+      color: $white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    }
+
+    &:hover:not(.active) {
+      color: $forest;
+    }
+  }
+}
+
+.priceWrapper { margin: 12px 0; }
 .priceComparison { display: flex; align-items: flex-start; justify-content: center; gap: 12px; }
 .priceBlock { display: flex; flex-direction: column; align-items: center; }
 .priceValue { font-size: 26px; font-weight: 700; color: rgba($forest, 0.5); }
@@ -25,16 +206,18 @@
 .priceLabel { font-size: 10px; color: rgba($forest, 0.7); text-transform: uppercase; }
 .priceLabelCash { font-size: 10px; color: $clay; text-transform: uppercase; font-weight: 600; }
 .separator { font-size: 20px; color: rgba($forest, 0.2); margin-top: 2px; }
+.priceNote { display: block; font-size: 12px; color: rgba($forest, 0.6); margin-top: 4px; font-weight: 500; }
 
-.description { font-size: 15px; color: rgba($forest, 0.7); line-height: 1.5; margin: 10px 0; }
-.badge { background-color: rgba($forest, 0.05); color: $forest; font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: 9999px; margin-top: auto; }
+.description { font-size: 14px; color: rgba($forest, 0.7); line-height: 1.5; margin: 10px 0; }
+.badge { background-color: rgba($forest, 0.05); color: $forest; font-size: 11px; font-weight: 600; padding: 6px 12px; border-radius: 9999px; margin-top: auto; }
 
 .elderBanner {
   background-color: $forest; color: $white; border-radius: 12px; padding: 30px; margin-bottom: 40px; display: flex; flex-direction: column; gap: 20px;
   @media (min-width: 900px) { flex-direction: row; align-items: center; justify-content: space-between; }
-  h3 { font-size: 24px; color: $white; }
-  p { color: rgba($white, 0.85); margin-top: 8px; }
+  h3 { font-size: 22px; color: $white; margin: 0; }
+  p { color: rgba($white, 0.85); margin-top: 8px; margin-bottom: 0; }
   .elderRight { text-align: left; @media (min-width: 900px) { text-align: right; } }
+  .supporter { font-weight: 600; color: rgba($white, 0.9); }
 }
 
 .splitGrid {
@@ -43,33 +226,13 @@
   h4 { font-size: 20px; margin-bottom: 20px; color: $forest; }
 }
 
-.amenityRow {
-  background-color: $white; border: 1px solid rgba($forest, 0.08); padding: 20px; border-radius: 12px;
-  display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;
-  h5 { font-size: 16px; color: $forest; margin: 0; }
-  p { font-size: 14px; color: rgba($forest, 0.6); margin: 0; }
-}
-
-.noticeBar {
-  background: $white; padding: 14px; border-radius: 8px; border-left: 4px solid $clay;
-  display: flex; align-items: center; gap: 10px; font-size: 14px; color: $forest;
-}
-
 .faqBlock {
   margin-bottom: 20px;
   h5 { font-size: 16px; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
   p { font-size: 14px; color: rgba($forest, 0.7); padding-left: 26px; }
 }
 
-.checklist { list-style-type: none; padding: 0; margin: 10px 0; text-align: left; li { margin-bottom: 6px; font-size: 14px; color: rgba($forest, 0.8); display: flex; gap: 8px; } }
-
-.free {
-  font-size: 1.9rem;
-  font-weight: 800;
-  color: $clay;
-}
-
-
+.checklist { list-style-type: none; padding: 0; margin: 10px 0; text-align: left; li { margin-bottom: 6px; font-size: 13px; color: rgba($forest, 0.8); display: flex; gap: 8px; } }
 
 .specialEventsCta {
   border-radius: 16px;
